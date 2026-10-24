@@ -229,21 +229,42 @@ Run: `python -m ffs.gpu.run_gpu --episodes 16384 --benchmark`.
   step-by-step on Google Colab's free T4 (expect ~10^6 episodes/s there). Both agree with
   each other and the CPU engine.
 
+## Distributed MPI worker pool (PAGP Units II & IV)
+
+`ffs/mpi/worker_pool.py` distributes the heterogeneity sweep across MPI ranks with a classic
+**manager-worker pool**: rank 0 holds the work queue (chunks of episodes) and hands a chunk to
+any worker that reports free; ranks 1..N-1 run episodes on the CPU engine and send results
+back. Because workers *pull* work when idle, uneven episode durations balance across ranks with
+no static partitioning — **dynamic load balancing**, the same give-work-to-where-it-pays
+principle the MVT rule embodies at the branch level, now across OS processes with no shared
+memory. Exercises MPI point-to-point messaging (`send`/`recv`, `ANY_SOURCE`, tags),
+decomposition and mapping.
+
+```bash
+mpirun -np 8 python -m ffs.mpi.worker_pool            # 1 manager + 7 workers
+python -m ffs.mpi.worker_pool                         # serial fallback (no MPI)
+for n in 1 2 4 8; do mpirun -np $n python -m ffs.mpi.worker_pool --quiet; done   # scaling
+```
+
+(Requires a system MPI, e.g. `brew install open-mpi`, then `pip install mpi4py`.)
+
 ## PAGP (CS372IA) course coverage
 
 The coverage is structural, not cosmetic:
 
-- **Units I–II** (task decomposition, synchronisation) — the parallel worker pool and the
-  shared frontier/branch state.
+- **Unit II** (multiprocessing, message passing, synchronisation) — the MPI manager-worker
+  pool (`ffs/mpi/`) over distributed-memory processes.
 - **Unit III** (data-level / SIMD parallelism, GPU) — the tensorized batch simulator maps
-  thousands of episodes onto GPU SIMD lanes (MPS/CUDA).
-- **Unit IV** (mapping & load balancing, containing interaction overheads) — the MVT rule
-  *is* the dynamic load-balancing / work-migration trigger; switch cost is the interaction
-  overhead; worker utilisation is the load-balance metric.
-- **Unit V** (applied GPU programming with PyTorch) — `ffs/gpu/` is a worked PyTorch GPU
-  application.
-- **Stretch** — MPI workers across nodes (the hand-written Numba `@cuda.jit` thread-per-episode
-  kernel is done: `ffs/gpu/cuda_kernel.py`, Colab-ready).
+  thousands of episodes onto GPU SIMD lanes (MPS/CUDA), plus the Numba CUDA kernel.
+- **Unit IV** (decomposition, mapping & load balancing, MPI, containing interaction
+  overheads) — the MVT rule *is* the dynamic load-balancing / work-migration trigger (switch
+  cost = interaction overhead; utilisation = the load-balance metric), and the MPI pool is
+  dynamic load balancing by work-pulling across ranks.
+- **Unit V** (applied GPU programming with PyTorch / Numba) — `ffs/gpu/` is a worked GPU
+  application in both PyTorch and a hand-written Numba `@cuda.jit` kernel (`ffs/gpu/COLAB.md`).
+
+Every unit now has concrete, running code; all GPU/MPI artifacts reproduce the same central
+hypothesis, corroborating the CPU engine.
 
 ---
 
