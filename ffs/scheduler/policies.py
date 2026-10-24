@@ -22,6 +22,10 @@ Policies:
                    comparator.
   MVT            - abandon when the estimated marginal g'(c) falls to the estimated frontier
                    opportunity rate R. THE contribution.
+  GuardedMVT     - MVT's rule applied only where the signal is *diminishing* (discovered
+                   online), with a committed-budget fallback elsewhere. Boundary-aware: keeps
+                   MVT's win under diminishing value and does not collapse under constant
+                   hazard, with one config for both regimes.
   OracleMVT      - MVT using the *true* marginal and the analytic R* (upper-bound reference).
 """
 
@@ -267,6 +271,80 @@ class MVT(Policy):
 
 
 @dataclass
+class GuardedMVT(MVT):
+    """MVT abandonment, gated by an online test for the regime where the rule is valid.
+
+    MVT's leaving rule is optimal only when a branch's return *diminishes* with compute. On a
+    constant-hazard branch (memoryless access, uniform value) the marginal signal is
+    uninformative: the naive rule reads a low rate and abandons before the hazard pays off,
+    and -- as the NASim and Tier-B experiments show -- its solve-rate can collapse. GuardedMVT
+    removes that failure mode by discovering the regime *online, per branch*, from the signal
+    the scheduler already estimates:
+
+      * It tracks the running peak of the smoothed marginal on the current branch.
+      * A *diminishing* signal is present once the marginal has fallen to `decline_frac` of a
+        peak that was genuinely productive (peak > `peak_floor_frac` x R). A concave branch
+        reaches this at compute ~ tau*ln(1/decline_frac) regardless of its richness; a
+        not-yet-productive or memoryless branch never does (its peak stays ~0).
+      * Where the diminishing signal IS present, it applies the exact MVT rule (abandon when
+        g'(c) <= R). Where it is NOT, it falls back to a committed budget `budget_cap`,
+        degrading gracefully to a fixed-timeout-like commitment instead of churning off a
+        branch whose value has not yet arrived.
+
+    The result is a policy that keeps MVT's advantage under diminishing returns and does not
+    collapse under constant hazard -- a boundary-aware scheduler, tuned by observation rather
+    than by hand per environment."""
+
+    decline_frac: float = 0.5        # "declined" := smoothed rate <= decline_frac * peak
+    peak_floor_frac: float = 0.05    # peak must exceed this * R to count as productive
+    budget_cap: float = 16.0         # committed budget when no diminishing evidence is seen
+    name: str = field(default="guarded_mvt", init=False)
+
+    eps: float = 1e-9                # a gain above this counts as "productive this tick"
+
+    def reset(self, patches: list[Patch], rng: np.random.Generator) -> None:
+        super().reset(patches, rng)
+        self._peak: dict[int, float] = {}
+        self._stall: dict[int, int] = {}
+
+    def on_assign(self, worker: WorkerView) -> None:
+        super().on_assign(worker)
+        self._peak[worker.wid] = 0.0
+        self._stall[worker.wid] = 0
+
+    def observe(self, worker: WorkerView, gain: float) -> None:
+        super().observe(worker, gain)
+        est = worker.marg_est
+        if est is not None:
+            self._peak[worker.wid] = max(self._peak.get(worker.wid, 0.0), est.rate)
+        # Ticks since the branch last produced a gain -> a regime-agnostic "stalled" signal.
+        if gain > self.eps:
+            self._stall[worker.wid] = 0
+        else:
+            self._stall[worker.wid] = self._stall.get(worker.wid, 0) + 1
+
+    def should_abandon(self, worker: WorkerView, R: float, memory: "BranchMemory") -> bool:
+        est = worker.marg_est
+        peak = self._peak.get(worker.wid, 0.0)
+        # (1) MVT leaving rule -- applied only where a *diminishing* signal is present: the
+        # branch has been genuinely productive (enough INFORMATIVE samples) and its smoothed
+        # marginal has fallen from its peak. This is the foraging value-add: leave a still-
+        # somewhat-productive branch early to migrate to a richer frontier.
+        if (est is not None and est.n >= self.min_samples
+                and peak > self.peak_floor_frac * R and est.rate <= self.decline_frac * peak
+                and est.rate <= R * (1.0 - self.hysteresis)):
+            return True
+        # (2) Committed-budget / stall fallback -- RAW-TICK based, so it stays active even when
+        # the branch yields too few informative events to feed the marginal estimator (exactly
+        # the constant-hazard case, where `est.n` -- informative-event count -- never reaches
+        # min_samples). Leave once the branch has produced nothing for `budget_cap` ticks. This
+        # covers both the uncracked memoryless branch (commit a budget, then migrate) and the
+        # exhausted branch (migrate promptly), without ever cutting off a rich branch still
+        # paying out (its stall counter keeps resetting while it yields).
+        return self._stall.get(worker.wid, 0) >= self.budget_cap
+
+
+@dataclass
 class OracleMVT(Policy):
     """Strict rate-optimal reference: abandon when the *true* marginal g'(c) falls to the
     analytic MVT environment rate R* (computed from the known surface and switch cost).
@@ -302,6 +380,7 @@ def make_policy(spec: dict) -> Policy:
         "top_k": TopK,
         "ucb": UCB,
         "mvt": MVT,
+        "guarded_mvt": GuardedMVT,
         "oracle_mvt": OracleMVT,
     }
     if kind not in table:

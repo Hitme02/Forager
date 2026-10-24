@@ -1,0 +1,5 @@
+# Minimal deps for the Tier-B live flag run (the heavy GPU/MPI deps are not needed here).
+numpy>=1.26
+scipy>=1.11
+pandas>=2.0
+requests>=2.31

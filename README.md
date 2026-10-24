@@ -1,270 +1,372 @@
-# Foraging-Based Frontier Scheduling (FFS)
+# Forager
 
-**MVT branch abandonment for parallel autonomous penetration-testing agents.**
+**Optimal-foraging scheduling for parallel autonomous pentest agents — it knows when to walk away.**
 
-> *Research code for a PAGP (CS372IA) × AI-SOC project targeting an IEEE Access paper.*
-
-Autonomous pentest agents explore an attack surface in parallel but decide **when to
-give up on a branch** using static rules — a timeout, a retry cap, a max depth. Those
-rules ignore the quantity that should drive the decision: the **opportunity cost of the
-rest of the frontier**. Optimal-foraging theory solved exactly this problem for animals
-decades ago, as the **Marginal Value Theorem (MVT)**: leave a depleting patch when its
-*marginal* intake rate falls to the *environment's* long-run average rate.
-
-This project transplants MVT into a parallel pentest scheduler as the **dynamic
-abandonment-and-migration (load-balancing) trigger**, and tests, against the ad-hoc
-timeouts deployed systems actually use:
-
-> **Central hypothesis.** At equal compute budget, MVT branch abandonment reaches the
-> objective faster than a (well-tuned) fixed timeout, and its advantage *grows* with
-> branch-return heterogeneity.
-
-This is deliberately **falsifiable**: if MVT does not beat a tuned fixed timeout, or its
-margin does not scale with heterogeneity, the hypothesis fails — and that negative result
-is itself a publishable characterization of when foraging rules transfer to security
-agents.
+> Research code for **PAGP (CS372IA) × AI-SOC**, targeting an IEEE Access paper.
+> Python package: `ffs/` (*Foraging-based Frontier Scheduling*).
 
 ---
 
-## Phase-1 result (this repo)
+## TL;DR
 
-Discrete-event parallel scheduler, 40 branches, 8 workers, switch cost 5, 50 % coverage
-objective, 30 seeds per point, **fixed timeout tuned per heterogeneity level** (so MVT is
-never compared to a strawman).
+A pool of autonomous pentest agents attacks many branches of a target *in parallel*. The hard
+question each agent faces is **"when do I give up on this branch and go somewhere better?"**
+Deployed systems answer with a dumb timeout. **Forager** answers with a 50-year-old rule from
+biology — the **Marginal Value Theorem (MVT)** — and shows exactly when that rule wins, when it
+doesn't, and a **boundary-aware version (`GuardedMVT`) that is never badly wrong**.
+
+| What we claim | Evidence |
+|---|---|
+| MVT beats a *tuned* timeout when branches are unequal, and the gap grows with inequality | abstract sweep: **−12% → +13%** as heterogeneity σ rises (crossover ≈ σ 0.6) |
+| The advantage transfers to a **real tool-using agent harness** | Tier-B live harness: same crossover, **+9.7%** at σ = 1.2 |
+| Plain MVT has a sharp **failure mode** (constant-hazard targets) | its solve-rate **collapses to 0** there |
+| `GuardedMVT` keeps the win **and** removes the failure | solves **both** regimes with **one** config; the only policy that does |
+| It's a genuine **parallel-computing** project (PAGP) | GPU batch sim **~100×** the Python engine; MPI pool **~4.5×** on 7 workers |
+
+---
+
+## The problem, in 30 seconds
+
+```
+Agent exploring an attack surface, in parallel with others:
+
+   branch A ───▶ paying off well      ← keep going?
+   branch B ───▶ gone quiet           ← give up and move?
+   branch C ───▶ untouched, looks rich ← worth switching to?
+```
+
+A static **timeout / retry-cap / max-depth** ignores the one thing that should drive the
+decision: the **opportunity cost of the rest of the frontier**. Leaving a quiet branch is only
+smart if somewhere better is waiting — and how good "elsewhere" is changes as the engagement
+unfolds.
+
+## The idea: borrow a rule from biology
+
+Animals solved this exact trade-off long ago. The **Marginal Value Theorem** says: *leave a
+depleting patch the moment its marginal intake rate drops to the habitat's long-run average
+rate.* Forager transplants that into scheduling.
+
+```mermaid
+flowchart LR
+  subgraph NATURE["Nature · optimal foraging"]
+    direction TB
+    A1["Forager in a food patch"] --> A2{"Intake rate dropped<br/>to the habitat average?"}
+    A2 -->|"no"| A1
+    A2 -->|"yes"| A3["Leave · travel · next patch"]
+  end
+  subgraph FORAGER["Forager · pentest scheduling"]
+    direction TB
+    B1["Agent working an attack branch"] --> B2{"Progress rate dropped<br/>to the frontier rate R?"}
+    B2 -->|"no"| B1
+    B2 -->|"yes"| B3["Abandon · migrate · next branch"]
+  end
+  NATURE -. "same rule (MVT)" .-> FORAGER
+  classDef sim fill:#C8E6C9,stroke:#2E7D32,color:#102a12;
+  classDef mvt fill:#FFE0B2,stroke:#E65100,color:#4a2300;
+  class A1,A2,A3 sim
+  class B1,B2,B3 mvt
+```
+
+> **Central hypothesis (falsifiable).** At equal compute, MVT branch-abandonment reaches the
+> objective *faster* than a well-tuned fixed timeout, and its advantage *grows* with
+> branch-return heterogeneity. If it doesn't, that negative result is itself a publishable
+> map of *when* foraging rules transfer to security agents.
+
+---
+
+## How it's built
+
+One **agent-agnostic scheduler** drives several interchangeable **backends** through a narrow
+seam. The scheduler never knows whether a "branch" is a math model, a network simulator, or a
+live agent attacking a container — so the *same* code produces every result in this repo.
+
+```mermaid
+flowchart TB
+  subgraph CORE["🧠 Scheduler core — agent-agnostic, never changes"]
+    direction LR
+    ENG["engine.py<br/>parallel discrete-event loop<br/>W workers · migration · metrics"]
+    POL["policies.py<br/>FixedTimeout · MaxRetry · TopK · UCB<br/>MVT · GuardedMVT · OracleMVT"]
+    EST["estimators.py<br/>marginal rate g'(c)<br/>frontier opportunity rate R"]
+  end
+  SEAM{{"the seam — a branch only needs<br/>work_one() · prior_score · spent"}}
+  subgraph BACK["🔌 Interchangeable backends — what a 'branch' really is"]
+    direction LR
+    SIM["Simulator<br/>foraging patches<br/>(controlled testbed)"]
+    NAS["NASim<br/>real network-attack sim"]
+    TB["Cyber range<br/>live tool-using agents"]
+  end
+  subgraph ACC["⚡ PAGP acceleration — tune the scheduler at scale"]
+    direction LR
+    GPU["GPU batch Monte-Carlo<br/>PyTorch MPS/CUDA + Numba"]
+    MPI["MPI worker pool<br/>distributed sweep"]
+  end
+  CORE --> SEAM --> BACK
+  BACK -. "millions of episodes" .-> ACC
+  classDef core fill:#BBDEFB,stroke:#1565C0,color:#0d2a4a;
+  classDef mvt fill:#FFE0B2,stroke:#E65100,color:#4a2300;
+  classDef agent fill:#E1BEE7,stroke:#6A1B9A,color:#2e0a3a;
+  classDef seam fill:#ECEFF1,stroke:#455A64,color:#1c272c;
+  classDef gpu fill:#B2DFDB,stroke:#00695C,color:#06302b;
+  classDef mpi fill:#FFF9C4,stroke:#F9A825,color:#4a3b00;
+  class ENG,EST core
+  class POL mvt
+  class SIM,NAS,TB agent
+  class SEAM seam
+  class GPU gpu
+  class MPI mpi
+```
+
+### The model (one line of math)
+
+Each attack branch is a foraging **patch** with diminishing returns. Working it for compute `c`
+yields cumulative validated progress
+
+```
+g(c) = A · (1 − e^(−c/τ))        marginal rate   g'(c) = (A/τ) · e^(−c/τ)
+```
+
+- **`A`** — how rich the branch is (total progress available). **`τ`** — how fast it pays out.
+- **Heterogeneity `σ`** (the independent variable) — branch richnesses are drawn log-normal with
+  spread `σ`, **mean held fixed**, so bigger σ = *same reward, more unequally distributed*.
+- **Switch cost `s`** — the "travel time": compute to drop a branch and re-establish recon elsewhere.
+
+---
+
+## How a worker decides
+
+Each of the `W` parallel workers is always in one of three states. The policy controls exactly
+one decision — **when to abandon** — and everything else is held identical across policies, so
+the comparison is fair.
+
+```mermaid
+stateDiagram-v2
+  [*] --> Working
+  Working --> Working: rate above R — keep foraging
+  Working --> Switching: rate at or below R — abandon and migrate
+  Switching --> Working: switch cost paid, enter a fresh branch
+  Working --> [*]: objective met
+  classDef work fill:#BBDEFB,stroke:#1565C0,color:#0d2a4a;
+  classDef move fill:#FFE0B2,stroke:#E65100,color:#4a2300;
+  class Working work
+  class Switching move
+```
+
+The MVT rule is just: **continue while `g'(c) > R`, abandon when `g'(c) ≤ R`**, where `R` is the
+frontier's opportunity rate (net of the switch cost). The real technical work is *estimating*
+two noisy things online:
+
+1. **the branch's marginal `g'(c)`** — via `recent_slope` (EWMA), `bayesian`, or **`adaptive`**,
+   the mechanism contribution: it measures the signal's *hit-rate* and widens its smoothing
+   window on bursty signals, so it tracks a constant number of *informative events* rather than
+   raw ticks. (Lifts MVT's solve-rate under bursty gains, e.g. **0.40 → 0.85**, with no
+   regression on smooth signals.)
+2. **the frontier rate `R`** — from the *early-phase intake a fresh branch offers*, discounted by
+   `s`. (Estimating it from completed visits instead causes a deadlock where nobody ever leaves.)
+
+### GuardedMVT — knowing *where* the rule applies
+
+MVT is only valid when a branch's return actually **diminishes**. On a *constant-hazard* target
+(every attempt equally likely to succeed, e.g. brute-forcing one host), the marginal signal is
+uninformative and plain MVT abandons too early — catastrophically. `GuardedMVT` detects the
+regime **online, per branch**, and only trusts the MVT rule where it's earned:
+
+```mermaid
+flowchart TD
+  S["Worker on a branch<br/>(enough samples seen?)"] --> P{"Was this branch<br/>ever productive?"}
+  P -->|"no · signal uninformative"| BUD["Commit a budget<br/>migrate only after no gain<br/>for budget_cap ticks"]
+  P -->|"yes"| D{"Has its return<br/>declined from its peak?"}
+  D -->|"no · still rich"| KEEP["Stay on the branch"]
+  D -->|"yes"| M{"marginal g'(c) ≤ R?"}
+  M -->|"yes"| MIG["Abandon & migrate<br/>MVT rule applies here"]
+  M -->|"no"| KEEP
+  classDef seam fill:#ECEFF1,stroke:#455A64,color:#1c272c;
+  classDef mvt fill:#FFE0B2,stroke:#E65100,color:#4a2300;
+  classDef core fill:#BBDEFB,stroke:#1565C0,color:#0d2a4a;
+  classDef mpi fill:#FFF9C4,stroke:#F9A825,color:#4a3b00;
+  class S,P seam
+  class BUD mpi
+  class D,M,MIG mvt
+  class KEEP core
+```
+
+---
+
+## Does it actually work? Three levels of proof
+
+The same scheduler is validated at increasing realism: **abstract math → network simulator →
+live tool-using agents.** Agreement across all three is the external-validity story.
+
+### 1 · Abstract simulator — the headline
+
+40 branches, 8 workers, switch cost 5, 50% coverage objective, 30 seeds, **fixed timeout tuned
+per heterogeneity level** (never a strawman).
 
 ![sweep](results/sweep.png)
 
-MVT speed-up in time-to-objective over the **tuned** fixed timeout (positive = MVT
-faster):
+MVT speed-up over the *tuned* fixed timeout (positive = MVT faster):
 
-| heterogeneity σ | MVT (recent-slope) | MVT (Bayesian) |
-|:---:|:---:|:---:|
-| 0.0 | −12.5 % | −25.2 % |
-| 0.3 | −4.5 % | −10.6 % |
-| 0.6 | **+5.4 %** | **+2.0 %** |
-| 0.9 | **+12.7 %** | **+10.7 %** |
-| 1.2 | **+13.3 %** | **+12.8 %** |
+| heterogeneity σ | 0.0 | 0.3 | 0.6 | 0.9 | 1.2 |
+|---|:--:|:--:|:--:|:--:|:--:|
+| **MVT speed-up** | −12.5% | −4.5% | **+5.4%** | **+12.7%** | **+13.3%** |
 
-The hypothesis is supported, and in a *nuanced* way that strengthens the paper: a tuned
-fixed timeout wins when branches are homogeneous (σ ≲ 0.5), MVT wins once returns are
-unequal, and **the margin rises monotonically with heterogeneity**. Top-K (prioritise
-without early stopping) and the UCB bandit are dominated throughout — evidence that
-*stopping* adds value beyond *prioritising*, and that this is not "just a bandit".
+A tuned timeout wins when branches are alike (σ ≲ 0.5); **MVT wins once they're unequal, and the
+margin rises monotonically.** Top-K (prioritise, never stop early) and a UCB bandit are dominated
+throughout — evidence that *stopping* adds value beyond *prioritising*. *(Ablations:
+`results/ablations.png` — switch-cost sensitivity, estimator comparison, scaling, burstiness.)*
 
-Reproduce:
+### 2 · NASim — a real network-attack simulator
+
+The same scheduler drives real NASim episodes. Finding: **the advantage does not transfer
+unconditionally.** A tuned timeout stays competitive because NASim exploitation is
+*constant-hazard* with *uniform* host value — so stalling just defers an equally-valuable
+reward. This **transfer boundary** is a real, robust result (and it motivated `GuardedMVT`).
+
+### 3 · Live agent harness (Tier B) — the real-tool test
+
+Now a branch is a **service**, one unit of compute is one **bounded agent action**, and progress
+is scored only from **observed** state. The results reproduce the full story *with real tooling*:
+
+| regime | tuned fixed | plain MVT | **GuardedMVT** |
+|---|:--:|:--:|:--:|
+| diminishing value, σ = 1.2 | baseline | +5.5% | **+9.7%** |
+| constant hazard | solves | **✗ collapses (0%)** | **solves 100%** |
+
+**One policy must handle an *unknown* regime** — and only `GuardedMVT` does (time-to-objective at
+σ = 1.2, lower = better):
+
+| policy (single config) | diminishing | constant |
+|---|:--:|:--:|
+| fixed timeout, tuned for *constant* | 137 | **46** |
+| fixed timeout, tuned for *diminishing* | 95 | 135 |
+| plain MVT | 90 | **✗ collapse** |
+| **GuardedMVT** | **86** | **74** |
+
+![tier b](results/tierb.png)
+
+#### The agent harness, up close
+
+Tier B is deliberately **framework-free and NDA-clean**: a tiny custom harness, not LangChain/
+AutoGPT. The scheduler is the orchestrator; a per-branch **brain** (scripted, or a real LLM)
+picks the next action; the **harness** enforces isolation and runs it; progress is **grounded**
+in observed state, never in what the agent *claims*.
+
+```mermaid
+flowchart TB
+  subgraph SCH["Scheduler (unchanged)"]
+    W["Worker — one of W running in parallel"]
+  end
+  subgraph AG["Agent harness · ffs/realism"]
+    direction TB
+    BRAIN["Brain — choose next action<br/>ScriptedBrain · HarvestBrain · LLMBrain"]
+    GATE["AgentHarness.step()<br/>🔒 assert isolation — fail-closed<br/>then run ONE bounded action"]
+    MENU["Bounded action menu<br/>probe · enumerate · attempt_access · collect"]
+  end
+  subgraph RG["Sandbox — isolated, no egress"]
+    direction TB
+    SVC["Service / host<br/>Mock model · NASim · Docker CTF fixture"]
+    LED["ProgressLedger<br/>scores grounded milestones only<br/>(never agent-claimed)"]
+  end
+  LLM["Local LLM<br/>Ollama · HF transformers"]
+  W -->|"work_one()"| BRAIN
+  BRAIN -. "optional" .-> LLM
+  BRAIN --> GATE --> MENU --> SVC --> LED
+  LED -->|"validated progress g(c)"| W
+  classDef core fill:#BBDEFB,stroke:#1565C0,color:#0d2a4a;
+  classDef agent fill:#E1BEE7,stroke:#6A1B9A,color:#2e0a3a;
+  classDef sim fill:#C8E6C9,stroke:#2E7D32,color:#102a12;
+  classDef safety fill:#FFCDD2,stroke:#C62828,color:#4a0f0f;
+  classDef opt fill:#F5F5F5,stroke:#9E9E9E,color:#333,stroke-dasharray: 4 3;
+  class W core
+  class BRAIN,MENU agent
+  class GATE safety
+  class SVC agent
+  class LED sim
+  class LLM opt
+  style RG fill:#FFF5F5,stroke:#C62828,color:#4a0f0f
+```
+
+**Safety by construction:** isolation is asserted before *every* action and **fails closed**;
+the action set is bounded and non-weaponised; the live Docker range sits on an internal,
+**no-egress** network and holds no real data. Full gate in [`ffs/realism/TIERB.md`](ffs/realism/TIERB.md).
+
+---
+
+## The PAGP angle (parallel architecture & GPU)
+
+This is a parallel-computing project end to end — three kinds of parallelism, all running:
+
+```mermaid
+flowchart LR
+  subgraph ONE["① Task parallelism"]
+    TP["W agents forage at once<br/>GuardedMVT migrates workers<br/>off stalling branches<br/>= dynamic load balancing"]
+  end
+  subgraph TWO["② GPU data parallelism"]
+    GP["batch Monte-Carlo<br/>one SIMD lane per episode<br/>~100× the Python engine"]
+  end
+  subgraph THREE["③ Distributed memory"]
+    MP["MPI manager–worker pool<br/>pull-based load balancing<br/>~4.5× on 7 workers"]
+  end
+  ONE --> TWO --> THREE
+  classDef mvt fill:#FFE0B2,stroke:#E65100,color:#4a2300;
+  classDef gpu fill:#B2DFDB,stroke:#00695C,color:#06302b;
+  classDef mpi fill:#FFF9C4,stroke:#F9A825,color:#4a3b00;
+  class TP mvt
+  class GP gpu
+  class MP mpi
+```
+
+- **GPU batch simulator** (`ffs/gpu/batch_sim.py`) — thousands of episodes run as PyTorch tensor
+  ops, one SIMD lane per episode, on **MPS (Apple Silicon)** or **CUDA**. **~85–120k episodes/s**,
+  **~100× (up to ~140×) the sequential Python engine** — a full tuned sweep in seconds, not
+  minutes. A second **Numba `@cuda.jit`** kernel (`ffs/gpu/cuda_kernel.py`) runs the same
+  Monte-Carlo thread-per-episode on CUDA (`ffs/gpu/COLAB.md`). Both reproduce the headline.
+  ![gpu](results/gpu_results.png)
+- **MPI worker pool** (`ffs/mpi/worker_pool.py`) — a manager hands episode chunks to whichever
+  rank is free (work-*pulling*), so uneven durations balance with no static partitioning — the
+  same give-work-to-where-it-pays principle MVT uses at the branch level, now across processes.
+
+| PAGP unit | Where it lives |
+|---|---|
+| **II** · message passing, synchronisation | MPI manager–worker pool (`ffs/mpi/`) |
+| **III** · data-level / SIMD, GPU | tensorized batch sim + Numba CUDA kernel (`ffs/gpu/`) |
+| **IV** · decomposition, mapping & **load balancing** | MVT *is* the work-migration trigger; MPI pool is pull-based balancing |
+| **V** · applied GPU with PyTorch / Numba | `ffs/gpu/` (both implementations) |
+
+---
+
+## Live demo — see it work
+
+A narrated run of `W` LLM agents foraging the range in parallel under `GuardedMVT`:
 
 ```bash
-python -m ffs.experiments.run  --seeds 30 --out results/sweep.csv
-python -m ffs.experiments.plot --csv results/sweep.csv --out results/sweep.png
+python -m ffs.realism.demo_llm                # auto: a local Ollama model, else scripted fallback
+python -m ffs.realism.demo_llm --backend scripted   # no LLM — always runs
 ```
 
-### Ablation findings (σ = 0.9, 20 seeds; `python -m ffs.experiments.ablations`)
-
-- **Switching cost.** MVT's speed-up over the tuned fixed timeout *shrinks* as the switch
-  cost `s` rises — +12 % at `s=1` down to +3 % at `s=20` — exactly as predicted (when
-  migrating is expensive, staying beats moving).
-- **R-estimator window.** MVT is *insensitive* to the frontier-rate memory: speed-up is
-  ~11.7 % flat across half-lives 5–80 visits. R estimation is not finicky.
-- **Scaling (64 branches, 2→32 workers).** Near-linear speed-up; worker utilisation stays
-  high and rises with scale (0.84→0.97); MVT beats fixed on time-to-objective *and* total
-  compute at every scale. (The PAGP parallel-scaling study.)
-- **Burstiness (threat to validity).** With bursty gains (a single exploit flips a branch),
-  a *short*-window MVT misreads `g'(c)` and degrades badly (solve-rate 0.40 at `burst_p=0.2`
-  with half-life 8). **Horizon-matched smoothing recovers it** (solve-rate 0.85–0.90 with
-  half-life 30–60 and a higher `min_samples`). Under *extreme* burstiness the signal-agnostic
-  fixed timeout remains more robust — delineating exactly when foraging rules transfer: MVT
-  wins when the progress signal is informative, static timeouts win when it is not.
-
-Four-panel ablation figure (`python -m ffs.experiments.ablations && python -m ffs.experiments.plot_ablations`):
-
-![ablations](results/ablations.png)
+It prints, live: each agent **ENTER**ing a branch → actions chosen by the model →
+**ABANDON → MIGRATE** (the parallel load-balancing moment) → **crown-jewel flag captured**, then
+the measured GPU numbers (batched inference + the ~100× batch Monte-Carlo). With no model it
+falls back to the scripted brain, so it never fails in front of an audience.
 
 ---
 
-## The model
-
-Each **attack branch** is a foraging **patch** with diminishing returns. Working it costs
-compute `c`; cumulative validated progress follows a concave curve
-
-```
-g_i(c) = A_i · (1 − e^(−c/τ_i))        marginal   g_i'(c) = (A_i/τ_i) · e^(−c/τ_i)
-```
-
-- `A_i` — asymptotic yield (branch richness: rich vs. dead branch).
-- `τ_i` — return time-constant (how fast the branch pays out).
-- Realised progress is noisy around this curve (`smooth` or `bursty` — the latter models
-  a single exploit flipping a branch discontinuously, the main threat to MVT's concavity
-  assumption).
-
-**Heterogeneity** — the independent variable — is a single knob `σ`: branch richnesses are
-drawn log-normal with spread `σ`, while **mean richness is held fixed** so higher
-heterogeneity means *the same reward distributed more unequally*, not *more reward*.
-
-**Switching cost** `s` is the foraging "travel time": compute to abandon, pull a new
-frontier task, and re-establish reconnaissance state.
-
-**The MVT rule.** A worker continues while its estimated marginal exceeds the frontier
-opportunity rate and migrates otherwise:
-
-```
-continue while  g'(c) >  R        abandon & migrate when  g'(c) ≤ R
-```
-
-`R` is the environment's long-run opportunity rate, net of `s`. The two estimation
-problems are the real technical content:
-
-1. **Estimating `g'(c)`** from noisy, bursty observations — `recent-slope` (EWMA),
-   `bayesian` (a discounted Normal-mean estimator with a *keep-exploring* prior calibrated
-   to the branch's entry rate), or **`adaptive`** — the **mechanism contribution**: it
-   measures the observed *hit rate* (fraction of non-zero-gain ticks) and scales its
-   smoothing window inversely to it, so it always spans a roughly constant number of
-   *informative events* — responsive on dense signals, heavily smoothed on bursty ones —
-   and gates abandonment on informative-event count, not raw ticks. This lifts MVT's
-   solve-rate under bursty gains (e.g. 0.40 → 0.85 at hit-rate 0.2) with no regression on
-   smooth signals, turning the plain MVT transplant into "MVT adapted to the bursty signals
-   security agents actually produce".
-2. **Tracking `R`** as a moving target — estimated online from **completed visits** as
-   `Σ yield / Σ (residence + s)`. Building `R` from completed visits (not the pool's
-   instantaneous intake) is what avoids the degenerate equilibrium where all workers grind
-   their branches down together and nobody ever leaves.
-
----
-
-## Architecture
+## Repo map
 
 ```
 ffs/
-  simulator/
-    patch.py           Patch: g(c), g'(c), smooth/bursty realised gains
-    heterogeneity.py   make_surface(): log-normal richness with the σ knob; Gini
-    environment.py     Environment: frontier, switch cost, objective, analytic MVT R*
-  scheduler/
-    estimators.py      marginal estimators (recent-slope, Bayesian); frontier R estimator
-    policies.py        FixedTimeout, MaxRetry, TopK, UCB, MVT, OracleMVT
-    engine.py          discrete-event parallel scheduler (workers, migration, metrics)
-  experiments/
-    run.py             single runs, seed aggregation, baseline tuning, heterogeneity sweep
-    plot.py            the two-panel sweep figure
-tests/                 sanity + per-policy smoke tests
-results/               sweep.csv, sweep.png (git-ignored)
+  simulator/     patch.py · heterogeneity.py · environment.py     the controlled foraging model
+  scheduler/     engine.py · policies.py · estimators.py          the agent-agnostic core (the science)
+  experiments/   run.py · ablations.py · plot*.py                 sweeps, ablations, figures
+  realism/       cyber_range.py · agent_harness.py · sandbox.py    Tier-B live harness + the seam
+                 services.py · progress.py · llm_backends.py       grounded progress + LLM backends
+                 nasim_target.py · brains.py                       Tier-A NASim integration
+                 demo_llm.py · TIERB.md                            the live PAGP demo + safety gate
+  gpu/           batch_sim.py · cuda_kernel.py · COLAB.md          GPU batch Monte-Carlo (MPS/CUDA/Numba)
+  mpi/           worker_pool.py                                    distributed sweep (MPI)
+docker/          flagsvc/ · docker-compose.yml                     isolated, no-egress CTF fixture
+tests/           33 tests (1 CUDA-gated)
+results/         *.png figures · *.csv data
 ```
-
-**Policies compared** (identical branch *selection*; only the *abandonment* rule differs,
-to isolate the contribution):
-
-| policy | abandonment rule | role |
-|---|---|---|
-| `fixed_timeout` | static per-branch budget | **headline baseline** (tuned per scenario) |
-| `max_retry` | after R no-progress ticks | common static alternative |
-| `top_k` | only when depleted (no early stop) | tests *stopping* vs *prioritising* |
-| `ucb` | index-based activation | the bandit comparator ("isn't this a bandit?") |
-| `mvt` | `g'(c) ≤ R` (estimated) | **the contribution** |
-| `oracle_mvt` | `g'(c) ≤ R*` (true marginal, analytic R*) | rate-optimal efficiency reference |
-
-Metrics: **time-to-objective** (primary), findings-per-compute (efficiency), worker
-utilisation / switches (the PAGP load-balance metric).
-
----
-
-## Tier-A realism (NASim) — status and findings
-
-The realism layer (`ffs/realism/`) lets the **same** scheduler + MVT policy forage a real
-network-attack simulator (NASim), via a narrow seam: `NASimTarget`/`NASimBranch` and
-`NASimSubnetTarget`/`SubnetBranch` duck-type `Environment`/`Patch`, so nothing in the engine
-or policies changes. This is validated end-to-end — the scheduler drives real NASim episodes
-reproducibly.
-
-Running it produced a genuine, paper-relevant characterization of **when foraging rules
-transfer** — the nuanced result the project explicitly set out to find:
-
-- **The frontier rate must be an *opportunity* rate.** Estimating `R` from completed visits
-  deadlocks (no switches → no visit data → `R≈0` → no switches). We now estimate `R` from the
-  *early-phase intake a fresh branch offers*, discounted by the switch cost
-  (`ffs/scheduler/estimators.py::FrontierRateEstimator`). This makes MVT migrate correctly on
-  real NASim — and it is also a cleaner, more principled `R` for the abstract model (the
-  headline result is unchanged).
-- **The abstract advantage does not reliably transfer to NASim.** With correct migration, a
-  well-tuned fixed timeout is still competitive or better across every regime we tested
-  (host- vs segment-branch, uniform vs diminishing value, breadth vs value objective,
-  switch-cost 1→10). MVT's clean win needs steep diminishing *value* (a saturating branch
-  yield, i.e. the abstract model's asymptote `A_i`) and a low-noise progress signal. NASim
-  exploitation is *constant-hazard* (each attempt has the same success probability) with
-  *uniform* per-host value, so a stalled host just defers an equally-valuable reward —
-  abandoning it buys little. This is the transfer boundary, and it is a real finding, not a
-  tuning failure (it is robust to switch cost and to a saturating-value variant).
-
-Reproduce: `python -m ffs.realism.run_nasim --seeds 12` (flags: `--objective value
---value-decay 0.5`, `--switch-cost`). Takeaway for the paper: the abstract contribution
-stands on its own; the NASim layer contributes a principled `R` estimator and a precise
-characterization of when optimal-foraging stopping does and does not help security agents.
-
-## GPU-parallel batch simulator (PAGP Units III & V)
-
-The abstract foraging model is pure arithmetic and a heterogeneity sweep needs thousands of
-independent episodes — embarrassingly parallel. `ffs/gpu/batch_sim.py` runs `B` episodes ×
-`W` workers entirely as PyTorch tensor ops (the classic i.i.d.-patch MVT formulation), so the
-whole batch advances in lockstep on the GPU (**MPS** on Apple Silicon, **CUDA** on NVIDIA)
-with no Python loop over episodes/workers/branches — only the tick loop, each tick a few fused
-kernels, and a branchless (masked) update so the batch never leaves the GPU.
-
-![gpu](results/gpu_results.png)
-
-- **Throughput:** ~**85k episodes/s** on this Mac's GPU (MPS) — **~138× the sequential
-  Python engine** (612 eps/s), ~2.2× PyTorch-CPU. A full 5-level *tuned* sweep (~0.7 M
-  episodes) runs in ~14 s instead of ~20 min. The same code runs on CUDA, where it scales
-  further.
-- **Correctness:** it reproduces the central hypothesis — MVT trails a tuned fixed timeout
-  when branches are homogeneous and overtakes it as heterogeneity grows (crossover ≈ σ 0.85)
-  — in a second, independent, data-parallel implementation, corroborating the CPU engine.
-
-Run: `python -m ffs.gpu.run_gpu --episodes 16384 --benchmark`.
-
-**Two GPU implementations** of the same Monte-Carlo, for contrast:
-- `batch_sim.py` (PyTorch) — *SIMD across episodes*: one tensor lane per episode, one fused
-  kernel per tick. Runs on MPS/CUDA.
-- `cuda_kernel.py` (Numba `@cuda.jit`) — a hand-written *thread-per-episode* kernel: each GPU
-  thread runs one whole episode; thousands run concurrently. The canonical CUDA
-  Monte-Carlo pattern. Validated without a GPU via Numba's CUDA simulator
-  (`NUMBA_ENABLE_CUDASIM=1`), and runs on any NVIDIA GPU — see `ffs/gpu/COLAB.md` for a
-  step-by-step on Google Colab's free T4 (expect ~10^6 episodes/s there). Both agree with
-  each other and the CPU engine.
-
-## Distributed MPI worker pool (PAGP Units II & IV)
-
-`ffs/mpi/worker_pool.py` distributes the heterogeneity sweep across MPI ranks with a classic
-**manager-worker pool**: rank 0 holds the work queue (chunks of episodes) and hands a chunk to
-any worker that reports free; ranks 1..N-1 run episodes on the CPU engine and send results
-back. Because workers *pull* work when idle, uneven episode durations balance across ranks with
-no static partitioning — **dynamic load balancing**, the same give-work-to-where-it-pays
-principle the MVT rule embodies at the branch level, now across OS processes with no shared
-memory. Exercises MPI point-to-point messaging (`send`/`recv`, `ANY_SOURCE`, tags),
-decomposition and mapping.
-
-```bash
-mpirun -np 8 python -m ffs.mpi.worker_pool            # 1 manager + 7 workers
-python -m ffs.mpi.worker_pool                         # serial fallback (no MPI)
-for n in 1 2 4 8; do mpirun -np $n python -m ffs.mpi.worker_pool --quiet; done   # scaling
-```
-
-(Requires a system MPI, e.g. `brew install open-mpi`, then `pip install mpi4py`.)
-
-## PAGP (CS372IA) course coverage
-
-The coverage is structural, not cosmetic:
-
-- **Unit II** (multiprocessing, message passing, synchronisation) — the MPI manager-worker
-  pool (`ffs/mpi/`) over distributed-memory processes.
-- **Unit III** (data-level / SIMD parallelism, GPU) — the tensorized batch simulator maps
-  thousands of episodes onto GPU SIMD lanes (MPS/CUDA), plus the Numba CUDA kernel.
-- **Unit IV** (decomposition, mapping & load balancing, MPI, containing interaction
-  overheads) — the MVT rule *is* the dynamic load-balancing / work-migration trigger (switch
-  cost = interaction overhead; utilisation = the load-balance metric), and the MPI pool is
-  dynamic load balancing by work-pulling across ranks.
-- **Unit V** (applied GPU programming with PyTorch / Numba) — `ffs/gpu/` is a worked GPU
-  application in both PyTorch and a hand-written Numba `@cuda.jit` kernel (`ffs/gpu/COLAB.md`).
-
-Every unit now has concrete, running code; all GPU/MPI artifacts reproduce the same central
-hypothesis, corroborating the CPU engine.
 
 ---
 
@@ -274,31 +376,33 @@ hypothesis, corroborating the CPU engine.
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-pytest -q                                   # sanity tests
-python -m ffs.experiments.run --seeds 30    # the heterogeneity sweep -> results/sweep.csv
-python -m ffs.experiments.plot              # -> results/sweep.png
+pytest -q                                    # sanity tests
+python -m ffs.experiments.run  --seeds 30    # abstract sweep      -> results/sweep.csv
+python -m ffs.experiments.plot               #                     -> results/sweep.png
+python -m ffs.realism.run_tierb --seeds 20   # live-harness study  -> results/tierb_*.csv
+python -m ffs.experiments.plot_tierb         #                     -> results/tierb.png
+python -m ffs.gpu.run_gpu --benchmark        # GPU throughput (MPS/CUDA)
 ```
 
-Useful flags: `--workers`, `--branches`, `--switch-cost`, `--target-frac`,
-`--noise {smooth,bursty}`, `--levels 0.0 0.3 0.6 0.9 1.2`.
+| Backend | Command |
+|---|---|
+| NASim study | `python -m ffs.realism.run_nasim --seeds 12` |
+| GPU (CUDA kernel, no GPU) | `NUMBA_ENABLE_CUDASIM=1 pytest tests/test_cuda_kernel.py` |
+| MPI pool | `mpirun -np 8 python -m ffs.mpi.worker_pool` *(needs `brew install open-mpi`)* |
+| Live LLM demo | `python -m ffs.realism.demo_llm` *(Ollama optional; scripted fallback built in)* |
 
 ---
 
-## Roadmap
+## Status & roadmap
 
-- **Phase 1 (done)** — testbed with tunable heterogeneity, metric logging, reproducible
-  baselines; MVT rule + online estimators; heterogeneity sweep; the core figure.
-- **Phase 2** — ablations: switching-cost sweep, estimator comparison, **bursty-noise**
-  robustness, non-stationary-`R` window sensitivity; Whittle-index comparator; scaling
-  (workers × branches).
-- **Phase 3 (stretch, PAGP systems artifact)** — back the worker pool with real
-  threads/processes, then MPI across nodes; GPU candidate scoring.
-- **Phase 4 (stretch, external validity)** — a realism layer running an LLM agent against
-  NASim / CyberBattleSim or a small CTF range, to confirm the simulator result transfers.
-- **Write-up** — IEEE Access, or a parallel-computing / security workshop.
+- **Phases 1–3 (done)** — tunable testbed, MVT rule + online estimators, the heterogeneity sweep,
+  ablations, and the real parallel/GPU/MPI artifacts.
+- **Phase 4 (done)** — external validity: the *same* scheduler on **NASim** (Tier A) and a **live
+  agent harness over an isolated range** (Tier B). Both map the transfer boundary precisely, and
+  **`GuardedMVT`** turns that boundary into a design win.
+- **Next** — write-up (IEEE Access / a parallel-computing or security venue).
 
-> **Why a custom simulator, not NASim/CyberBattleSim, for the MVP?** The central
-> hypothesis is about *branch-return heterogeneity*, which those environments do not
-> expose as a direct knob. A purpose-built patch-foraging simulator makes heterogeneity a
-> controlled independent variable and keeps results reproducible and isolatable; NASim /
-> CyberBattleSim then serve as the external-validity layer in Phase 4.
+> **Why a custom simulator, not NASim/CyberBattleSim, as the MVP?** The hypothesis is about
+> *branch-return heterogeneity*, which those environments don't expose as a direct knob. A
+> purpose-built foraging model makes heterogeneity a controlled variable; NASim and the live
+> range are then the external-validity layers — exactly how they're used here.

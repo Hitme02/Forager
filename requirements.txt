@@ -6,6 +6,8 @@ PyYAML==6.0.3
 tqdm==4.70.1
 pytest==9.1.1
 nasim==0.12.0
+# Tier-B live range (gated): the agent harness talks HTTP to the isolated Docker fixture
+requests==2.34.2
 # GPU / parallel (PAGP): torch uses MPS on Apple Silicon, CUDA on NVIDIA; numba for CUDA kernels
 torch==2.14.1
 numba==0.68.0
