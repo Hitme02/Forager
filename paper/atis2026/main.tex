@@ -205,8 +205,9 @@ This is the natural ``harvest the surface'' objective, and for it, finishing soo
 the same as earning a higher average intake rate, which is what MVT maximises.
 
 \paragraph{The leaving rule and the oracle rate.}
-A worker keeps going while $g_i'(c) > \RR$ and leaves when $g_i'(c) \le \RR$, where
-$\RR$ is the frontier's opportunity rate, net of $s$. For the exponential surface the
+A worker keeps going while $g_i'(c) > \RR$ and leaves when $g_i'(c) \le \RR$, with $\RR$
+the rate the rest of the frontier would pay once the switch cost $s$ is netted out. For
+the exponential surface the
 self-consistent best rate $\RStar$ is the fixed point
 $\RStar = \sum_i y_i^\star / \sum_i (t_i^\star + s)$ over the branches worth entering,
 those with $A_i/\tau_i > \RStar$, where the leaving time is $t_i^\star = \tau_i
@@ -443,11 +444,11 @@ pool scaling, and burstiness (recent-slope against the adaptive estimator).}
 \label{sec:res-nasim}
 
 Pointing the same scheduler at NASim~\cite{nasim2019} episodes is an early, qualitative
-check rather than a full study, and it brings out a limit worth stating plainly. The
-lead does not carry over without conditions. NASim exploitation is close to
-constant-hazard with uniform host value, so stalling on a branch only puts off a reward
-of equal worth rather than passing up a richer one, and a tuned timeout stays in the
-race. We read this as a useful negative signal, not a measured speedup: foraging-style
+check rather than a full study, and it exposes a limit we would rather be upfront about.
+The lead does not carry over without conditions. In NASim, exploitation behaves like a
+constant hazard and the hosts are worth roughly the same, so lingering on a branch merely
+delays an equally valuable reward instead of forgoing a richer one, and the tuned timeout
+keeps pace. We read this as a useful negative signal, not a measured speedup: foraging-style
 stopping needs diminishing \emph{value}, not just a hard target to reach. It is what
 pushed us to design GuardedMVT, and a quantitative NASim study is left for future work.
 
@@ -455,10 +456,10 @@ pushed us to design GuardedMVT, and a quantitative NASim study is left for futur
 \label{sec:res-tierb}
 
 We then swap the simulator for a live, tool-running agent harness over a sealed-off
-range. A branch is now a service, one unit of compute is one bounded agent action, and
-progress is scored only from observed service state by a milestone ledger (host
+range. Here a branch is a running service, each unit of compute buys one bounded action,
+and a milestone ledger credits progress only from service state we can observe (host
 discovered, service enumerated, foothold shell, objective flag), never from what the
-agent claims. Diminishing returns and burstiness now have a concrete cause: remaining
+agent reports. Diminishing returns and burstiness now have a concrete cause: remaining
 milestones get sparser as a branch is worked, and a foothold or a flag is a large, rare
 jump.
 
@@ -466,8 +467,8 @@ jump.
 \centering
 \caption{Live-harness robustness to an \emph{unknown} regime at $\sigma=1.2$
 (time-to-objective in ticks; lower is better; ``fails'' means the policy did not
-solve). A timeout tuned for one regime is poor in the other, since the best budget
-differs about eightfold, and plain MVT breaks under constant hazard. \textbf{GuardedMVT
+solve). A timeout tuned for one regime does poorly in the other (the best budget differs
+about eightfold), and plain MVT breaks under constant hazard. \textbf{GuardedMVT
 is the only policy that stays strong in both regimes with a single configuration.}}
 \label{tab:robust}
 \begin{tabular}{lcc}
@@ -490,8 +491,9 @@ constant-hazard regime, plain MVT's solve rate drops to $0\%$, the boundary of
 Section~\ref{sec:res-nasim} now with live actions, while GuardedMVT solves every
 episode. The sharpest comparison is robustness to an unknown regime
 (Table~\ref{tab:robust}): the best timeout budget differs about eightfold between
-regimes, so a timeout tuned for one is poor in the other and plain MVT breaks under
-constant hazard, leaving GuardedMVT the only policy strong in both with one setting. A
+regimes, so a timeout tuned for one does badly in the other and plain MVT breaks under
+constant hazard, which leaves GuardedMVT alone in handling both from a single
+configuration. A
 burstiness study inside the harness mirrors the
 abstract one: as the collection stream turns bursty, recent-slope MVT slows from
 $94.6$ to $182.9$ ticks as the hit probability falls from $1.0$ to $0.1$, while the
@@ -543,8 +545,8 @@ is sealed off before every action and refuses to run otherwise, with no flag to 
 it; the live range sits on an internal network with no route out, verified from inside
 by requiring outbound connections to fail. Actions are bounded and not weaponised: the
 menu is only probe, enumerate, attempt access with a planted default credential, and
-collect, with no exploit synthesis and no arbitrary command execution, each mapped onto
-a plain request against a deliberately weak fixture that holds no real data. Progress is
+collect; it neither synthesises exploits nor runs arbitrary commands, and each action
+maps onto a plain request against a deliberately weak fixture that holds no real data. Progress is
 grounded, since a milestone scores only when its evidence holds against observed state,
 which keeps MVT from chasing a made-up signal. Building the real-range sandbox needs an
 explicit authorisation flag, and every experiment here uses an in-process mock or the
@@ -554,25 +556,25 @@ isolated fixture. The work is meant for authorised defensive assessment only.
 \section{Limitations and Threats to Validity}
 \label{sec:threats}
 
-A few limits are worth naming up front. The foraging model and the heterogeneity knob
-are synthetic. The live harness uses scripted and mock services reached with a planted
-default credential rather than real vulnerabilities, and its LLM-driven brain is
-available but not evaluated here. GuardedMVT's thresholds are set by hand rather than
-learned, and while we include a Gittins-style restless-index baseline, a full
-Whittle-index treatment of drifting arms is left to future work. With those stated, we
-turn to the standard validity axes.
+This study has clear limits. The foraging model and the heterogeneity knob are
+synthetic. The live harness runs scripted and mock services reached with a planted
+default credential, not real vulnerabilities, and its LLM-driven brain is wired in but
+not evaluated here. GuardedMVT's thresholds are set by hand, not learned, and although
+we include a Gittins-style restless-index baseline, a full Whittle-index treatment of
+drifting arms is still future work.
 
-On construct validity, the exponential patch in Eq.~\eqref{eq:patch} is a model; we
-guard against it by reproducing the pattern on a network simulator and on a live
-harness with grounded progress, and by studying burstiness as an explicit break from
-the smooth curve. On internal validity, the main baseline is tuned per scenario and
-every policy shares the same selection and the same per-seed surfaces, which removes
-the weak-baseline worry. On external validity, we deliberately show a regime
-(constant hazard) where the lead does not hold, and we claim nothing beyond
-diminishing-value branches; GuardedMVT exists precisely so a deployed scheduler need
-not know the regime up front. On statistical validity, we report the qualitative
-pattern (the crossover, the breakdown, the single-configuration robustness) that holds
-steady across seeds, estimators, pool sizes, and both realism layers.
+How much do these threaten the conclusions? The patch model in Eq.~\eqref{eq:patch} is
+only a model, so we lean instead on the pattern reappearing on a network simulator and
+a live harness with grounded progress, and on the burstiness study as a deliberate break
+from the smooth curve. The comparison is kept honest a different way: the main baseline
+is tuned per scenario, and every policy shares one selection rule and the same per-seed
+surfaces, so a weak baseline cannot be doing the work. On scope, we show a regime
+(constant hazard) where the advantage disappears and claim nothing past
+diminishing-value branches, which is the whole reason GuardedMVT reads the regime for
+itself. And because the numbers are means over fixed seeds, what we actually rely on is
+the shape of the result, the crossover, the collapse, and the single-configuration
+robustness, which stays put across seeds, estimators, pool sizes, and both realism
+layers.
 
 % ===========================================================================
 \section{Conclusion and Future Work}
@@ -583,8 +585,9 @@ should walk away from a branch. We gave one by borrowing the Marginal Value Theo
 from behavioural ecology, and showed, on a controlled testbed and again in a live
 harness, when it wins (uneven surfaces with diminishing value), when it loses (uniform
 or constant-hazard targets), and how to keep the win without the failure. GuardedMVT
-reads the regime online, per branch, and is the only policy strong in both with one
-setting. Built as a task-parallel scheduler with a GPU batch Monte-Carlo and an MPI
+reads the regime online, per branch, and was the one policy in our study to hold up
+across both regimes without reconfiguration. Built as a task-parallel scheduler with a
+GPU batch Monte-Carlo and an MPI
 pool, the same migration idea that drives the method also balances the computation.
 Next steps: a full Whittle-index treatment of drifting arms, learned regime detectors,
 wiring the scheduler to RL and LLM planners beneath the seam, and larger live ranges
