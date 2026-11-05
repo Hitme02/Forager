@@ -367,6 +367,71 @@ class OracleMVT(Policy):
         return worker.patch.marginal() <= threshold
 
 
+@dataclass
+class RestlessIndex(Policy):
+    """Gittins-style index policy for deteriorating (restless) arms -- the restless-bandit
+    comparator a reviewer asks for.
+
+    Our branches are a bandit whose arms only deteriorate while active and freeze while
+    passive (a branch's spent compute advances only when a worker is on it). For such
+    deteriorating-reward arms the Gittins index reduces to the arm's *current* expected
+    reward rate, so the index-optimal rule is greedy on the current marginal. We estimate
+    each branch's current rate with a shared recency-weighted (EWMA) mean of observed gains,
+    work the highest-index available branch, and switch when another branch's index beats
+    the current one's by a hysteresis `margin` (which prevents thrashing). Unvisited
+    branches carry an optimistic (infinite) index so each is tried once.
+
+    The point of including it: unlike MVT it has no notion of the frontier opportunity rate,
+    the switch cost, or the completion objective -- it only ranks arms against one another,
+    and so never stops early on opportunity cost. It therefore isolates, together with UCB,
+    whether a selection/index policy alone can match MVT's stopping.
+    """
+
+    half_life: float = 8.0
+    margin: float = 0.05
+    name: str = field(default="restless_index", init=False)
+    _rate: dict = field(default_factory=dict, init=False)
+    _seen: set = field(default_factory=set, init=False)
+    _alpha: float = field(default=0.0, init=False)
+
+    def reset(self, patches: list[Patch], rng: np.random.Generator) -> None:
+        super().reset(patches, rng)
+        self._alpha = 1.0 - 0.5 ** (1.0 / max(self.half_life, 1e-6))
+        self._rate = {p.patch_id: 0.0 for p in patches}
+        self._seen = set()
+
+    def observe(self, worker: WorkerView, gain: float) -> None:
+        if worker.patch is None:
+            return
+        pid = worker.patch.patch_id
+        if pid not in self._seen:
+            self._rate[pid] = gain               # initialise on first observation
+            self._seen.add(pid)
+        else:
+            self._rate[pid] = (1.0 - self._alpha) * self._rate[pid] + self._alpha * gain
+
+    def _index(self, pid: int) -> float:
+        return float("inf") if pid not in self._seen else self._rate[pid]
+
+    def select_branch(
+        self, worker: WorkerView, available: list[Patch], memory: "BranchMemory"
+    ) -> Patch | None:
+        if not available:
+            return None
+        return max(available, key=lambda p: self._index(p.patch_id))
+
+    def should_abandon(self, worker: WorkerView, R: float, memory: "BranchMemory") -> bool:
+        if worker.patch is None:
+            return False
+        cur = self._index(worker.patch.patch_id)
+        best_other = -float("inf")
+        for p in self._patches:
+            if p.patch_id == worker.patch.patch_id:
+                continue
+            best_other = max(best_other, self._index(p.patch_id))
+        return best_other > cur + self.margin
+
+
 # --------------------------------------------------------------------------- #
 # Factory
 # --------------------------------------------------------------------------- #
@@ -379,6 +444,8 @@ def make_policy(spec: dict) -> Policy:
         "max_retry": MaxRetry,
         "top_k": TopK,
         "ucb": UCB,
+        "restless_index": RestlessIndex,
+        "gittins": RestlessIndex,
         "mvt": MVT,
         "guarded_mvt": GuardedMVT,
         "oracle_mvt": OracleMVT,

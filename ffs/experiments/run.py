@@ -103,6 +103,7 @@ DEFAULT_POLICIES: dict[str, dict] = {
                   "min_samples": 3, "hysteresis": 0.05},
     "top_k": {"type": "top_k"},
     "ucb": {"type": "ucb", "c": 1.0, "margin": 0.05},
+    "restless_index": {"type": "restless_index", "half_life": 8.0, "margin": 0.05},
     # fixed_timeout is added per-level after tuning; oracle_mvt is reported separately
     # as an efficiency upper bound (it is rate-optimal and does not chase sub-R* tails).
 }

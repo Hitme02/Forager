@@ -1,0 +1,598 @@
+\documentclass[runningheads]{llncs}
+
+% ---------------------------------------------------------------------------
+% ATIS 2026 submission -- Track 3: Artificial Intelligence, Data Security and
+% Cybersecurity. Springer CCIS format (LNCS class), <= 12 pages.
+% Review is (assumed) double-blind. Use the \anon toggle below to switch
+% between the named (camera-ready) and anonymized (submission) builds.
+% ---------------------------------------------------------------------------
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% Absorb a few unavoidable wide lines without visible stretching.
+\emergencystretch=2em
+
+% Author-block toggle: \anontrue = anonymized (double-blind SUBMISSION version),
+% \anonfalse = named (CAMERA-READY / records version). ATIS review appears to be
+% double-blind -- flip to \anontrue before uploading the submission PDF to CMT.
+\newif\ifanon
+\anonfalse
+
+\newcommand{\gprime}{g'(c)}
+\newcommand{\RR}{R}
+\newcommand{\RStar}{R^{\star}}
+
+\begin{document}
+
+\title{Knowing When to Walk Away: Foraging-Based
+Frontier Scheduling for Parallel Autonomous
+Penetration-Testing Agents}
+
+\titlerunning{Foraging-Based Frontier Scheduling for Pentest Agents}
+
+\ifanon
+  \author{Anonymous Author(s)}
+  \authorrunning{Anonymous}
+  \institute{Affiliation withheld for double-blind review}
+\else
+  \author{Manas M. N. \and Chhavi Pareek \and Hitarth Mehra \and Chetan M. Patil}
+  \authorrunning{Manas M. N. et al.}
+  \institute{Department of Computer Science and Engineering,\\
+    R.V. College of Engineering, Bengaluru, Karnataka, India\\
+    \email{\{manasmn, chhavipareek.cs23, hitarthmehra.cs23, chetanmpatil.cs23\}@rvce.edu.in}}
+\fi
+
+\maketitle
+
+\begin{abstract}
+A pool of automated penetration-testing agents often works one target at once, each
+on a different part of it. Every agent keeps hitting the same question: the branch I
+am on has slowed down, so do I keep digging or move on? Most deployed tools answer
+with a fixed time limit, which ignores the thing that should settle it, namely how
+well the other branches are paying off just now. We borrow a rule from the study of
+how animals feed, the Marginal Value Theorem, and use it to make the call. An agent
+leaves a branch once its rate of fresh progress drops to the average rate the rest of
+the frontier is offering, after the cost of moving is taken out. The same scheduler
+drives three back ends without change: a controlled model, a network-attack
+simulator, and a small live harness that acts inside a sealed-off range. On the
+controlled model the rule is about 12 to 16 percent slower than a carefully tuned
+time limit when branches look alike, and 9 to 12 percent faster once they differ a
+lot, with the crossover near a value spread of~0.6; the live harness repeats the
+pattern. We also report where it breaks: when a target gives no sign of running dry,
+the plain rule leaves too early and solves nothing. A guarded version spots that case
+on its own and is the only setting that handles both kinds of target with one
+configuration. The scheduler also runs in parallel, on a GPU and across machines.
+
+\keywords{Autonomous penetration testing \and AI for cybersecurity \and
+Optimal foraging \and Marginal Value Theorem \and Scheduling \and Parallel
+computing \and GPU acceleration.}
+\end{abstract}
+
+% ===========================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Automated penetration-testing agents are no longer run one at a time. Planners built
+on reinforcement learning~\cite{schwartz2019autonomous,hu2020automated}, and more
+recently agents driven by large language models~\cite{deng2024pentestgpt}, are run as
+a pool that searches a target together. Each agent works one branch of the target at a
+time. Running $W$ of them at once turns a slow depth-first crawl into a broad sweep,
+but it also raises a
+question a single planner rarely has to answer: with several other branches in
+progress right now, when should this agent give up on its own and move on?
+
+The common answer is a fixed one, a timeout or a retry cap or a depth limit. None of
+them looks at what should really decide it, which is what the rest of the frontier is
+worth at that moment. Leaving a quiet branch helps only if a better one is waiting,
+and how good the alternatives are keeps shifting as the run goes on and the easy wins
+are used up. A timeout that suits a target with many similar branches will be wrong
+for one with a handful of rich branches and a lot of dead ends, and real networks tend
+to have the second shape.
+
+Animals solved a version of this a long time ago. A forager in a patch that is being
+emptied has to judge when to leave for the next one, setting the patch's falling intake
+against what the surroundings pay once travel is counted. Charnov's Marginal Value
+Theorem (MVT)~\cite{charnov1976optimal} gives the rate-optimal rule: leave as soon as
+the patch's marginal intake drops to the long-run average of the habitat. We move that
+rule into parallel pentest scheduling. An attack branch stands in for a patch whose
+validated progress has diminishing returns, and the parallel frontier stands in for the
+habitat.
+
+\medskip\noindent\textbf{Contributions.}
+\begin{enumerate}
+  \item A foraging view of parallel attack-surface exploration, and a scheduler that
+  does not care what kind of agent sits underneath it. The scheduler applies the MVT
+  leaving rule from two things it estimates online: a branch's marginal progress rate
+  $\gprime$ and the frontier's opportunity rate $\RR$, net of the cost of switching
+  (Sections~\ref{sec:model}--\ref{sec:method}).
+  \item A clear empirical pattern. With the spread of branch value, $\sigma$, used as
+  a single knob that holds total value fixed, the foraging rule's lead over a
+  per-level-tuned timeout widens as $\sigma$ grows, peaking near $\sigma\approx 0.9$,
+  and the two cross over near $\sigma\approx 0.6$ (Section~\ref{sec:res-sweep}).
+  Priority-only and bandit baselines trail both, which tells us the gain comes from
+  \emph{stopping}, not from better \emph{selection}.
+  \item A boundary and a repair. Plain MVT breaks on targets with constant hazard. We
+  add \textbf{GuardedMVT}, which works out online, per branch, whether the rule even
+  applies, and is the only policy that stays strong in both regimes with one setting
+  (Sections~\ref{sec:guarded},~\ref{sec:res-tierb}).
+  \item A parallel build of the whole thing: worker migration as load balancing, a
+  GPU batch Monte-Carlo, and an MPI worker pool, plus a live harness whose safety is
+  built in rather than assumed (Sections~\ref{sec:parallel},~\ref{sec:safety}).
+\end{enumerate}
+
+% ===========================================================================
+\section{Background and Related Work}
+\label{sec:related}
+
+\paragraph{Automated and autonomous penetration testing.}
+Attack planning has been cast as a POMDP~\cite{sarraute2012pomdp} and, at larger scale,
+as reinforcement learning over abstract network
+models~\cite{schwartz2019autonomous,hu2020automated,ghanem2020reinforcement}, with
+NASim~\cite{nasim2019} and CyberBattleSim~\cite{cyberbattlesim2021} as the usual
+testbeds. More recent work drives tool-using LLM agents through real exploitation
+steps~\cite{deng2024pentestgpt}. Nearly all of it is about the policy inside one
+engagement: which action to take next on one target. The parallel question we study
+sits beside that and is mostly untouched, which is when a pool of agents on different
+branches should give up and migrate. Our scheduler stays agent-agnostic, so any of
+these planners can sit beneath its decision seam.
+
+\paragraph{Bandits and index policies.}
+Spending effort well among uncertain options sounds like a bandit
+problem~\cite{auer2002finite}, with Gittins indices~\cite{gittins1979bandit} and
+restless bandits~\cite{whittle1988restless} for arms that drift while they are left
+alone. Those are about \emph{selection}, which arm to pull, usually under a fixed
+horizon or a discount. Ours is about \emph{early stopping} toward a goal: leave a
+branch that still pays, because the frontier pays more once travel is counted. We add a
+UCB1 comparator, a priority-and-exhaust comparator, and a Gittins-style restless-index
+comparator so we can show that good selection on its own does not explain the gain
+(Section~\ref{sec:res-sweep}).
+
+\paragraph{Optimal and information foraging.}
+MVT~\cite{charnov1976optimal} and foraging theory~\cite{stephens1986foraging} are old
+ground in behavioural ecology, and Pirolli and Card carried the patch model into human
+information seeking as information foraging~\cite{pirolli1999information}. We have not
+found earlier work that uses MVT as the trigger for abandoning a branch in a pool of
+autonomous security agents, or that pins down, for this setting, when the rule actually
+transfers: when branch value diminishes, not merely when there is a hard target.
+
+% ===========================================================================
+\section{Problem Formulation and Foraging Model}
+\label{sec:model}
+
+\paragraph{Branches as patches.}
+An attack surface is a set of $N$ branches. Working branch $i$ for a total of $c$
+units of compute returns expected cumulative \emph{validated progress}
+\begin{equation}
+g_i(c) = A_i\left(1 - e^{-c/\tau_i}\right),
+\qquad
+g_i'(c) = \frac{A_i}{\tau_i}\, e^{-c/\tau_i},
+\label{eq:patch}
+\end{equation}
+where $A_i$ is how rich the branch is (the total progress it can give) and $\tau_i$
+is how quickly it pays out. The marginal rate $g_i'(c)$ falls as more compute is
+spent, which is the diminishing-returns condition MVT needs. Realised progress is
+noisy around this curve, with mean $g_i'(c)$. A \emph{bursty} variant delivers the
+same mean as rare Bernoulli jumps of size $g_i'(c)/p$ (probability $p$), which matters
+because a single exploit can flip a branch all at once, breaking the smooth-curve
+assumption.
+
+\paragraph{Heterogeneity as the single variable we turn.}
+Branch richness is drawn from a log-normal law, $A_i = \exp(\mu + \sigma Z_i)$ with
+$Z_i\sim\mathcal{N}(0,1)$ and $\mu = \log(\text{mean}_A) - \sigma^2/2$, so that the
+\emph{mean} richness stays put as $\sigma$ grows. A larger $\sigma$ therefore means
+``the same total reward, shared out more unevenly'', not ``more reward''. This keeps
+heterogeneity and abundance apart. Time constants are tied in part to richness, so a
+rich branch also matures more slowly, and no single fixed timeout can be right for a
+rich branch and a poor one at the same time.
+
+\paragraph{Economics and the goal.}
+Leaving a branch and setting up reconnaissance somewhere new costs a \emph{switch
+cost} $s$, the forager's travel time. With $W$ workers in parallel, one tick moves the
+clock forward by one and spends up to $W$ units of compute. A worker that is switching
+spends compute but returns nothing that tick. The \emph{coverage} goal is reached when
+realised progress across the pool passes a target fraction of the total available.
+This is the natural ``harvest the surface'' objective, and for it, finishing sooner is
+the same as earning a higher average intake rate, which is what MVT maximises.
+
+\paragraph{The leaving rule and the oracle rate.}
+A worker keeps going while $g_i'(c) > \RR$ and leaves when $g_i'(c) \le \RR$, where
+$\RR$ is the frontier's opportunity rate, net of $s$. For the exponential surface the
+self-consistent best rate $\RStar$ is the fixed point
+$\RStar = \sum_i y_i^\star / \sum_i (t_i^\star + s)$ over the branches worth entering,
+those with $A_i/\tau_i > \RStar$, where the leaving time is $t_i^\star = \tau_i
+\ln(A_i/(\tau_i \RStar))$ and the leaving yield is $y_i^\star = A_i - \tau_i \RStar$.
+We solve it with Brent's method and use it only as a clairvoyant \emph{OracleMVT}
+reference. The deployed policy never sees $\RStar$; it has to estimate its own $\RR$
+as it goes.
+
+% ===========================================================================
+\section{Method: Foraging-Based Frontier Scheduling}
+\label{sec:method}
+
+\subsection{An agent-agnostic scheduler and its seam}
+The scheduler runs $W$ workers. At any moment a worker is \emph{working} (spending
+compute and producing noisy progress), \emph{switching} (paying $s$ after leaving a
+branch), or \emph{idle} (which happens only when the frontier is used up). All of the
+mechanics, the accounting, the frontier-rate estimate, and the stopping test live in
+the engine and are identical for every policy. A policy controls two choices and
+nothing else: \textsc{select\_branch} and \textsc{should\_abandon}. Holding the rest
+fixed is what makes the comparison fair, because only the decision rule changes. A
+back end need only expose a branch with a \texttt{work\_one()} step, a recon prior, and
+its spent compute, so one engine drives the abstract model, a network simulator, and a
+live harness unchanged.
+
+\subsection{The policies we compare}
+To put the spotlight on the leaving rule, branch \emph{selection} is kept the same
+across the core policies: enter the available branch with the best reconnaissance
+prior. We compare \textbf{FixedTimeout} (leave after a fixed per-branch budget; the
+deployed heuristic and our main baseline, tuned for each scenario), \textbf{MaxRetry}
+(leave after a fixed run of near-zero ticks), \textbf{TopK} (rank by prior and leave
+only when a branch is truly used up, so it prioritises but never stops early),
+\textbf{UCB} (a UCB1 index over branches treated as arms), \textbf{RestlessIndex} (a
+Gittins-style index, greedy on each branch's estimated current rate, with switch
+hysteresis; the restless-bandit comparator), \textbf{MVT} (our rule), and
+\textbf{OracleMVT} (a clairvoyant upper bound we report only as an efficiency
+reference).
+
+\subsection{Estimating the two rates}
+The real work is estimating two noisy, drifting quantities.
+
+The marginal rate $\gprime$ comes from one of three estimators. \textbf{Recent-slope}
+is an exponentially weighted average of realised per-compute gains. \textbf{Bayesian}
+is a conjugate Normal-mean estimator with an optimistic prior that is set from the
+branch's own entry rate, so a few early samples keep the estimate high and no branch
+is dropped too soon; a discount lets it follow the branch's current rate rather than
+its running average. \textbf{Adaptive} is built for burstiness. It tracks the hit
+rate $\hat{p}$, the fraction of ticks with a non-zero gain, and sets the smoothing
+window inversely to it, so the estimate spans about the same number of informative
+events whether the signal is dense or bursty. It also counts $n$ as informative
+(non-zero) events, so a policy's minimum-samples guard means ``enough real evidence''
+rather than ``enough ticks''.
+
+The frontier rate $\RR$ is read off the \emph{early-phase intake} a fresh branch
+gives, discounted for travel:
+\begin{equation}
+\RR = f_{\text{fresh}} \cdot \frac{k}{k + s},
+\qquad
+f_{\text{fresh}} = \mathrm{EWMA}_{\text{entries}}\!\left(\tfrac{1}{k}\textstyle\sum_{\text{first } k \text{ ticks}} \text{gain}\right),
+\label{eq:R}
+\end{equation}
+where $k$ is the entry window. Reading $\RR$ off \emph{completed} visits instead leads
+to a deadlock. The low-rate tails a worker grinds before leaving pull the average
+down, so switching never looks worth it, so no visit data build up and nobody ever
+leaves. The entry-phase figure is seen on every branch entry, needs no completed
+visits to start, and reflects the strong intake a fresh branch pays. A worker stuck on
+a dying tail then sees its marginal fall below $\RR$ and moves on.
+
+\subsection{GuardedMVT: knowing where the rule holds}
+\label{sec:guarded}
+MVT's leaving rule is right only when a branch's return really does diminish. On a
+constant-hazard branch, say brute-forcing one host where each try is equally likely to
+land and value is uniform, the marginal signal carries no information. The plain rule
+reads a low rate and leaves before the hazard pays off. \textbf{GuardedMVT}
+(Algorithm~\ref{alg:guarded}) fixes this by working out the regime online, per branch,
+from signals the scheduler already keeps. It tracks the running peak of the smoothed
+marginal and treats the signal as diminishing once that marginal has fallen to a
+fraction of a genuinely productive peak. A concave branch reaches this at roughly
+$\tau\ln(1/\text{decline\_frac})$ compute, whatever its richness, while a memoryless
+or not-yet-productive branch never does, because its peak stays near zero. Where the
+signal is diminishing it applies the exact MVT rule; otherwise it falls back to a
+committed budget, behaving like a timeout rather than churning off a branch whose value
+has not landed yet. The fallback counts raw ticks, so it keeps
+working even when a constant-hazard branch yields too few informative events to feed
+the marginal estimator.
+
+\begin{algorithm}[t]
+\caption{GuardedMVT \textsc{should\_abandon} (per worker, per tick)}
+\label{alg:guarded}
+\begin{algorithmic}[1]
+\Require smoothed marginal $m$ with informative-event count $n$; frontier rate $\RR$;
+running peak $\rho$; stall counter $\kappa$ (ticks since last gain)
+\State \textbf{Update:} $\rho \gets \max(\rho, m)$;\quad $\kappa \gets 0$ if gain $> 0$ else $\kappa+1$
+\If{$n \ge \textit{min\_samples}$ \textbf{and} $\rho > \textit{peak\_floor}\cdot \RR$ \textbf{and} $m \le \textit{decline\_frac}\cdot\rho$ \textbf{and} $m \le \RR(1-\textit{hyst})$}
+   \State \Return \textbf{true} \Comment{diminishing signal present: apply the MVT leaving rule}
+\EndIf
+\State \Return $\kappa \ge \textit{budget\_cap}$ \Comment{committed-budget fallback, works in any regime}
+\end{algorithmic}
+\end{algorithm}
+
+% ===========================================================================
+\section{Parallel and GPU Implementation}
+\label{sec:parallel}
+
+The project is a parallel-computing artifact from top to bottom, and it uses three
+kinds of parallelism.
+
+\paragraph{(1) Task parallelism that doubles as load balancing.}
+$W$ agents forage at once, and GuardedMVT moves a worker off a stalling branch onto a
+fresher one. That is dynamic load balancing by another name: send work to where it
+pays, applied at the branch level.
+
+\paragraph{(2) GPU data parallelism.}
+The abstract model is plain arithmetic, and a sweep needs thousands of independent
+episodes, an easy fit for the GPU. We run $B$ episodes by $W$ workers entirely as
+PyTorch~\cite{paszke2019pytorch} tensor operations on MPS or CUDA, with no Python loop
+over episodes, workers, or branches; the only loop left is over ticks, each a few
+fused, branchless masked kernels. Checking for early exit only every 128 ticks avoids a
+per-tick GPU-to-CPU sync and keeps the batch on the device. A second
+Numba~\cite{lam2015numba} \texttt{@cuda.jit} kernel runs the same Monte-Carlo one thread
+per episode on CUDA, and both reproduce the headline pattern.
+
+\paragraph{(3) Distributed memory.}
+An MPI~\cite{mpiforum2021} manager--worker pool, built on mpi4py~\cite{dalcin2011mpi4py},
+spreads the sweep across processes. Rank~0 holds a queue of episode chunks and hands
+one to any worker that says it is free. Because the workers pull work, uneven episode
+lengths even out across ranks with no fixed partitioning. It is the same idea as MVT,
+now across operating-system processes that share no memory.
+
+% ===========================================================================
+\section{Experimental Setup}
+\label{sec:setup}
+
+Unless stated otherwise, the abstract testbed uses $N=40$ branches, $W=8$ workers, a
+switch cost $s=5$, a coverage goal of $50\%$ of the total available yield, and $30$
+random seeds. The same seed hands every policy the \emph{same} surface, so a
+difference between policies is never a difference between surfaces. The FixedTimeout
+baseline is tuned for each heterogeneity level by a grid search over its budget and
+reported at its best value, so MVT is never set against a weak version of it. We give
+mean time-to-objective, and as a relative figure the percentage speedup of MVT over
+the tuned timeout, where positive means MVT is faster. Every experiment runs from
+fixed-seed drivers in the released code. GuardedMVT uses one fixed threshold set
+everywhere ($\textit{decline\_frac}=0.5$, peak floor $=0.05\,\RR$, committed budget
+$=16$ ticks, $\textit{min\_samples}=3$) on the adaptive marginal estimator, unchanged
+across heterogeneity levels, regimes, and both realism layers; the robustness in
+Table~\ref{tab:robust} uses this same configuration. The GPU figures use the PyTorch
+MPS backend on a 10-core Apple M4, and the MPI figures use one manager with seven worker
+ranks on the same machine. Code, configurations, and the data behind every figure will
+be released on acceptance; every number here is reproducible from the fixed-seed
+drivers.
+
+% ===========================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{The headline pattern on the controlled testbed}
+\label{sec:res-sweep}
+
+\begin{table}[t]
+\centering
+\caption{Mean time-to-objective (ticks; lower is better) on the abstract testbed,
+with MVT's speedup over the per-level-tuned fixed timeout. Every policy solves all
+episodes. MVT loses when branches are alike and wins once they are uneven, crossing
+over near $\sigma\approx0.6$. The priority-only (\textsc{TopK}) and bandit
+(\textsc{UCB}) comparators trail throughout. Standard deviations over the 30 seeds are
+small next to the gaps at $\sigma\ge0.6$ (for example $101.0{\pm}11.0$ against
+$88.4{\pm}3.8$ at $\sigma=0.9$).}
+\label{tab:sweep}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Heterogeneity $\sigma$ & $0.0$ & $0.3$ & $0.6$ & $0.9$ & $1.2$ \\
+\midrule
+Fixed timeout (tuned)      & \textbf{107.0} & \textbf{106.9} & 104.1 & 101.0 & 94.8 \\
+MVT (recent-slope)         & 124.5 & 113.4 & \textbf{98.8} & \textbf{88.4} & \textbf{86.3} \\
+MVT (Bayesian)             & 134.6 & 117.8 & 100.9 & 89.1 & 85.9 \\
+TopK (priority only)       & 235.5 & 228.9 & 183.4 & 149.6 & 118.4 \\
+UCB (bandit)               & 393.0 & 397.0 & 397.0 & 394.5 & 393.1 \\
+Restless index (Gittins)   & 148.0 & 149.7 & 146.4 & 141.6 & 144.3 \\
+\midrule
+\emph{MVT speedup vs tuned} & $-16.3\%$ & $-6.1\%$ & $+5.0\%$ & $+12.5\%$ & $+8.9\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:sweep} and Fig.~\ref{fig:sweep} carry the main result. When branches
+are almost the same ($\sigma \lesssim 0.5$), a tuned timeout is hard to beat. There is
+no better branch waiting, so leaving early only burns switch cost, and MVT comes in 6
+to 16 percent slower. As the branches spread out, the picture turns over. A few rich
+branches make it genuinely worth leaving a dying one, and MVT becomes 5 to 12.5
+percent faster, with the crossover near $\sigma\approx0.6$. The lead peaks near
+$\sigma\approx0.9$ and then holds rather than climbing further. Because every policy
+runs on the same per-seed surfaces the comparison is paired, and at $\sigma\ge0.6$ the
+gap is several times the seed-to-seed standard error, so the wins are not noise.
+\textsc{TopK} (picks well, never stops early), \textsc{UCB}, and a Gittins-style
+restless-index bandit (greedy on each branch's estimated current rate) all trail across
+the whole range. That is direct evidence the value comes from \emph{stopping},
+not from \emph{choosing} good branches, which also rebuts the ``isn't this just a
+bandit?'' objection.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.70\textwidth]{figs/sweep.png}
+\caption{Time-to-objective against branch-value spread $\sigma$ on the abstract
+testbed ($40$ branches, $8$ workers, $s=5$, $30$ seeds). The MVT variants overtake the
+per-level-tuned fixed timeout as $\sigma$ grows; the priority-only and bandit
+baselines trail throughout.}
+\label{fig:sweep}
+\end{figure}
+
+\subsection{Ablations}
+\label{sec:res-ablation}
+
+Figure~\ref{fig:ablations} gathers four ablations, all at $\sigma=0.9$ over $20$ seeds.
+The switch cost is the economic lever: MVT's lead peaks at a moderate cost ($+11.7\%$
+at $s=5$), goes slightly negative at $s=1$ (moving is nearly free, so the timeout can
+thrash cheaply too), and fades by $s=20$. The frontier-rate memory is not fussy, with
+the speedup between 7 and 12 percent as the averaging half-life runs from 5 to 80
+entries. Scaling the pool from $W=2$ to $W=32$ keeps the lead while wall-clock time
+drops about as $1/W$, so the gain is not tied to one pool size. Burstiness is the one
+place a naive estimator trips: under rare large jumps, recent-slope MVT's solve rate
+falls to $0.25$ at a hit probability of $0.1$, reading depletion where there is none,
+while the adaptive estimator holds a full solve rate and steady time-to-objective,
+exactly the mechanism of Section~\ref{sec:method}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{figs/ablations.png}
+\caption{Ablations at $\sigma=0.9$: switch-cost sensitivity, the frontier-rate window,
+pool scaling, and burstiness (recent-slope against the adaptive estimator).}
+\label{fig:ablations}
+\end{figure}
+
+\subsection{External validity I: the transfer boundary on a network simulator}
+\label{sec:res-nasim}
+
+Pointing the same scheduler at NASim~\cite{nasim2019} episodes is an early, qualitative
+check rather than a full study, and it brings out a limit worth stating plainly. The
+lead does not carry over without conditions. NASim exploitation is close to
+constant-hazard with uniform host value, so stalling on a branch only puts off a reward
+of equal worth rather than passing up a richer one, and a tuned timeout stays in the
+race. We read this as a useful negative signal, not a measured speedup: foraging-style
+stopping needs diminishing \emph{value}, not just a hard target to reach. It is what
+pushed us to design GuardedMVT, and a quantitative NASim study is left for future work.
+
+\subsection{External validity II: a live agent harness (Tier B)}
+\label{sec:res-tierb}
+
+We then swap the simulator for a live, tool-running agent harness over a sealed-off
+range. A branch is now a service, one unit of compute is one bounded agent action, and
+progress is scored only from observed service state by a milestone ledger (host
+discovered, service enumerated, foothold shell, objective flag), never from what the
+agent claims. Diminishing returns and burstiness now have a concrete cause: remaining
+milestones get sparser as a branch is worked, and a foothold or a flag is a large, rare
+jump.
+
+\begin{table}[t]
+\centering
+\caption{Live-harness robustness to an \emph{unknown} regime at $\sigma=1.2$
+(time-to-objective in ticks; lower is better; ``fails'' means the policy did not
+solve). A timeout tuned for one regime is poor in the other, since the best budget
+differs about eightfold, and plain MVT breaks under constant hazard. \textbf{GuardedMVT
+is the only policy that stays strong in both regimes with a single configuration.}}
+\label{tab:robust}
+\begin{tabular}{lcc}
+\toprule
+Policy (single configuration) & Diminishing value & Constant hazard \\
+\midrule
+Fixed timeout, tuned for \emph{constant} ($t{=}8$)     & 136.9 & \textbf{47.4} \\
+Fixed timeout, tuned for \emph{diminishing} ($t{=}60$) & 95.1  & 135.1 \\
+Plain MVT (adaptive)                                   & 89.9  & fails \\
+\textbf{GuardedMVT}                                    & \textbf{85.8} & 74.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The live harness repeats the full story (Fig.~\ref{fig:tierb}). In the
+diminishing-value regime, GuardedMVT's speedup over a per-level-tuned timeout again
+grows with heterogeneity, from $-18\%$ at $\sigma=0$, through a crossover near
+$\sigma\approx0.6$, to $+9.7\%$ at $\sigma=1.2$, matching the abstract testbed. In the
+constant-hazard regime, plain MVT's solve rate drops to $0\%$, the boundary of
+Section~\ref{sec:res-nasim} now with live actions, while GuardedMVT solves every
+episode. The sharpest comparison is robustness to an unknown regime
+(Table~\ref{tab:robust}): the best timeout budget differs about eightfold between
+regimes, so a timeout tuned for one is poor in the other and plain MVT breaks under
+constant hazard, leaving GuardedMVT the only policy strong in both with one setting. A
+burstiness study inside the harness mirrors the
+abstract one: as the collection stream turns bursty, recent-slope MVT slows from
+$94.6$ to $182.9$ ticks as the hit probability falls from $1.0$ to $0.1$, while the
+adaptive estimator and GuardedMVT bring it back to $108.5$ ticks.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.84\textwidth]{figs/tierb.png}
+\caption{Live agent harness (Tier~B). Left: the diminishing-value regime, where the
+crossover shows up again with real tooling. Right: the constant-hazard regime, where
+plain MVT breaks while GuardedMVT solves, turning the boundary into a design win.}
+\label{fig:tierb}
+\end{figure}
+
+\subsection{Parallel performance}
+\label{sec:res-parallel}
+
+The tensorised GPU batch Monte-Carlo (Fig.~\ref{fig:parallel}, left) reaches about
+$1.5\times10^{5}$ foraging episodes per second on a 10-core Apple M4 (MPS backend),
+roughly $130\times$ the sequential per-episode engine at $1.1\times10^{3}$ episodes per
+second. That turns a full tuned sweep from minutes into seconds, and the GPU sweep
+reproduces the crossover with an $11.7\%$ speedup at $\sigma=1.2$. The MPI
+manager--worker pool (Fig.~\ref{fig:parallel}, right) scales nearly linearly, reaching
+about $4.7\times$ throughput on seven workers before communication starts to bound it.
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}{0.49\textwidth}
+  \centering\includegraphics[width=\textwidth]{figs/gpu_results.png}
+  \caption{GPU batch Monte-Carlo}
+\end{subfigure}\hfill
+\begin{subfigure}{0.49\textwidth}
+  \centering\includegraphics[width=\textwidth]{figs/mpi_scaling.png}
+  \caption{MPI worker-pool scaling}
+\end{subfigure}
+\caption{Parallel performance. (a) Throughput and the reproduced crossover for the
+tensorised GPU batch simulator. (b) Speedup of the MPI manager--worker pool against
+rank count.}
+\label{fig:parallel}
+\end{figure}
+
+% ===========================================================================
+\section{Safety, Ethics, and Responsible Use}
+\label{sec:safety}
+
+Automating attack actions means the tool itself has to be safe by design. Four
+properties enforce that. Isolation is a hard gate: the harness checks that the sandbox
+is sealed off before every action and refuses to run otherwise, with no flag to loosen
+it; the live range sits on an internal network with no route out, verified from inside
+by requiring outbound connections to fail. Actions are bounded and not weaponised: the
+menu is only probe, enumerate, attempt access with a planted default credential, and
+collect, with no exploit synthesis and no arbitrary command execution, each mapped onto
+a plain request against a deliberately weak fixture that holds no real data. Progress is
+grounded, since a milestone scores only when its evidence holds against observed state,
+which keeps MVT from chasing a made-up signal. Building the real-range sandbox needs an
+explicit authorisation flag, and every experiment here uses an in-process mock or the
+isolated fixture. The work is meant for authorised defensive assessment only.
+
+% ===========================================================================
+\section{Limitations and Threats to Validity}
+\label{sec:threats}
+
+A few limits are worth naming up front. The foraging model and the heterogeneity knob
+are synthetic. The live harness uses scripted and mock services reached with a planted
+default credential rather than real vulnerabilities, and its LLM-driven brain is
+available but not evaluated here. GuardedMVT's thresholds are set by hand rather than
+learned, and while we include a Gittins-style restless-index baseline, a full
+Whittle-index treatment of drifting arms is left to future work. With those stated, we
+turn to the standard validity axes.
+
+On construct validity, the exponential patch in Eq.~\eqref{eq:patch} is a model; we
+guard against it by reproducing the pattern on a network simulator and on a live
+harness with grounded progress, and by studying burstiness as an explicit break from
+the smooth curve. On internal validity, the main baseline is tuned per scenario and
+every policy shares the same selection and the same per-seed surfaces, which removes
+the weak-baseline worry. On external validity, we deliberately show a regime
+(constant hazard) where the lead does not hold, and we claim nothing beyond
+diminishing-value branches; GuardedMVT exists precisely so a deployed scheduler need
+not know the regime up front. On statistical validity, we report the qualitative
+pattern (the crossover, the breakdown, the single-configuration robustness) that holds
+steady across seeds, estimators, pool sizes, and both realism layers.
+
+% ===========================================================================
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+Parallel autonomous penetration testing needs a principled answer to when an agent
+should walk away from a branch. We gave one by borrowing the Marginal Value Theorem
+from behavioural ecology, and showed, on a controlled testbed and again in a live
+harness, when it wins (uneven surfaces with diminishing value), when it loses (uniform
+or constant-hazard targets), and how to keep the win without the failure. GuardedMVT
+reads the regime online, per branch, and is the only policy strong in both with one
+setting. Built as a task-parallel scheduler with a GPU batch Monte-Carlo and an MPI
+pool, the same migration idea that drives the method also balances the computation.
+Next steps: a full Whittle-index treatment of drifting arms, learned regime detectors,
+wiring the scheduler to RL and LLM planners beneath the seam, and larger live ranges
+with lateral movement.
+
+%\section*{Acknowledgments} % Omitted for double-blind review.
+
+\bibliographystyle{splncs04}
+\bibliography{references}
+
+\end{document}

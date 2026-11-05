@@ -16,6 +16,7 @@ STYLE = {
     "mvt_bayes":      ("MVT (Bayesian)",         "#009E73", "D", "-"),
     "top_k":          ("Top-K (prioritise)",     "#E69F00", "^", "--"),
     "ucb":            ("UCB bandit",             "#CC79A7", "v", "--"),
+    "restless_index": ("Restless index (Gittins)", "#D55E00", "P", "--"),
 }
 
 
