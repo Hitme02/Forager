@@ -564,17 +564,15 @@ we include a Gittins-style restless-index baseline, a full Whittle-index treatme
 drifting arms is still future work.
 
 How much do these threaten the conclusions? The patch model in Eq.~\eqref{eq:patch} is
-only a model, so we lean instead on the pattern reappearing on a network simulator and
-a live harness with grounded progress, and on the burstiness study as a deliberate break
-from the smooth curve. The comparison is kept honest a different way: the main baseline
-is tuned per scenario, and every policy shares one selection rule and the same per-seed
-surfaces, so a weak baseline cannot be doing the work. On scope, we show a regime
-(constant hazard) where the advantage disappears and claim nothing past
-diminishing-value branches, which is the whole reason GuardedMVT reads the regime for
-itself. And because the numbers are means over fixed seeds, what we actually rely on is
-the shape of the result, the crossover, the collapse, and the single-configuration
-robustness, which stays put across seeds, estimators, pool sizes, and both realism
-layers.
+only a model, so we lean on the same pattern reappearing on a network simulator and a
+live harness with grounded progress, and on the burstiness study as a deliberate break
+from it. The baseline is tuned per scenario and every policy shares one selection rule
+and the same per-seed surfaces, so a weak baseline cannot explain the result. We show a
+regime (constant hazard) where the advantage disappears and claim nothing past
+diminishing-value branches, which is why GuardedMVT reads the regime for itself. And
+since the numbers are seed means, we rely on the shape of the result, the crossover, the
+collapse, and the single-configuration robustness, which holds across seeds, estimators,
+pool sizes, and both realism layers.
 
 % ===========================================================================
 \section{Conclusion and Future Work}
