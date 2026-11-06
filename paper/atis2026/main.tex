@@ -350,8 +350,8 @@ mean time-to-objective, and as a relative figure the percentage speedup of MVT o
 the tuned timeout, where positive means MVT is faster. Every experiment runs from
 fixed-seed drivers in the released code. GuardedMVT uses one fixed threshold set
 everywhere ($\textit{decline\_frac}=0.5$, peak floor $=0.05\,\RR$, committed budget
-$=16$ ticks, $\textit{min\_samples}=3$) on the adaptive marginal estimator, unchanged
-across heterogeneity levels, regimes, and both realism layers; the robustness in
+$=16$ ticks, $\textit{min\_samples}=6$, hysteresis $=0.3$) on the adaptive marginal
+estimator, unchanged across heterogeneity levels and both regimes; the robustness in
 Table~\ref{tab:robust} uses this same configuration. The GPU figures use the PyTorch
 MPS backend on a 10-core Apple M4, and the MPI figures use one manager with seven worker
 ranks on the same machine. Code, configurations, and the data behind every figure will
