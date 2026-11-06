@@ -112,24 +112,25 @@ habitat average. We transpose this rule onto parallel penetration-test schedulin
 identifying each attack branch with a patch of diminishing validated-progress returns
 and the parallel frontier with the habitat.
 
-The novelty and principal contributions of this work are the following. To our
-knowledge, this is the first use of the Marginal Value Theorem as an online abandonment
-criterion for a pool of autonomous security agents. We develop a foraging formulation of
-parallel attack-surface exploration together with an agent-agnostic scheduler that
-applies the MVT leaving rule from two quantities estimated online, a branch's marginal
-progress rate $\gprime$ and the frontier opportunity rate $\RR$ net of switch cost
-(Sections~\ref{sec:model}--\ref{sec:method}). Using branch-value heterogeneity $\sigma$
-as a single abundance-preserving control, we establish an empirical law in which the
-foraging rule's advantage over a per-level-tuned timeout increases with $\sigma$ and
-crosses over near $\sigma\approx0.6$, with priority-only and bandit baselines dominated
-throughout, thereby isolating \emph{stopping} rather than \emph{selection} as the source
-of the gain (Section~\ref{sec:res-sweep}). We further identify a transfer boundary at
-which plain MVT fails under constant hazard, and introduce GuardedMVT, which infers the
-applicable regime online and per branch and is the only evaluated policy robust across
-both regimes under a single configuration (Sections~\ref{sec:guarded},~\ref{sec:res-tierb}).
-Finally, the method is realised as a parallel system comprising task-parallel worker
-migration, a tensorized GPU batch Monte-Carlo, and an MPI worker pool, with a
-safety-by-construction live harness (Sections~\ref{sec:parallel},~\ref{sec:safety}).
+This work makes four contributions, and to our knowledge it is the first to use the
+Marginal Value Theorem as an online abandonment criterion for a pool of autonomous
+security agents. The first is a foraging view of parallel attack-surface exploration, and
+a scheduler that does not care what kind of agent sits underneath it; the scheduler
+applies the MVT leaving rule from two things it estimates online, a branch's marginal
+progress rate $\gprime$ and the frontier's opportunity rate $\RR$, net of the cost of
+switching (Sections~\ref{sec:model}--\ref{sec:method}). The second is a clear empirical
+pattern: with the spread of branch value $\sigma$ used as a single knob that holds total
+value fixed, the foraging rule's lead over a per-level-tuned timeout widens as $\sigma$
+grows, peaking near $\sigma\approx 0.9$, and the two cross over near $\sigma\approx 0.6$
+(Section~\ref{sec:res-sweep}); priority-only and bandit baselines trail both, which tells
+us the gain comes from \emph{stopping}, not from better \emph{selection}. The third is a
+boundary and a repair: plain MVT breaks on targets with constant hazard, so we add
+\textbf{GuardedMVT}, which works out online, per branch, whether the rule even applies,
+and is the only policy that stays strong in both regimes with one setting
+(Sections~\ref{sec:guarded},~\ref{sec:res-tierb}). The fourth is a parallel build of the
+whole thing: worker migration as load balancing, a GPU batch Monte-Carlo, and an MPI
+worker pool, plus a live harness whose safety is built in rather than assumed
+(Sections~\ref{sec:parallel},~\ref{sec:safety}).
 
 % ===========================================================================
 \section{Background and Related Work}
