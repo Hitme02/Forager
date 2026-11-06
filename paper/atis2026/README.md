@@ -14,15 +14,15 @@ in Information Security), Bengaluru, 14–15 Dec 2026.
 
 ## Build
 
-Everything needed is vendored here (`llncs.cls` v2.26 + `splncs04.bst`, both from
-CTAN, redistributable for authors). No TeX package installation required.
+Everything needed is vendored here (`llncs.cls` v2.24 + `splncs04.bst`, taken from the
+official ATIS 2026 LaTeX template ZIP). No TeX package installation required. The
+bibliography is a manual `thebibliography` (references ordered by first appearance, per
+the conference guideline), so **no `bibtex` pass is needed**.
 
 ```bash
 cd paper/atis2026
 pdflatex main            # pass 1
-bibtex   main            # resolve references
-pdflatex main            # pass 2
-pdflatex main            # pass 3 (fix cross-refs)
+pdflatex main            # pass 2 (resolve references and cross-refs)
 # -> main.pdf (12 pages)
 ```
 

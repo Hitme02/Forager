@@ -112,27 +112,24 @@ habitat average. We transpose this rule onto parallel penetration-test schedulin
 identifying each attack branch with a patch of diminishing validated-progress returns
 and the parallel frontier with the habitat.
 
-\medskip\noindent\textbf{Contributions.}
-\begin{enumerate}
-  \item A foraging view of parallel attack-surface exploration, and a scheduler that
-  does not care what kind of agent sits underneath it. The scheduler applies the MVT
-  leaving rule from two things it estimates online: a branch's marginal progress rate
-  $\gprime$ and the frontier's opportunity rate $\RR$, net of the cost of switching
-  (Sections~\ref{sec:model}--\ref{sec:method}).
-  \item A clear empirical pattern. With the spread of branch value, $\sigma$, used as
-  a single knob that holds total value fixed, the foraging rule's lead over a
-  per-level-tuned timeout widens as $\sigma$ grows, peaking near $\sigma\approx 0.9$,
-  and the two cross over near $\sigma\approx 0.6$ (Section~\ref{sec:res-sweep}).
-  Priority-only and bandit baselines trail both, which tells us the gain comes from
-  \emph{stopping}, not from better \emph{selection}.
-  \item A boundary and a repair. Plain MVT breaks on targets with constant hazard. We
-  add \textbf{GuardedMVT}, which works out online, per branch, whether the rule even
-  applies, and is the only policy that stays strong in both regimes with one setting
-  (Sections~\ref{sec:guarded},~\ref{sec:res-tierb}).
-  \item A parallel build of the whole thing: worker migration as load balancing, a
-  GPU batch Monte-Carlo, and an MPI worker pool, plus a live harness whose safety is
-  built in rather than assumed (Sections~\ref{sec:parallel},~\ref{sec:safety}).
-\end{enumerate}
+The novelty and principal contributions of this work are the following. To our
+knowledge, this is the first use of the Marginal Value Theorem as an online abandonment
+criterion for a pool of autonomous security agents. We develop a foraging formulation of
+parallel attack-surface exploration together with an agent-agnostic scheduler that
+applies the MVT leaving rule from two quantities estimated online, a branch's marginal
+progress rate $\gprime$ and the frontier opportunity rate $\RR$ net of switch cost
+(Sections~\ref{sec:model}--\ref{sec:method}). Using branch-value heterogeneity $\sigma$
+as a single abundance-preserving control, we establish an empirical law in which the
+foraging rule's advantage over a per-level-tuned timeout increases with $\sigma$ and
+crosses over near $\sigma\approx0.6$, with priority-only and bandit baselines dominated
+throughout, thereby isolating \emph{stopping} rather than \emph{selection} as the source
+of the gain (Section~\ref{sec:res-sweep}). We further identify a transfer boundary at
+which plain MVT fails under constant hazard, and introduce GuardedMVT, which infers the
+applicable regime online and per branch and is the only evaluated policy robust across
+both regimes under a single configuration (Sections~\ref{sec:guarded},~\ref{sec:res-tierb}).
+Finally, the method is realised as a parallel system comprising task-parallel worker
+migration, a tensorized GPU batch Monte-Carlo, and an MPI worker pool, with a
+safety-by-construction live harness (Sections~\ref{sec:parallel},~\ref{sec:safety}).
 
 % ===========================================================================
 \section{Background and Related Work}
@@ -313,12 +310,12 @@ running peak $\rho$; stall counter $\kappa$ (ticks since last gain)
 
 The system exploits three forms of parallelism.
 
-\paragraph{(1) Task parallelism as load balancing.}
+\paragraph{Task parallelism as load balancing.}
 $W$ agents forage concurrently, and GuardedMVT migrates a worker from a stalling branch
 to a fresher one. This constitutes dynamic load balancing at the branch level: compute is
 reallocated toward the most productive available work.
 
-\paragraph{(2) GPU data parallelism.}
+\paragraph{GPU data parallelism.}
 The abstract model is purely arithmetic and a heterogeneity sweep comprises thousands of
 independent episodes, making it amenable to data-parallel execution. We run $B$ episodes
 by $W$ workers entirely as
@@ -329,7 +326,7 @@ per-tick GPU-to-CPU sync and keeps the batch on the device. A second
 Numba~\cite{lam2015numba} \texttt{@cuda.jit} kernel runs the same Monte-Carlo one thread
 per episode on CUDA, and both reproduce the headline pattern.
 
-\paragraph{(3) Distributed memory.}
+\paragraph{Distributed memory.}
 An MPI~\cite{mpiforum2021} manager--worker pool, built on mpi4py~\cite{dalcin2011mpi4py},
 spreads the sweep across processes. Rank~0 holds a queue of episode chunks and hands
 one to any worker that says it is free. Because the workers pull work, uneven episode
@@ -586,7 +583,58 @@ lateral movement.
 
 %\section*{Acknowledgments} % Omitted for double-blind review.
 
-\bibliographystyle{splncs04}
-\bibliography{references}
+% References in order of first appearance (numerical-sequence requirement), splncs04 format.
+\begin{thebibliography}{17}
+\bibitem{schwartz2019autonomous}
+Schwartz, J., Kurniawati, H.: Autonomous penetration testing using reinforcement learning. arXiv preprint arXiv:1905.05965 (2019)
+
+\bibitem{hu2020automated}
+Hu, Z., Beuran, R., Tan, Y.: Automated penetration testing using deep reinforcement learning. In: 2020 IEEE European Symposium on Security and Privacy Workshops (EuroS\&PW). pp. 2--10. IEEE (2020)
+
+\bibitem{deng2024pentestgpt}
+Deng, G., Liu, Y., Mayoral-Vilches, V., Liu, P., Li, Y., Xu, Y., Zhang, T., Liu, Y., Pinzger, M., Rass, S.: {PentestGPT}: evaluating and harnessing large language models for automated penetration testing. In: 33rd USENIX Security Symposium. pp. 847--864 (2024)
+
+\bibitem{charnov1976optimal}
+Charnov, E.L.: Optimal foraging, the marginal value theorem. Theoretical Population Biology \textbf{9}(2), 129--136 (1976)
+
+\bibitem{sarraute2012pomdp}
+Sarraute, C., Buffet, O., Hoffmann, J.: {POMDPs} make better hackers: accounting for uncertainty in penetration testing. In: Proceedings of the AAAI Conference on Artificial Intelligence. vol.~26, pp. 1816--1824 (2012)
+
+\bibitem{ghanem2020reinforcement}
+Ghanem, M.C., Chen, T.M.: Reinforcement learning for efficient network penetration testing. Information \textbf{11}(1), 6 (2020)
+
+\bibitem{nasim2019}
+Schwartz, J.: {NASim}: Network Attack Simulator (2019), \url{https://github.com/Jjschwartz/NetworkAttackSimulator}
+
+\bibitem{cyberbattlesim2021}
+Microsoft Defender Research Team: {CyberBattleSim} (2021), \url{https://github.com/microsoft/CyberBattleSim}
+
+\bibitem{auer2002finite}
+Auer, P., Cesa-Bianchi, N., Fischer, P.: Finite-time analysis of the multiarmed bandit problem. Machine Learning \textbf{47}(2--3), 235--256 (2002)
+
+\bibitem{gittins1979bandit}
+Gittins, J.C.: Bandit processes and dynamic allocation indices. Journal of the Royal Statistical Society: Series B \textbf{41}(2), 148--177 (1979)
+
+\bibitem{whittle1988restless}
+Whittle, P.: Restless bandits: activity allocation in a changing world. Journal of Applied Probability \textbf{25}(A), 287--298 (1988)
+
+\bibitem{stephens1986foraging}
+Stephens, D.W., Krebs, J.R.: Foraging Theory. Princeton University Press (1986)
+
+\bibitem{pirolli1999information}
+Pirolli, P., Card, S.: Information foraging. Psychological Review \textbf{106}(4), 643--675 (1999)
+
+\bibitem{paszke2019pytorch}
+Paszke, A., Gross, S., Massa, F., et al.: {PyTorch}: an imperative style, high-performance deep learning library. In: Advances in Neural Information Processing Systems. vol.~32 (2019)
+
+\bibitem{lam2015numba}
+Lam, S.K., Pitrou, A., Seibert, S.: {Numba}: a {LLVM}-based {Python} {JIT} compiler. In: Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC. pp. 1--6 (2015)
+
+\bibitem{mpiforum2021}
+{MPI Forum}: {MPI}: A Message-Passing Interface Standard, Version 4.0. University of Tennessee (2021)
+
+\bibitem{dalcin2011mpi4py}
+Dalc{\'i}n, L.D., Paz, R.R., Kler, P.A., Cosimo, A.: Parallel distributed computing using {Python}. Advances in Water Resources \textbf{34}(9), 1124--1139 (2011)
+\end{thebibliography}
 
 \end{document}
