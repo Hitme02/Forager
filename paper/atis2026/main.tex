@@ -434,7 +434,7 @@ exactly the mechanism of Section~\ref{sec:method}.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.82\textwidth]{figs/ablations.png}
+\includegraphics[width=0.76\textwidth]{figs/ablations.png}
 \caption{Ablations at $\sigma=0.9$: switch-cost sensitivity, the frontier-rate window,
 pool scaling, and burstiness (recent-slope against the adaptive estimator).}
 \label{fig:ablations}
@@ -443,14 +443,17 @@ pool scaling, and burstiness (recent-slope against the adaptive estimator).}
 \subsection{External validity I: the transfer boundary on a network simulator}
 \label{sec:res-nasim}
 
-Pointing the same scheduler at NASim~\cite{nasim2019} episodes is an early, qualitative
-check rather than a full study, and it exposes a limit we would rather be upfront about.
-The lead does not carry over without conditions. In NASim, exploitation behaves like a
-constant hazard and the hosts are worth roughly the same, so lingering on a branch merely
-delays an equally valuable reward instead of forgoing a richer one, and the tuned timeout
-keeps pace. We read this as a useful negative signal, not a measured speedup: foraging-style
-stopping needs diminishing \emph{value}, not just a hard target to reach. It is what
-pushed us to design GuardedMVT, and a quantitative NASim study is left for future work.
+We ran the same scheduler over NASim~\cite{nasim2019} episodes (12 seeds) with a
+per-level-tuned timeout, plain MVT, and GuardedMVT. The foraging advantage does not carry
+over: NASim exploitation is a constant hazard with roughly uniform host value, so lingering
+on a branch delays an equally valuable reward rather than forgoing a richer one. Plain MVT
+runs $22$ to $46\%$ slower than the tuned timeout across $\sigma$, and GuardedMVT trails
+too. GuardedMVT does not collapse ($92$ to $100\%$ solved), but it is slower than plain MVT
+here: NASim is only a \emph{mild} constant hazard where plain MVT already solves, so the
+guard's budget commitment is overhead against a collapse that never comes. The guard earns
+its keep in the \emph{sharp} case of Section~\ref{sec:res-tierb}, where plain MVT collapses
+to $0\%$. Foraging stopping needs steep diminishing \emph{value}, strongly present in the
+controlled model and the Tier-B diminishing regime and only weakly in NASim.
 
 \subsection{External validity II: a live agent harness (Tier B)}
 \label{sec:res-tierb}
@@ -501,7 +504,7 @@ adaptive estimator and GuardedMVT bring it back to $108.5$ ticks.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.84\textwidth]{figs/tierb.png}
+\includegraphics[width=0.78\textwidth]{figs/tierb.png}
 \caption{Live agent harness (Tier~B). Left: the diminishing-value regime, where the
 crossover shows up again with real tooling. Right: the constant-hazard regime, where
 plain MVT breaks while GuardedMVT solves, turning the boundary into a design win.}
@@ -564,9 +567,9 @@ we include a Gittins-style restless-index baseline, a full Whittle-index treatme
 drifting arms is still future work.
 
 How much do these threaten the conclusions? The patch model in Eq.~\eqref{eq:patch} is
-only a model, so we lean on the same pattern reappearing on a network simulator and a
-live harness with grounded progress, and on the burstiness study as a deliberate break
-from it. The baseline is tuned per scenario and every policy shares one selection rule
+only a model, so we lean on the same pattern reappearing in the live harness with
+grounded progress, on NASim marking where it stops holding, and on the burstiness study
+as a deliberate break from it. The baseline is tuned per scenario and every policy shares one selection rule
 and the same per-seed surfaces, so a weak baseline cannot explain the result. We show a
 regime (constant hazard) where the advantage disappears and claim nothing past
 diminishing-value branches, which is why GuardedMVT reads the regime for itself. And

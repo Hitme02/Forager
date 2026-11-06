@@ -386,7 +386,7 @@ python -m ffs.gpu.run_gpu --benchmark        # GPU throughput (MPS/CUDA)
 
 | Backend | Command |
 |---|---|
-| NASim study | `python -m ffs.realism.run_nasim --seeds 12` |
+| NASim study | `python -m ffs.realism.run_nasim --seeds 12` *(NASim's renderer imports Tk; on Homebrew Python: `brew install python-tk@3.14`)* |
 | GPU (CUDA kernel, no GPU) | `NUMBA_ENABLE_CUDASIM=1 pytest tests/test_cuda_kernel.py` |
 | MPI pool | `mpirun -np 8 python -m ffs.mpi.worker_pool` *(needs `brew install open-mpi`)* |
 | Live LLM demo | `python -m ffs.realism.demo_llm` *(Ollama optional; scripted fallback built in)* |
