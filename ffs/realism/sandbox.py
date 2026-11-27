@@ -167,7 +167,7 @@ class DockerSandbox(Sandbox):
 
     def __init__(self, compose_project: str = "ffs_tierb", *,
                  network_name: str = "ffs_tierb_isolated",
-                 manifest: list[tuple[str, bool]] | None = None,
+                 manifest: list | None = None,
                  flag_depth: int = 3, probe_timeout: float = 1.0,
                  acknowledged: bool = False) -> None:
         if not acknowledged:
@@ -198,10 +198,18 @@ class DockerSandbox(Sandbox):
         if self._services is None:
             from .services import LiveHttpService  # lazy: needs the live fixture
             self.assert_isolated()
-            self._services = [
-                LiveHttpService(i, f"http://{name}", holds_flag=flag)
-                for i, (name, flag) in enumerate(self.manifest)
-            ]
+            self._services = []
+            for i, entry in enumerate(self.manifest):
+                if isinstance(entry, dict):        # extended manifest (live evaluation)
+                    self._services.append(LiveHttpService(
+                        i, f"http://{entry['name']}", holds_flag=entry.get("flag", False),
+                        max_value=entry.get("max_value", float("inf")),
+                        n_art=entry.get("n_art", 32), prior=entry.get("prior", 1.0),
+                        foothold_value=entry.get("foothold_value", 10.0)))
+                else:
+                    name, flag = entry
+                    self._services.append(LiveHttpService(i, f"http://{name}",
+                                                          holds_flag=flag))
         return self._services
 
     def flag_captured(self) -> bool:

@@ -142,5 +142,14 @@ class AgentHarness:
         action = self.brain.next_action(service)
         if action is None:
             return Evidence(None, f"svc{service.service_id}", grounded=False)
+        # Only members of the closed Action enum can be dispatched; the brain never supplies a
+        # target, an argument or a command string, so the action runs on the committed
+        # in-scope service and nothing else.
+        if not isinstance(action, Action):
+            raise TypeError(f"brain returned a non-menu action: {action!r}")
         method = getattr(service, self._DISPATCH[action])
-        return method(rng)
+        ev = method(rng)
+        hook = getattr(self.brain, "observe_result", None)
+        if hook is not None:              # tool-output feedback for brains that use it (LLM)
+            hook(service, action, ev)
+        return ev

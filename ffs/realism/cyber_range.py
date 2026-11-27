@@ -143,18 +143,20 @@ class CyberRange:
 def make_mock_range(cfg: RangeConfig | None = None, *, n_services: int = 12,
                     flag_services: int = 2, sigma: float = 0.8,
                     regime: str = "diminishing", burst_p: float = 1.0,
-                    brain: Brain | None = None, seed: int = 0) -> CyberRange:
+                    brain: Brain | None = None, seed: int = 0,
+                    **sandbox_kw) -> CyberRange:
     """Build an in-process (no-Docker) range -- the default, runnable here and in CI.
 
     `sigma` is the branch-heterogeneity knob (log-normal richness, mean held fixed); `regime`
     selects the diminishing-value vs constant-hazard contrast under test. This is the live
-    analogue of the simulator's heterogeneity sweep."""
+    analogue of the simulator's heterogeneity sweep. Extra keyword arguments (e.g.
+    `mean_access_cost`, `mean_tau`) are forwarded to `MockSandbox`."""
     from .agent_harness import HarvestBrain
     from .sandbox import MockSandbox
 
     cfg = cfg or RangeConfig()
     sandbox = MockSandbox(n_services=n_services, flag_services=flag_services, sigma=sigma,
-                          regime=regime, burst_p=burst_p, seed=seed)
+                          regime=regime, burst_p=burst_p, seed=seed, **sandbox_kw)
     return CyberRange(sandbox, cfg, brain or HarvestBrain())
 
 

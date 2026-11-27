@@ -1,0 +1,14 @@
+{
+ "services": 12,
+ "workers": 2,
+ "target_frac": 0.8,
+ "seeds": 10,
+ "total_value_kb": 194.6181640625,
+ "llm_model": "qwen2.5:7b",
+ "llm_calls": 12,
+ "llm_lookups": 19268,
+ "llm_latency_ms": 9061.673667500012,
+ "episodes": 80,
+ "isolation_checks": 15112,
+ "isolation_failures": 0
+}

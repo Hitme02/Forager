@@ -29,6 +29,14 @@ from .nasim_target import RealismConfig, make_segmented_nasim_target
 MVT = {"type": "mvt", "estimator": "adaptive",
        "estimator_kw": {"base_half_life": 20.0, "max_half_life": 20.0},
        "min_samples": 2, "hysteresis": 0.1}
+# GuardedMVT: the same MVT estimator config as above, plus the boundary-aware guard
+# (apply the MVT leaving rule only where the signal is diminishing; elsewhere commit a
+# budget). On NASim's constant-hazard exploitation the guard's committed-budget fallback
+# should keep GuardedMVT from the premature-abandonment that hurts plain MVT here.
+GUARDED = {"type": "guarded_mvt", "estimator": "adaptive",
+           "estimator_kw": {"base_half_life": 20.0, "max_half_life": 20.0},
+           "min_samples": 2, "hysteresis": 0.1,
+           "decline_frac": 0.5, "peak_floor_frac": 0.05, "budget_cap": 16.0}
 TIMEOUTS = [10, 16, 24, 35, 55]
 
 
@@ -62,9 +70,12 @@ def sweep(levels, seeds, switch_cost, objective, value_decay):
                 best_m, best_t = mt, t
         sr, mt = _run(MVT, sigma, seeds, cfg_kw, engine_kw)
         speedup = 100.0 * (best_m - mt) / best_m if (best_m and np.isfinite(mt)) else np.nan
+        gsr, gmt = _run(GUARDED, sigma, seeds, cfg_kw, engine_kw)
+        gspeedup = 100.0 * (best_m - gmt) / best_m if (best_m and np.isfinite(gmt)) else np.nan
         rows.append({"heterogeneity": sigma, "fixed_tuned_timeout": best_t,
                      "fixed_ticks": best_m, "mvt_solve_rate": sr, "mvt_ticks": mt,
-                     "mvt_speedup_pct": speedup})
+                     "mvt_speedup_pct": speedup, "guarded_solve_rate": gsr,
+                     "guarded_ticks": gmt, "guarded_speedup_pct": gspeedup})
     return pd.DataFrame(rows)
 
 

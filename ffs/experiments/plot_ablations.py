@@ -89,7 +89,7 @@ def main() -> None:
     fig.suptitle("FFS ablations  ($\\sigma{=}0.9$, 20 seeds, fixed timeout tuned per config)",
                  fontsize=12)
     fig.tight_layout(rect=(0, 0, 1, 0.97))
-    fig.savefig(args.out, dpi=150)
+    fig.savefig(args.out, dpi=300)
     print(f"Saved {args.out}")
 
 

@@ -1,0 +1,16 @@
+backend,regime,param,min_rel_pct,max_rel_pct,min_solve
+abstract,diminishing,budget_cap,0.0,0.0,1.0
+abstract,diminishing,decline_frac,-0.18234865061999006,4.741064916119608,1.0
+abstract,diminishing,hysteresis,-1.8964259664478456,6.5645514223194645,1.0
+abstract,diminishing,min_samples,0.0,0.0,1.0
+abstract,diminishing,peak_floor_frac,0.0,0.0,1.0
+tierb,constant,budget_cap,-25.67385444743936,45.28301886792452,1.0
+tierb,constant,decline_frac,0.0,0.0,1.0
+tierb,constant,hysteresis,0.0,0.0,1.0
+tierb,constant,min_samples,0.0,0.0,1.0
+tierb,constant,peak_floor_frac,0.0,0.0,1.0
+tierb,diminishing,budget_cap,0.0,0.0,1.0
+tierb,diminishing,decline_frac,0.0,2.0396270396270344,1.0
+tierb,diminishing,hysteresis,-0.4662004662004615,1.631701631701632,1.0
+tierb,diminishing,min_samples,0.0,0.0,1.0
+tierb,diminishing,peak_floor_frac,0.0,4.487179487179493,1.0

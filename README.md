@@ -357,15 +357,22 @@ ffs/
   simulator/     patch.py · heterogeneity.py · environment.py     the controlled foraging model
   scheduler/     engine.py · policies.py · estimators.py          the agent-agnostic core (the science)
   experiments/   run.py · ablations.py · plot*.py                 sweeps, ablations, figures
+                 camera_ready.py · stats.py · tables_cr.py        camera-ready study, statistics, paper tables
+                 plot_cr.py                                       camera-ready (vector) figures
   realism/       cyber_range.py · agent_harness.py · sandbox.py    Tier-B live harness + the seam
                  services.py · progress.py · llm_backends.py       grounded progress + LLM backends
                  nasim_target.py · brains.py                       Tier-A NASim integration
                  demo_llm.py · TIERB.md                            the live PAGP demo + safety gate
+                 llm_agent.py · cr_llm_eval.py                     LLM brains (Ollama) + their evaluation
+                 cr_safety.py · run_live_eval.py                   safety-control tests + containerised range
   gpu/           batch_sim.py · cuda_kernel.py · COLAB.md          GPU batch Monte-Carlo (MPS/CUDA/Numba)
   mpi/           worker_pool.py                                    distributed sweep (MPI)
 docker/          flagsvc/ · docker-compose.yml                     isolated, no-egress CTF fixture
-tests/           33 tests (1 CUDA-gated)
+                 eval/make_eval_range.py                           heterogeneous 12-container evaluation range
+paper/atis2026/  main.tex · main.pdf · tables/ · figs/             ATIS 2026 camera-ready paper
+tests/           47 tests (1 CUDA-gated)
 results/         *.png figures · *.csv data
+  cr/            camera-ready per-seed data, statistics, LLM reply memos
 ```
 
 ---
@@ -386,10 +393,39 @@ python -m ffs.gpu.run_gpu --benchmark        # GPU throughput (MPS/CUDA)
 
 | Backend | Command |
 |---|---|
-| NASim study | `python -m ffs.realism.run_nasim --seeds 12` |
+| NASim study | `python -m ffs.realism.run_nasim --seeds 12` *(NASim's renderer imports Tk; on Homebrew Python: `brew install python-tk@3.14`)* |
 | GPU (CUDA kernel, no GPU) | `NUMBA_ENABLE_CUDASIM=1 pytest tests/test_cuda_kernel.py` |
 | MPI pool | `mpirun -np 8 python -m ffs.mpi.worker_pool` *(needs `brew install open-mpi`)* |
 | Live LLM demo | `python -m ffs.realism.demo_llm` *(Ollama optional; scripted fallback built in)* |
+
+### Camera-ready experiments (ATIS 2026, paper 452)
+
+Every number in the camera-ready paper comes from these drivers (outputs in `results/cr/`):
+
+```bash
+python -m ffs.experiments.camera_ready all   # baselines, statistics, sensitivity, learned
+                                             # thresholds, 9-scenario study, crossover
+python -m ffs.realism.cr_llm_eval            # five local LLM brains (needs Ollama 0.20.3 with
+python -m ffs.realism.cr_llm_eval --entry-mode productive --tag _prod --no-ablation \
+       --replay-episodes 0                   #   qwen2.5:7b/1.5b, llama3.1:8b, gemma2:9b, mistral:7b)
+python -m ffs.realism.cr_safety              # prompt injection, fail-closed, authorisation, fuzzing
+python -m ffs.experiments.tables_cr          # -> paper/atis2026/tables/*.tex
+python -m ffs.experiments.plot_cr            # -> paper/atis2026/figs/fig_speedup.pdf
+```
+
+LLM replies are memoised by prompt in `results/cr/llm/cache_*.json` (greedy decoding, so a
+memoised reply equals a fresh one); delete a cache to re-query the model.
+
+Containerised range (Docker; no egress — the harness refuses to run otherwise):
+
+```bash
+python docker/eval/make_eval_range.py                       # compose.yml + manifest.json
+cd docker/eval && docker compose -p ffs_eval -f compose.yml build
+docker compose -p ffs_eval -f compose.yml up -d $(seq -f "svc%g" 0 11) ollama
+for t in 80 90; do docker compose -p ffs_eval -f compose.yml run --rm --no-deps \
+  -e LIVE_WORKERS=2 -e LIVE_TARGET=0.$t -e LIVE_OUT=/out/t$t harness; done
+docker compose -p ffs_eval -f compose.yml down
+```
 
 ---
 
@@ -400,7 +436,9 @@ python -m ffs.gpu.run_gpu --benchmark        # GPU throughput (MPS/CUDA)
 - **Phase 4 (done)** — external validity: the *same* scheduler on **NASim** (Tier A) and a **live
   agent harness over an isolated range** (Tier B). Both map the transfer boundary precisely, and
   **`GuardedMVT`** turns that boundary into a design win.
-- **Next** — write-up (IEEE Access / a parallel-computing or security venue).
+- **Phase 5 (done)** — accepted at **ATIS 2026** (paper 452). The camera-ready adds five local
+  LLM agents, a containerised range, paired statistics, new baselines and safety-control tests
+  (`paper/atis2026/`).
 
 > **Why a custom simulator, not NASim/CyberBattleSim, as the MVP?** The hypothesis is about
 > *branch-return heterogeneity*, which those environments don't expose as a direct knob. A

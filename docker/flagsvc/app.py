@@ -31,6 +31,11 @@ HOLDS_FLAG = os.environ.get("HOLDS_FLAG", "false").lower() == "true"
 FLAG = os.environ.get("FLAG", "FLAG{isolated-research-range-crown-jewel}")
 # Depth (artifact index) at which the crown jewel is readable on the flag service.
 FLAG_DEPTH = int(os.environ.get("FLAG_DEPTH", "3"))
+# Richness of this instance: artifact n has ART_SCALE * 4096 / (n + 1) bytes, so collection
+# value is concave in the number of artifacts read; N_ART artifacts exist (then 404).
+ART_SCALE = float(os.environ.get("ART_SCALE", "1.0"))
+N_ART = int(os.environ.get("N_ART", "32"))
+BANNER = os.environ.get("BANNER", "demo-fixture/1.0")
 DEFAULT_USER = os.environ.get("DEFAULT_USER", "admin")
 DEFAULT_PASS = os.environ.get("DEFAULT_PASS", "admin")
 
@@ -57,7 +62,7 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/":
             self._send(200, {"service": SERVICE_ID, "status": "up"})
         elif path == "/version":
-            self._send(200, {"service": SERVICE_ID, "version": "demo-fixture/1.0"})
+            self._send(200, {"service": SERVICE_ID, "version": BANNER})
         elif path.startswith("/artifact/"):
             try:
                 n = int(path.rsplit("/", 1)[1])
@@ -65,8 +70,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(404, {"error": "bad index"})
             if self.headers.get("X-Session") != _TOKEN:
                 return self._send(401, {"error": "not authenticated"})
+            if n < 0 or n >= N_ART:
+                return self._send(404, {"error": "no such artifact"})
             # artifacts shrink with index: a concave collection return
-            size = max(1, 4096 // (n + 1))
+            size = max(1, int(ART_SCALE * 4096) // (n + 1))
             payload = {"artifact": n, "data": "A" * size}
             if HOLDS_FLAG and n >= FLAG_DEPTH:
                 payload["flag"] = FLAG

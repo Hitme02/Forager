@@ -64,7 +64,7 @@ def main() -> None:
     fig.suptitle("Foraging-Based Frontier Scheduling: MVT branch abandonment vs baselines",
                  fontsize=11)
     fig.tight_layout(rect=(0, 0, 1, 0.96))
-    fig.savefig(args.out, dpi=150)
+    fig.savefig(args.out, dpi=300)
     print(f"Saved {args.out}")
 
 

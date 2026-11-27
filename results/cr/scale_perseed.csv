@@ -1,0 +1,2161 @@
+scenario,regime,policy,tuned_label,seed,solved,ticks,switches
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,0,True,90,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,1,True,101,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,2,True,92,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,3,True,149,16
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,4,True,85,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,5,True,89,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,6,True,88,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,7,True,92,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,8,True,77,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,9,True,98,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,10,True,93,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,11,True,89,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,12,True,89,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,13,True,83,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,14,True,103,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,15,True,89,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,16,True,90,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,17,True,79,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,18,True,110,8
+dim s1.2,diminishing,fixed (tuned per scenario),t=60,19,True,115,8
+dim s1.2,diminishing,fixed t=8 (tuned constant),,0,True,133,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,1,True,135,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,2,True,137,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,3,True,164,96
+dim s1.2,diminishing,fixed t=8 (tuned constant),,4,True,137,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,5,True,134,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,6,True,133,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,7,True,133,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,8,True,137,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,9,True,138,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,10,True,133,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,11,True,136,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,12,True,133,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,13,True,125,72
+dim s1.2,diminishing,fixed t=8 (tuned constant),,14,True,148,88
+dim s1.2,diminishing,fixed t=8 (tuned constant),,15,True,136,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,16,True,133,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,17,True,132,80
+dim s1.2,diminishing,fixed t=8 (tuned constant),,18,True,144,88
+dim s1.2,diminishing,fixed t=8 (tuned constant),,19,True,136,80
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,0,True,90,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,1,True,101,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,2,True,92,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,3,True,149,16
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,4,True,85,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,5,True,89,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,6,True,88,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,7,True,92,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,8,True,77,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,9,True,98,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,10,True,93,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,11,True,89,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,12,True,89,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,13,True,83,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,14,True,103,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,15,True,89,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,16,True,90,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,17,True,79,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,18,True,110,8
+dim s1.2,diminishing,fixed t=60 (tuned diminishing),,19,True,115,8
+dim s1.2,diminishing,fixed t=12 (minimax),,0,True,124,56
+dim s1.2,diminishing,fixed t=12 (minimax),,1,True,128,56
+dim s1.2,diminishing,fixed t=12 (minimax),,2,True,130,56
+dim s1.2,diminishing,fixed t=12 (minimax),,3,True,158,72
+dim s1.2,diminishing,fixed t=12 (minimax),,4,True,130,56
+dim s1.2,diminishing,fixed t=12 (minimax),,5,True,126,56
+dim s1.2,diminishing,fixed t=12 (minimax),,6,True,124,56
+dim s1.2,diminishing,fixed t=12 (minimax),,7,True,125,56
+dim s1.2,diminishing,fixed t=12 (minimax),,8,True,130,56
+dim s1.2,diminishing,fixed t=12 (minimax),,9,True,137,64
+dim s1.2,diminishing,fixed t=12 (minimax),,10,True,124,56
+dim s1.2,diminishing,fixed t=12 (minimax),,11,True,127,56
+dim s1.2,diminishing,fixed t=12 (minimax),,12,True,125,56
+dim s1.2,diminishing,fixed t=12 (minimax),,13,True,123,56
+dim s1.2,diminishing,fixed t=12 (minimax),,14,True,142,64
+dim s1.2,diminishing,fixed t=12 (minimax),,15,True,128,56
+dim s1.2,diminishing,fixed t=12 (minimax),,16,True,125,56
+dim s1.2,diminishing,fixed t=12 (minimax),,17,True,127,56
+dim s1.2,diminishing,fixed t=12 (minimax),,18,True,137,64
+dim s1.2,diminishing,fixed t=12 (minimax),,19,True,129,56
+dim s1.2,diminishing,max_retry k=8 (minimax),,0,True,142,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,1,True,134,2
+dim s1.2,diminishing,max_retry k=8 (minimax),,2,True,140,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,3,True,124,1
+dim s1.2,diminishing,max_retry k=8 (minimax),,4,True,100,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,5,True,116,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,6,True,163,1
+dim s1.2,diminishing,max_retry k=8 (minimax),,7,True,159,2
+dim s1.2,diminishing,max_retry k=8 (minimax),,8,True,86,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,9,True,98,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,10,True,189,4
+dim s1.2,diminishing,max_retry k=8 (minimax),,11,True,160,1
+dim s1.2,diminishing,max_retry k=8 (minimax),,12,True,131,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,13,True,123,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,14,True,118,1
+dim s1.2,diminishing,max_retry k=8 (minimax),,15,True,148,1
+dim s1.2,diminishing,max_retry k=8 (minimax),,16,True,183,3
+dim s1.2,diminishing,max_retry k=8 (minimax),,17,True,88,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,18,True,124,0
+dim s1.2,diminishing,max_retry k=8 (minimax),,19,True,160,3
+dim s1.2,diminishing,median g=2 (minimax),,0,True,109,6
+dim s1.2,diminishing,median g=2 (minimax),,1,True,91,10
+dim s1.2,diminishing,median g=2 (minimax),,2,True,99,10
+dim s1.2,diminishing,median g=2 (minimax),,3,True,116,42
+dim s1.2,diminishing,median g=2 (minimax),,4,True,90,15
+dim s1.2,diminishing,median g=2 (minimax),,5,True,97,24
+dim s1.2,diminishing,median g=2 (minimax),,6,True,127,3
+dim s1.2,diminishing,median g=2 (minimax),,7,True,113,4
+dim s1.2,diminishing,median g=2 (minimax),,8,True,86,1
+dim s1.2,diminishing,median g=2 (minimax),,9,True,88,21
+dim s1.2,diminishing,median g=2 (minimax),,10,True,116,7
+dim s1.2,diminishing,median g=2 (minimax),,11,True,109,4
+dim s1.2,diminishing,median g=2 (minimax),,12,True,91,13
+dim s1.2,diminishing,median g=2 (minimax),,13,True,94,3
+dim s1.2,diminishing,median g=2 (minimax),,14,True,104,38
+dim s1.2,diminishing,median g=2 (minimax),,15,True,97,6
+dim s1.2,diminishing,median g=2 (minimax),,16,True,121,5
+dim s1.2,diminishing,median g=2 (minimax),,17,True,90,22
+dim s1.2,diminishing,median g=2 (minimax),,18,True,103,37
+dim s1.2,diminishing,median g=2 (minimax),,19,True,104,7
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,0,True,134,83
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,1,True,132,95
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,2,True,133,96
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,3,True,129,84
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,4,True,121,82
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,5,True,121,81
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,6,True,133,84
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,7,True,136,94
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,8,True,129,84
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,9,True,119,78
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,10,True,135,87
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,11,True,135,91
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,12,True,121,65
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,13,True,122,71
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,14,True,121,77
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,15,True,128,90
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,16,True,139,93
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,17,True,113,66
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,18,True,123,80
+dim s1.2,diminishing,"asha r0=2,eta=2 (minimax)",,19,True,131,80
+dim s1.2,diminishing,mvt_adaptive,,0,True,105,38
+dim s1.2,diminishing,mvt_adaptive,,1,True,124,72
+dim s1.2,diminishing,mvt_adaptive,,2,True,86,11
+dim s1.2,diminishing,mvt_adaptive,,3,True,107,36
+dim s1.2,diminishing,mvt_adaptive,,4,True,80,9
+dim s1.2,diminishing,mvt_adaptive,,5,True,82,16
+dim s1.2,diminishing,mvt_adaptive,,6,True,88,24
+dim s1.2,diminishing,mvt_adaptive,,7,True,88,11
+dim s1.2,diminishing,mvt_adaptive,,8,True,81,9
+dim s1.2,diminishing,mvt_adaptive,,9,True,84,22
+dim s1.2,diminishing,mvt_adaptive,,10,True,87,9
+dim s1.2,diminishing,mvt_adaptive,,11,True,86,8
+dim s1.2,diminishing,mvt_adaptive,,12,True,91,26
+dim s1.2,diminishing,mvt_adaptive,,13,True,84,23
+dim s1.2,diminishing,mvt_adaptive,,14,True,81,13
+dim s1.2,diminishing,mvt_adaptive,,15,True,81,8
+dim s1.2,diminishing,mvt_adaptive,,16,True,85,12
+dim s1.2,diminishing,mvt_adaptive,,17,True,78,18
+dim s1.2,diminishing,mvt_adaptive,,18,True,95,27
+dim s1.2,diminishing,mvt_adaptive,,19,True,104,35
+dim s1.2,diminishing,mvt_slope,,0,True,105,38
+dim s1.2,diminishing,mvt_slope,,1,True,124,72
+dim s1.2,diminishing,mvt_slope,,2,True,86,11
+dim s1.2,diminishing,mvt_slope,,3,True,107,36
+dim s1.2,diminishing,mvt_slope,,4,True,80,9
+dim s1.2,diminishing,mvt_slope,,5,True,82,16
+dim s1.2,diminishing,mvt_slope,,6,True,88,24
+dim s1.2,diminishing,mvt_slope,,7,True,88,11
+dim s1.2,diminishing,mvt_slope,,8,True,81,9
+dim s1.2,diminishing,mvt_slope,,9,True,84,22
+dim s1.2,diminishing,mvt_slope,,10,True,87,9
+dim s1.2,diminishing,mvt_slope,,11,True,86,8
+dim s1.2,diminishing,mvt_slope,,12,True,91,26
+dim s1.2,diminishing,mvt_slope,,13,True,84,23
+dim s1.2,diminishing,mvt_slope,,14,True,81,13
+dim s1.2,diminishing,mvt_slope,,15,True,81,8
+dim s1.2,diminishing,mvt_slope,,16,True,85,12
+dim s1.2,diminishing,mvt_slope,,17,True,78,18
+dim s1.2,diminishing,mvt_slope,,18,True,95,27
+dim s1.2,diminishing,mvt_slope,,19,True,104,35
+dim s1.2,diminishing,guarded_mvt,,0,True,89,15
+dim s1.2,diminishing,guarded_mvt,,1,True,103,22
+dim s1.2,diminishing,guarded_mvt,,2,True,86,11
+dim s1.2,diminishing,guarded_mvt,,3,True,98,17
+dim s1.2,diminishing,guarded_mvt,,4,True,81,9
+dim s1.2,diminishing,guarded_mvt,,5,True,81,11
+dim s1.2,diminishing,guarded_mvt,,6,True,86,14
+dim s1.2,diminishing,guarded_mvt,,7,True,88,11
+dim s1.2,diminishing,guarded_mvt,,8,True,81,9
+dim s1.2,diminishing,guarded_mvt,,9,True,83,12
+dim s1.2,diminishing,guarded_mvt,,10,True,87,9
+dim s1.2,diminishing,guarded_mvt,,11,True,86,8
+dim s1.2,diminishing,guarded_mvt,,12,True,84,13
+dim s1.2,diminishing,guarded_mvt,,13,True,80,12
+dim s1.2,diminishing,guarded_mvt,,14,True,81,10
+dim s1.2,diminishing,guarded_mvt,,15,True,81,8
+dim s1.2,diminishing,guarded_mvt,,16,True,85,10
+dim s1.2,diminishing,guarded_mvt,,17,True,75,11
+dim s1.2,diminishing,guarded_mvt,,18,True,91,15
+dim s1.2,diminishing,guarded_mvt,,19,True,90,15
+dim s1.2,diminishing,guarded_mvt_dyn,,0,True,89,15
+dim s1.2,diminishing,guarded_mvt_dyn,,1,True,103,22
+dim s1.2,diminishing,guarded_mvt_dyn,,2,True,86,11
+dim s1.2,diminishing,guarded_mvt_dyn,,3,True,98,17
+dim s1.2,diminishing,guarded_mvt_dyn,,4,True,81,9
+dim s1.2,diminishing,guarded_mvt_dyn,,5,True,81,11
+dim s1.2,diminishing,guarded_mvt_dyn,,6,True,86,14
+dim s1.2,diminishing,guarded_mvt_dyn,,7,True,88,11
+dim s1.2,diminishing,guarded_mvt_dyn,,8,True,81,9
+dim s1.2,diminishing,guarded_mvt_dyn,,9,True,83,12
+dim s1.2,diminishing,guarded_mvt_dyn,,10,True,87,9
+dim s1.2,diminishing,guarded_mvt_dyn,,11,True,86,8
+dim s1.2,diminishing,guarded_mvt_dyn,,12,True,84,13
+dim s1.2,diminishing,guarded_mvt_dyn,,13,True,80,12
+dim s1.2,diminishing,guarded_mvt_dyn,,14,True,81,10
+dim s1.2,diminishing,guarded_mvt_dyn,,15,True,81,8
+dim s1.2,diminishing,guarded_mvt_dyn,,16,True,85,10
+dim s1.2,diminishing,guarded_mvt_dyn,,17,True,75,11
+dim s1.2,diminishing,guarded_mvt_dyn,,18,True,91,15
+dim s1.2,diminishing,guarded_mvt_dyn,,19,True,90,15
+dim s1.2,diminishing,guarded_mvt_learned,,0,True,89,14
+dim s1.2,diminishing,guarded_mvt_learned,,1,True,140,13
+dim s1.2,diminishing,guarded_mvt_learned,,2,True,86,11
+dim s1.2,diminishing,guarded_mvt_learned,,3,True,97,16
+dim s1.2,diminishing,guarded_mvt_learned,,4,True,81,11
+dim s1.2,diminishing,guarded_mvt_learned,,5,True,83,13
+dim s1.2,diminishing,guarded_mvt_learned,,6,True,86,13
+dim s1.2,diminishing,guarded_mvt_learned,,7,True,86,11
+dim s1.2,diminishing,guarded_mvt_learned,,8,True,78,9
+dim s1.2,diminishing,guarded_mvt_learned,,9,True,83,12
+dim s1.2,diminishing,guarded_mvt_learned,,10,True,87,10
+dim s1.2,diminishing,guarded_mvt_learned,,11,True,84,9
+dim s1.2,diminishing,guarded_mvt_learned,,12,True,85,12
+dim s1.2,diminishing,guarded_mvt_learned,,13,True,79,9
+dim s1.2,diminishing,guarded_mvt_learned,,14,True,81,10
+dim s1.2,diminishing,guarded_mvt_learned,,15,True,82,10
+dim s1.2,diminishing,guarded_mvt_learned,,16,True,85,11
+dim s1.2,diminishing,guarded_mvt_learned,,17,True,75,9
+dim s1.2,diminishing,guarded_mvt_learned,,18,True,90,13
+dim s1.2,diminishing,guarded_mvt_learned,,19,True,89,13
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,0,True,51,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,1,True,53,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,2,True,51,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,3,True,59,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,4,True,48,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,5,True,50,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,6,True,51,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,7,True,52,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,8,True,46,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,9,True,49,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,10,True,53,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,11,True,52,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,12,True,51,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,13,True,49,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,14,True,52,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,15,True,51,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,16,True,52,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,17,True,46,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,18,True,53,8
+dim s1.2 tau/2,diminishing,fixed (tuned per scenario),t=40,19,True,59,8
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,0,True,73,40
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,1,True,80,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,2,True,81,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,3,True,97,56
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,4,True,82,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,5,True,80,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,6,True,73,40
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,7,True,73,40
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,8,True,82,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,9,True,83,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,10,True,72,40
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,11,True,79,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,12,True,79,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,13,True,73,40
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,14,True,92,56
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,15,True,80,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,16,True,73,40
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,17,True,81,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,18,True,83,48
+dim s1.2 tau/2,diminishing,fixed t=8 (tuned constant),,19,True,81,48
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,0,True,66,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,1,True,68,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,2,True,66,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,3,True,66,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,4,True,49,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,5,True,56,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,6,True,67,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,7,True,67,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,8,True,42,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,9,True,48,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,10,True,70,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,11,True,68,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,12,True,66,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,13,True,59,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,14,True,59,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,15,True,67,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,16,True,68,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,17,True,43,0
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,18,True,66,8
+dim s1.2 tau/2,diminishing,fixed t=60 (tuned diminishing),,19,True,72,8
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,0,True,69,32
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,1,True,75,32
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,2,True,73,32
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,3,True,104,48
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,4,True,88,40
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,5,True,79,32
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,6,True,60,24
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,7,True,60,24
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,8,True,87,40
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,9,True,90,40
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,10,True,58,24
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,11,True,63,24
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,12,True,76,32
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,13,True,63,24
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,14,True,93,40
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,15,True,75,32
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,16,True,59,24
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,17,True,87,40
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,18,True,88,40
+dim s1.2 tau/2,diminishing,fixed t=12 (minimax),,19,True,78,32
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,0,True,67,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,1,True,68,1
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,2,True,67,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,3,True,63,1
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,4,True,49,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,5,True,56,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,6,True,81,1
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,7,True,80,1
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,8,True,42,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,9,True,48,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,10,True,99,4
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,11,True,82,1
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,12,True,63,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,13,True,59,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,14,True,59,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,15,True,70,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,16,True,92,1
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,17,True,43,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,18,True,61,0
+dim s1.2 tau/2,diminishing,max_retry k=8 (minimax),,19,True,85,3
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,0,True,56,5
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,1,True,47,11
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,2,True,52,11
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,3,True,68,35
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,4,True,45,10
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,5,True,49,16
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,6,True,67,3
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,7,True,57,4
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,8,True,42,1
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,9,True,48,18
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,10,True,59,6
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,11,True,56,4
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,12,True,48,12
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,13,True,48,3
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,14,True,52,23
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,15,True,50,6
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,16,True,62,5
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,17,True,43,10
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,18,True,58,29
+dim s1.2 tau/2,diminishing,median g=2 (minimax),,19,True,53,7
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,0,True,80,63
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,1,True,78,66
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,2,True,79,67
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,3,True,75,64
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,4,True,73,61
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,5,True,72,56
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,6,True,80,65
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,7,True,83,70
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,8,True,81,65
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,9,True,72,58
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,10,True,81,61
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,11,True,84,70
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,12,True,73,50
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,13,True,78,54
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,14,True,74,60
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,15,True,77,64
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,16,True,84,67
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,17,True,71,52
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,18,True,72,58
+dim s1.2 tau/2,diminishing,"asha r0=2,eta=2 (minimax)",,19,True,77,57
+dim s1.2 tau/2,diminishing,mvt_adaptive,,0,True,48,10
+dim s1.2 tau/2,diminishing,mvt_adaptive,,1,True,72,44
+dim s1.2 tau/2,diminishing,mvt_adaptive,,2,True,46,6
+dim s1.2 tau/2,diminishing,mvt_adaptive,,3,True,49,11
+dim s1.2 tau/2,diminishing,mvt_adaptive,,4,True,42,4
+dim s1.2 tau/2,diminishing,mvt_adaptive,,5,True,42,7
+dim s1.2 tau/2,diminishing,mvt_adaptive,,6,True,47,10
+dim s1.2 tau/2,diminishing,mvt_adaptive,,7,True,47,6
+dim s1.2 tau/2,diminishing,mvt_adaptive,,8,True,41,1
+dim s1.2 tau/2,diminishing,mvt_adaptive,,9,True,42,10
+dim s1.2 tau/2,diminishing,mvt_adaptive,,10,True,51,8
+dim s1.2 tau/2,diminishing,mvt_adaptive,,11,True,47,6
+dim s1.2 tau/2,diminishing,mvt_adaptive,,12,True,43,5
+dim s1.2 tau/2,diminishing,mvt_adaptive,,13,True,42,6
+dim s1.2 tau/2,diminishing,mvt_adaptive,,14,True,43,7
+dim s1.2 tau/2,diminishing,mvt_adaptive,,15,True,45,7
+dim s1.2 tau/2,diminishing,mvt_adaptive,,16,True,48,9
+dim s1.2 tau/2,diminishing,mvt_adaptive,,17,True,38,4
+dim s1.2 tau/2,diminishing,mvt_adaptive,,18,True,46,11
+dim s1.2 tau/2,diminishing,mvt_adaptive,,19,True,49,11
+dim s1.2 tau/2,diminishing,mvt_slope,,0,True,48,10
+dim s1.2 tau/2,diminishing,mvt_slope,,1,True,72,44
+dim s1.2 tau/2,diminishing,mvt_slope,,2,True,46,6
+dim s1.2 tau/2,diminishing,mvt_slope,,3,True,49,11
+dim s1.2 tau/2,diminishing,mvt_slope,,4,True,42,4
+dim s1.2 tau/2,diminishing,mvt_slope,,5,True,42,7
+dim s1.2 tau/2,diminishing,mvt_slope,,6,True,47,10
+dim s1.2 tau/2,diminishing,mvt_slope,,7,True,47,6
+dim s1.2 tau/2,diminishing,mvt_slope,,8,True,41,1
+dim s1.2 tau/2,diminishing,mvt_slope,,9,True,42,10
+dim s1.2 tau/2,diminishing,mvt_slope,,10,True,51,8
+dim s1.2 tau/2,diminishing,mvt_slope,,11,True,47,6
+dim s1.2 tau/2,diminishing,mvt_slope,,12,True,43,5
+dim s1.2 tau/2,diminishing,mvt_slope,,13,True,42,6
+dim s1.2 tau/2,diminishing,mvt_slope,,14,True,43,7
+dim s1.2 tau/2,diminishing,mvt_slope,,15,True,45,7
+dim s1.2 tau/2,diminishing,mvt_slope,,16,True,48,9
+dim s1.2 tau/2,diminishing,mvt_slope,,17,True,38,4
+dim s1.2 tau/2,diminishing,mvt_slope,,18,True,46,11
+dim s1.2 tau/2,diminishing,mvt_slope,,19,True,49,11
+dim s1.2 tau/2,diminishing,guarded_mvt,,0,True,48,8
+dim s1.2 tau/2,diminishing,guarded_mvt,,1,True,53,15
+dim s1.2 tau/2,diminishing,guarded_mvt,,2,True,46,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,3,True,50,11
+dim s1.2 tau/2,diminishing,guarded_mvt,,4,True,42,4
+dim s1.2 tau/2,diminishing,guarded_mvt,,5,True,42,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,6,True,48,8
+dim s1.2 tau/2,diminishing,guarded_mvt,,7,True,47,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,8,True,41,1
+dim s1.2 tau/2,diminishing,guarded_mvt,,9,True,41,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,10,True,51,8
+dim s1.2 tau/2,diminishing,guarded_mvt,,11,True,47,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,12,True,43,5
+dim s1.2 tau/2,diminishing,guarded_mvt,,13,True,42,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,14,True,43,7
+dim s1.2 tau/2,diminishing,guarded_mvt,,15,True,45,6
+dim s1.2 tau/2,diminishing,guarded_mvt,,16,True,48,8
+dim s1.2 tau/2,diminishing,guarded_mvt,,17,True,39,5
+dim s1.2 tau/2,diminishing,guarded_mvt,,18,True,46,7
+dim s1.2 tau/2,diminishing,guarded_mvt,,19,True,49,8
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,0,True,48,8
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,1,True,53,15
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,2,True,46,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,3,True,50,11
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,4,True,42,4
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,5,True,42,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,6,True,48,8
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,7,True,47,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,8,True,41,1
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,9,True,41,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,10,True,51,8
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,11,True,47,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,12,True,43,5
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,13,True,42,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,14,True,43,7
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,15,True,45,6
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,16,True,48,8
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,17,True,39,5
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,18,True,46,7
+dim s1.2 tau/2,diminishing,guarded_mvt_dyn,,19,True,49,8
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,0,True,47,8
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,1,True,52,11
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,2,True,45,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,3,True,51,11
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,4,True,42,5
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,5,True,43,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,6,True,47,8
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,7,True,46,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,8,True,42,4
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,9,True,41,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,10,True,49,7
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,11,True,46,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,12,True,44,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,13,True,43,8
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,14,True,43,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,15,True,45,6
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,16,True,47,8
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,17,True,39,5
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,18,True,46,7
+dim s1.2 tau/2,diminishing,guarded_mvt_learned,,19,True,49,7
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,0,True,177,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,1,True,200,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,2,True,181,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,3,True,295,16
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,4,True,167,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,5,True,174,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,6,True,172,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,7,True,182,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,8,True,149,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,9,True,195,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,10,True,183,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,11,True,173,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,12,True,174,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,13,True,162,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,14,True,205,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,15,True,174,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,16,True,175,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,17,True,155,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,18,True,220,8
+dim s1.2 tau*2,diminishing,fixed (tuned per scenario),t=120,19,True,229,8
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,0,True,251,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,1,True,253,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,2,True,255,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,3,True,306,184
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,4,True,252,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,5,True,250,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,6,True,248,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,7,True,251,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,8,True,251,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,9,True,254,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,10,True,249,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,11,True,255,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,12,True,248,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,13,True,238,144
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,14,True,267,160
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,15,True,252,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,16,True,251,152
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,17,True,238,144
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,18,True,265,160
+dim s1.2 tau*2,diminishing,fixed t=8 (tuned constant),,19,True,254,152
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,0,True,200,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,1,True,217,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,2,True,203,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,3,True,364,40
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,4,True,221,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,5,True,216,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,6,True,181,16
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,7,True,197,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,8,True,203,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,9,True,326,40
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,10,True,181,16
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,11,True,203,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,12,True,212,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,13,True,178,16
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,14,True,336,40
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,15,True,204,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,16,True,178,16
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,17,True,216,24
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,18,True,276,32
+dim s1.2 tau*2,diminishing,fixed t=60 (tuned diminishing),,19,True,213,24
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,0,True,224,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,1,True,229,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,2,True,232,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,3,True,279,128
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,4,True,229,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,5,True,225,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,6,True,223,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,7,True,226,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,8,True,225,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,9,True,232,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,10,True,224,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,11,True,228,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,12,True,224,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,13,True,214,96
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,14,True,246,112
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,15,True,228,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,16,True,226,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,17,True,222,104
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,18,True,240,112
+dim s1.2 tau*2,diminishing,fixed t=12 (minimax),,19,True,230,104
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,0,True,292,1
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,1,True,263,2
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,2,True,287,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,3,True,249,1
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,4,True,202,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,5,True,234,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,6,True,325,2
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,7,True,312,2
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,8,True,174,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,9,True,198,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,10,True,369,4
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,11,True,318,1
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,12,True,266,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,13,True,252,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,14,True,234,2
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,15,True,292,1
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,16,True,358,3
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,17,True,178,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,18,True,252,0
+dim s1.2 tau*2,diminishing,max_retry k=8 (minimax),,19,True,312,3
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,0,True,213,6
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,1,True,179,10
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,2,True,194,10
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,3,True,212,52
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,4,True,179,24
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,5,True,188,36
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,6,True,249,3
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,7,True,224,4
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,8,True,173,2
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,9,True,175,36
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,10,True,226,7
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,11,True,215,4
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,12,True,175,15
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,13,True,184,3
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,14,True,185,39
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,15,True,190,6
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,16,True,240,5
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,17,True,172,32
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,18,True,185,40
+dim s1.2 tau*2,diminishing,median g=2 (minimax),,19,True,205,7
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,0,True,232,108
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,1,True,224,127
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,2,True,225,125
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,3,True,235,115
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,4,True,207,110
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,5,True,210,111
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,6,True,228,110
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,7,True,234,123
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,8,True,211,106
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,9,True,206,105
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,10,True,230,115
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,11,True,232,121
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,12,True,221,89
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,13,True,215,92
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,14,True,216,108
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,15,True,219,123
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,16,True,237,124
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,17,True,197,92
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,18,True,222,112
+dim s1.2 tau*2,diminishing,"asha r0=2,eta=2 (minimax)",,19,True,232,105
+dim s1.2 tau*2,diminishing,mvt_adaptive,,0,True,188,48
+dim s1.2 tau*2,diminishing,mvt_adaptive,,1,True,211,95
+dim s1.2 tau*2,diminishing,mvt_adaptive,,2,True,158,13
+dim s1.2 tau*2,diminishing,mvt_adaptive,,3,True,214,68
+dim s1.2 tau*2,diminishing,mvt_adaptive,,4,True,173,36
+dim s1.2 tau*2,diminishing,mvt_adaptive,,5,True,186,57
+dim s1.2 tau*2,diminishing,mvt_adaptive,,6,True,184,48
+dim s1.2 tau*2,diminishing,mvt_adaptive,,7,True,162,14
+dim s1.2 tau*2,diminishing,mvt_adaptive,,8,True,148,9
+dim s1.2 tau*2,diminishing,mvt_adaptive,,9,True,183,56
+dim s1.2 tau*2,diminishing,mvt_adaptive,,10,True,160,11
+dim s1.2 tau*2,diminishing,mvt_adaptive,,11,True,164,17
+dim s1.2 tau*2,diminishing,mvt_adaptive,,12,True,180,45
+dim s1.2 tau*2,diminishing,mvt_adaptive,,13,True,179,47
+dim s1.2 tau*2,diminishing,mvt_adaptive,,14,True,191,56
+dim s1.2 tau*2,diminishing,mvt_adaptive,,15,True,154,11
+dim s1.2 tau*2,diminishing,mvt_adaptive,,16,True,187,50
+dim s1.2 tau*2,diminishing,mvt_adaptive,,17,True,172,44
+dim s1.2 tau*2,diminishing,mvt_adaptive,,18,True,189,56
+dim s1.2 tau*2,diminishing,mvt_adaptive,,19,True,187,48
+dim s1.2 tau*2,diminishing,mvt_slope,,0,True,188,48
+dim s1.2 tau*2,diminishing,mvt_slope,,1,True,211,95
+dim s1.2 tau*2,diminishing,mvt_slope,,2,True,158,13
+dim s1.2 tau*2,diminishing,mvt_slope,,3,True,214,68
+dim s1.2 tau*2,diminishing,mvt_slope,,4,True,173,36
+dim s1.2 tau*2,diminishing,mvt_slope,,5,True,186,57
+dim s1.2 tau*2,diminishing,mvt_slope,,6,True,184,48
+dim s1.2 tau*2,diminishing,mvt_slope,,7,True,162,14
+dim s1.2 tau*2,diminishing,mvt_slope,,8,True,148,9
+dim s1.2 tau*2,diminishing,mvt_slope,,9,True,183,56
+dim s1.2 tau*2,diminishing,mvt_slope,,10,True,160,11
+dim s1.2 tau*2,diminishing,mvt_slope,,11,True,164,17
+dim s1.2 tau*2,diminishing,mvt_slope,,12,True,180,45
+dim s1.2 tau*2,diminishing,mvt_slope,,13,True,179,47
+dim s1.2 tau*2,diminishing,mvt_slope,,14,True,191,56
+dim s1.2 tau*2,diminishing,mvt_slope,,15,True,154,11
+dim s1.2 tau*2,diminishing,mvt_slope,,16,True,187,50
+dim s1.2 tau*2,diminishing,mvt_slope,,17,True,172,44
+dim s1.2 tau*2,diminishing,mvt_slope,,18,True,189,56
+dim s1.2 tau*2,diminishing,mvt_slope,,19,True,187,48
+dim s1.2 tau*2,diminishing,guarded_mvt,,0,True,193,33
+dim s1.2 tau*2,diminishing,guarded_mvt,,1,True,207,40
+dim s1.2 tau*2,diminishing,guarded_mvt,,2,True,158,13
+dim s1.2 tau*2,diminishing,guarded_mvt,,3,True,209,39
+dim s1.2 tau*2,diminishing,guarded_mvt,,4,True,152,14
+dim s1.2 tau*2,diminishing,guarded_mvt,,5,True,161,21
+dim s1.2 tau*2,diminishing,guarded_mvt,,6,True,177,28
+dim s1.2 tau*2,diminishing,guarded_mvt,,7,True,162,14
+dim s1.2 tau*2,diminishing,guarded_mvt,,8,True,148,9
+dim s1.2 tau*2,diminishing,guarded_mvt,,9,True,176,29
+dim s1.2 tau*2,diminishing,guarded_mvt,,10,True,160,11
+dim s1.2 tau*2,diminishing,guarded_mvt,,11,True,163,13
+dim s1.2 tau*2,diminishing,guarded_mvt,,12,True,191,34
+dim s1.2 tau*2,diminishing,guarded_mvt,,13,True,182,31
+dim s1.2 tau*2,diminishing,guarded_mvt,,14,True,161,19
+dim s1.2 tau*2,diminishing,guarded_mvt,,15,True,154,11
+dim s1.2 tau*2,diminishing,guarded_mvt,,16,True,164,18
+dim s1.2 tau*2,diminishing,guarded_mvt,,17,True,179,28
+dim s1.2 tau*2,diminishing,guarded_mvt,,18,True,188,32
+dim s1.2 tau*2,diminishing,guarded_mvt,,19,True,183,29
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,0,True,193,33
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,1,True,207,40
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,2,True,158,13
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,3,True,209,39
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,4,True,152,14
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,5,True,161,21
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,6,True,177,28
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,7,True,162,14
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,8,True,148,9
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,9,True,176,29
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,10,True,160,11
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,11,True,163,13
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,12,True,191,34
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,13,True,182,31
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,14,True,161,19
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,15,True,154,11
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,16,True,164,18
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,17,True,179,28
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,18,True,188,32
+dim s1.2 tau*2,diminishing,guarded_mvt_dyn,,19,True,183,29
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,0,True,172,22
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,1,True,352,7
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,2,True,159,15
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,3,True,214,39
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,4,True,151,12
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,5,True,174,24
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,6,True,162,19
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,7,True,160,14
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,8,True,146,9
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,9,True,162,19
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,10,True,159,12
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,11,True,163,15
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,12,True,171,21
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,13,True,161,20
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,14,True,160,17
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,15,True,154,13
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,16,True,164,18
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,17,True,156,19
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,18,True,176,25
+dim s1.2 tau*2,diminishing,guarded_mvt_learned,,19,True,171,22
+con s0.3,constant,fixed (tuned per scenario),t=8,0,True,59,32
+con s0.3,constant,fixed (tuned per scenario),t=8,1,True,54,32
+con s0.3,constant,fixed (tuned per scenario),t=8,2,True,43,24
+con s0.3,constant,fixed (tuned per scenario),t=8,3,True,56,32
+con s0.3,constant,fixed (tuned per scenario),t=8,4,True,57,32
+con s0.3,constant,fixed (tuned per scenario),t=8,5,True,58,32
+con s0.3,constant,fixed (tuned per scenario),t=8,6,True,54,32
+con s0.3,constant,fixed (tuned per scenario),t=8,7,True,79,48
+con s0.3,constant,fixed (tuned per scenario),t=8,8,True,47,24
+con s0.3,constant,fixed (tuned per scenario),t=8,9,True,44,24
+con s0.3,constant,fixed (tuned per scenario),t=8,10,False,12000,7384
+con s0.3,constant,fixed (tuned per scenario),t=8,11,True,57,32
+con s0.3,constant,fixed (tuned per scenario),t=8,12,True,56,32
+con s0.3,constant,fixed (tuned per scenario),t=8,13,True,57,32
+con s0.3,constant,fixed (tuned per scenario),t=8,14,True,55,32
+con s0.3,constant,fixed (tuned per scenario),t=8,15,True,55,32
+con s0.3,constant,fixed (tuned per scenario),t=8,16,True,55,32
+con s0.3,constant,fixed (tuned per scenario),t=8,17,True,55,32
+con s0.3,constant,fixed (tuned per scenario),t=8,18,True,53,32
+con s0.3,constant,fixed (tuned per scenario),t=8,19,True,55,32
+con s0.3,constant,fixed t=8 (tuned constant),,0,True,59,32
+con s0.3,constant,fixed t=8 (tuned constant),,1,True,54,32
+con s0.3,constant,fixed t=8 (tuned constant),,2,True,43,24
+con s0.3,constant,fixed t=8 (tuned constant),,3,True,56,32
+con s0.3,constant,fixed t=8 (tuned constant),,4,True,57,32
+con s0.3,constant,fixed t=8 (tuned constant),,5,True,58,32
+con s0.3,constant,fixed t=8 (tuned constant),,6,True,54,32
+con s0.3,constant,fixed t=8 (tuned constant),,7,True,79,48
+con s0.3,constant,fixed t=8 (tuned constant),,8,True,47,24
+con s0.3,constant,fixed t=8 (tuned constant),,9,True,44,24
+con s0.3,constant,fixed t=8 (tuned constant),,10,False,12000,7384
+con s0.3,constant,fixed t=8 (tuned constant),,11,True,57,32
+con s0.3,constant,fixed t=8 (tuned constant),,12,True,56,32
+con s0.3,constant,fixed t=8 (tuned constant),,13,True,57,32
+con s0.3,constant,fixed t=8 (tuned constant),,14,True,55,32
+con s0.3,constant,fixed t=8 (tuned constant),,15,True,55,32
+con s0.3,constant,fixed t=8 (tuned constant),,16,True,55,32
+con s0.3,constant,fixed t=8 (tuned constant),,17,True,55,32
+con s0.3,constant,fixed t=8 (tuned constant),,18,True,53,32
+con s0.3,constant,fixed t=8 (tuned constant),,19,True,55,32
+con s0.3,constant,fixed t=60 (tuned diminishing),,0,True,139,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,1,True,138,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,2,True,134,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,3,True,136,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,4,True,134,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,5,True,156,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,6,True,135,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,7,True,140,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,8,True,135,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,9,True,140,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,10,True,134,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,11,True,137,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,12,True,138,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,13,True,137,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,14,True,136,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,15,True,137,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,16,True,135,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,17,True,139,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,18,True,135,16
+con s0.3,constant,fixed t=60 (tuned diminishing),,19,True,141,16
+con s0.3,constant,fixed t=12 (minimax),,0,True,70,32
+con s0.3,constant,fixed t=12 (minimax),,1,True,52,24
+con s0.3,constant,fixed t=12 (minimax),,2,True,44,16
+con s0.3,constant,fixed t=12 (minimax),,3,True,58,24
+con s0.3,constant,fixed t=12 (minimax),,4,True,69,32
+con s0.3,constant,fixed t=12 (minimax),,5,True,60,24
+con s0.3,constant,fixed t=12 (minimax),,6,True,55,24
+con s0.3,constant,fixed t=12 (minimax),,7,True,74,32
+con s0.3,constant,fixed t=12 (minimax),,8,True,52,24
+con s0.3,constant,fixed t=12 (minimax),,9,True,53,24
+con s0.3,constant,fixed t=12 (minimax),,10,True,57,24
+con s0.3,constant,fixed t=12 (minimax),,11,True,59,24
+con s0.3,constant,fixed t=12 (minimax),,12,True,57,24
+con s0.3,constant,fixed t=12 (minimax),,13,True,56,24
+con s0.3,constant,fixed t=12 (minimax),,14,True,55,24
+con s0.3,constant,fixed t=12 (minimax),,15,True,57,24
+con s0.3,constant,fixed t=12 (minimax),,16,True,60,24
+con s0.3,constant,fixed t=12 (minimax),,17,True,62,24
+con s0.3,constant,fixed t=12 (minimax),,18,True,57,24
+con s0.3,constant,fixed t=12 (minimax),,19,True,55,24
+con s0.3,constant,max_retry k=8 (minimax),,0,True,68,34
+con s0.3,constant,max_retry k=8 (minimax),,1,True,56,25
+con s0.3,constant,max_retry k=8 (minimax),,2,True,53,25
+con s0.3,constant,max_retry k=8 (minimax),,3,True,64,31
+con s0.3,constant,max_retry k=8 (minimax),,4,True,68,33
+con s0.3,constant,max_retry k=8 (minimax),,5,True,70,33
+con s0.3,constant,max_retry k=8 (minimax),,6,True,63,29
+con s0.3,constant,max_retry k=8 (minimax),,7,False,12000,7376
+con s0.3,constant,max_retry k=8 (minimax),,8,True,54,25
+con s0.3,constant,max_retry k=8 (minimax),,9,True,57,27
+con s0.3,constant,max_retry k=8 (minimax),,10,True,65,31
+con s0.3,constant,max_retry k=8 (minimax),,11,False,12000,7379
+con s0.3,constant,max_retry k=8 (minimax),,12,True,65,31
+con s0.3,constant,max_retry k=8 (minimax),,13,True,65,30
+con s0.3,constant,max_retry k=8 (minimax),,14,True,59,28
+con s0.3,constant,max_retry k=8 (minimax),,15,True,65,30
+con s0.3,constant,max_retry k=8 (minimax),,16,True,64,31
+con s0.3,constant,max_retry k=8 (minimax),,17,True,64,30
+con s0.3,constant,max_retry k=8 (minimax),,18,True,66,32
+con s0.3,constant,max_retry k=8 (minimax),,19,True,63,31
+con s0.3,constant,median g=2 (minimax),,0,False,12000,10606
+con s0.3,constant,median g=2 (minimax),,1,False,12000,10591
+con s0.3,constant,median g=2 (minimax),,2,True,133,34
+con s0.3,constant,median g=2 (minimax),,3,False,12000,10601
+con s0.3,constant,median g=2 (minimax),,4,False,12000,10586
+con s0.3,constant,median g=2 (minimax),,5,False,12000,10585
+con s0.3,constant,median g=2 (minimax),,6,False,12000,10615
+con s0.3,constant,median g=2 (minimax),,7,False,12000,10618
+con s0.3,constant,median g=2 (minimax),,8,False,12000,10567
+con s0.3,constant,median g=2 (minimax),,9,False,12000,10593
+con s0.3,constant,median g=2 (minimax),,10,False,12000,10599
+con s0.3,constant,median g=2 (minimax),,11,False,12000,11311
+con s0.3,constant,median g=2 (minimax),,12,False,12000,10593
+con s0.3,constant,median g=2 (minimax),,13,False,12000,10587
+con s0.3,constant,median g=2 (minimax),,14,False,12000,10584
+con s0.3,constant,median g=2 (minimax),,15,False,12000,12312
+con s0.3,constant,median g=2 (minimax),,16,False,12000,10587
+con s0.3,constant,median g=2 (minimax),,17,False,12000,10584
+con s0.3,constant,median g=2 (minimax),,18,False,12000,10607
+con s0.3,constant,median g=2 (minimax),,19,False,12000,10579
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,0,False,12000,10606
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,1,False,12000,10587
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,2,False,12000,10566
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,3,False,12000,10601
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,4,False,12000,10598
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,5,False,12000,10585
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,6,False,12000,10615
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,7,False,12000,10615
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,8,False,12000,10568
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,9,False,12000,10598
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,10,False,12000,10613
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,11,False,12000,10599
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,12,False,12000,10593
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,13,False,12000,10587
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,14,False,12000,10584
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,15,False,12000,10596
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,16,False,12000,10587
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,17,False,12000,10603
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,18,False,12000,10607
+con s0.3,constant,"asha r0=2,eta=2 (minimax)",,19,False,12000,10581
+con s0.3,constant,mvt_adaptive,,0,False,12000,0
+con s0.3,constant,mvt_adaptive,,1,False,12000,0
+con s0.3,constant,mvt_adaptive,,2,False,12000,0
+con s0.3,constant,mvt_adaptive,,3,False,12000,0
+con s0.3,constant,mvt_adaptive,,4,False,12000,0
+con s0.3,constant,mvt_adaptive,,5,False,12000,0
+con s0.3,constant,mvt_adaptive,,6,False,12000,0
+con s0.3,constant,mvt_adaptive,,7,False,12000,0
+con s0.3,constant,mvt_adaptive,,8,False,12000,0
+con s0.3,constant,mvt_adaptive,,9,False,12000,0
+con s0.3,constant,mvt_adaptive,,10,False,12000,0
+con s0.3,constant,mvt_adaptive,,11,False,12000,0
+con s0.3,constant,mvt_adaptive,,12,False,12000,0
+con s0.3,constant,mvt_adaptive,,13,False,12000,0
+con s0.3,constant,mvt_adaptive,,14,False,12000,0
+con s0.3,constant,mvt_adaptive,,15,False,12000,0
+con s0.3,constant,mvt_adaptive,,16,False,12000,0
+con s0.3,constant,mvt_adaptive,,17,False,12000,0
+con s0.3,constant,mvt_adaptive,,18,False,12000,0
+con s0.3,constant,mvt_adaptive,,19,False,12000,0
+con s0.3,constant,mvt_slope,,0,False,12000,8713
+con s0.3,constant,mvt_slope,,1,True,101,27
+con s0.3,constant,mvt_slope,,2,True,50,26
+con s0.3,constant,mvt_slope,,3,False,12000,8690
+con s0.3,constant,mvt_slope,,4,False,12000,8708
+con s0.3,constant,mvt_slope,,5,False,12000,8710
+con s0.3,constant,mvt_slope,,6,True,89,31
+con s0.3,constant,mvt_slope,,7,False,12000,8707
+con s0.3,constant,mvt_slope,,8,True,82,30
+con s0.3,constant,mvt_slope,,9,True,57,33
+con s0.3,constant,mvt_slope,,10,False,12000,8723
+con s0.3,constant,mvt_slope,,11,False,12000,8700
+con s0.3,constant,mvt_slope,,12,False,12000,8689
+con s0.3,constant,mvt_slope,,13,True,91,33
+con s0.3,constant,mvt_slope,,14,True,70,34
+con s0.3,constant,mvt_slope,,15,False,12000,8692
+con s0.3,constant,mvt_slope,,16,False,12000,8711
+con s0.3,constant,mvt_slope,,17,False,12000,8725
+con s0.3,constant,mvt_slope,,18,False,12000,8706
+con s0.3,constant,mvt_slope,,19,True,90,35
+con s0.3,constant,guarded_mvt,,0,True,80,20
+con s0.3,constant,guarded_mvt,,1,True,66,16
+con s0.3,constant,guarded_mvt,,2,True,66,16
+con s0.3,constant,guarded_mvt,,3,True,77,17
+con s0.3,constant,guarded_mvt,,4,True,77,21
+con s0.3,constant,guarded_mvt,,5,True,76,20
+con s0.3,constant,guarded_mvt,,6,True,74,21
+con s0.3,constant,guarded_mvt,,7,True,92,25
+con s0.3,constant,guarded_mvt,,8,True,66,16
+con s0.3,constant,guarded_mvt,,9,True,68,18
+con s0.3,constant,guarded_mvt,,10,True,80,20
+con s0.3,constant,guarded_mvt,,11,True,78,21
+con s0.3,constant,guarded_mvt,,12,True,73,18
+con s0.3,constant,guarded_mvt,,13,True,74,17
+con s0.3,constant,guarded_mvt,,14,True,73,19
+con s0.3,constant,guarded_mvt,,15,True,73,18
+con s0.3,constant,guarded_mvt,,16,True,81,23
+con s0.3,constant,guarded_mvt,,17,True,78,21
+con s0.3,constant,guarded_mvt,,18,True,70,17
+con s0.3,constant,guarded_mvt,,19,True,81,23
+con s0.3,constant,guarded_mvt_dyn,,0,True,75,17
+con s0.3,constant,guarded_mvt_dyn,,1,True,71,16
+con s0.3,constant,guarded_mvt_dyn,,2,True,53,24
+con s0.3,constant,guarded_mvt_dyn,,3,True,99,16
+con s0.3,constant,guarded_mvt_dyn,,4,True,84,19
+con s0.3,constant,guarded_mvt_dyn,,5,True,86,24
+con s0.3,constant,guarded_mvt_dyn,,6,True,91,16
+con s0.3,constant,guarded_mvt_dyn,,7,True,109,21
+con s0.3,constant,guarded_mvt_dyn,,8,True,80,15
+con s0.3,constant,guarded_mvt_dyn,,9,True,61,24
+con s0.3,constant,guarded_mvt_dyn,,10,True,74,30
+con s0.3,constant,guarded_mvt_dyn,,11,True,76,21
+con s0.3,constant,guarded_mvt_dyn,,12,True,92,17
+con s0.3,constant,guarded_mvt_dyn,,13,True,102,16
+con s0.3,constant,guarded_mvt_dyn,,14,True,116,16
+con s0.3,constant,guarded_mvt_dyn,,15,True,89,17
+con s0.3,constant,guarded_mvt_dyn,,16,True,74,24
+con s0.3,constant,guarded_mvt_dyn,,17,True,85,23
+con s0.3,constant,guarded_mvt_dyn,,18,True,64,26
+con s0.3,constant,guarded_mvt_dyn,,19,True,94,16
+con s0.3,constant,guarded_mvt_learned,,0,False,12000,7386
+con s0.3,constant,guarded_mvt_learned,,1,True,49,29
+con s0.3,constant,guarded_mvt_learned,,2,True,41,26
+con s0.3,constant,guarded_mvt_learned,,3,True,64,31
+con s0.3,constant,guarded_mvt_learned,,4,True,55,33
+con s0.3,constant,guarded_mvt_learned,,5,True,52,33
+con s0.3,constant,guarded_mvt_learned,,6,True,63,30
+con s0.3,constant,guarded_mvt_learned,,7,False,12000,7376
+con s0.3,constant,guarded_mvt_learned,,8,True,52,27
+con s0.3,constant,guarded_mvt_learned,,9,True,42,26
+con s0.3,constant,guarded_mvt_learned,,10,True,58,38
+con s0.3,constant,guarded_mvt_learned,,11,False,12000,7382
+con s0.3,constant,guarded_mvt_learned,,12,True,58,31
+con s0.3,constant,guarded_mvt_learned,,13,True,64,31
+con s0.3,constant,guarded_mvt_learned,,14,True,48,29
+con s0.3,constant,guarded_mvt_learned,,15,True,62,34
+con s0.3,constant,guarded_mvt_learned,,16,True,53,34
+con s0.3,constant,guarded_mvt_learned,,17,True,55,35
+con s0.3,constant,guarded_mvt_learned,,18,True,53,33
+con s0.3,constant,guarded_mvt_learned,,19,True,60,29
+con s0.6,constant,fixed (tuned per scenario),t=8,0,True,55,32
+con s0.6,constant,fixed (tuned per scenario),t=8,1,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,2,True,42,24
+con s0.6,constant,fixed (tuned per scenario),t=8,3,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,4,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,5,True,55,32
+con s0.6,constant,fixed (tuned per scenario),t=8,6,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,7,True,92,56
+con s0.6,constant,fixed (tuned per scenario),t=8,8,True,42,24
+con s0.6,constant,fixed (tuned per scenario),t=8,9,True,44,24
+con s0.6,constant,fixed (tuned per scenario),t=8,10,True,55,32
+con s0.6,constant,fixed (tuned per scenario),t=8,11,True,56,32
+con s0.6,constant,fixed (tuned per scenario),t=8,12,True,57,32
+con s0.6,constant,fixed (tuned per scenario),t=8,13,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,14,True,46,24
+con s0.6,constant,fixed (tuned per scenario),t=8,15,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,16,True,54,32
+con s0.6,constant,fixed (tuned per scenario),t=8,17,True,53,32
+con s0.6,constant,fixed (tuned per scenario),t=8,18,True,47,24
+con s0.6,constant,fixed (tuned per scenario),t=8,19,True,54,32
+con s0.6,constant,fixed t=8 (tuned constant),,0,True,55,32
+con s0.6,constant,fixed t=8 (tuned constant),,1,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,2,True,42,24
+con s0.6,constant,fixed t=8 (tuned constant),,3,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,4,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,5,True,55,32
+con s0.6,constant,fixed t=8 (tuned constant),,6,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,7,True,92,56
+con s0.6,constant,fixed t=8 (tuned constant),,8,True,42,24
+con s0.6,constant,fixed t=8 (tuned constant),,9,True,44,24
+con s0.6,constant,fixed t=8 (tuned constant),,10,True,55,32
+con s0.6,constant,fixed t=8 (tuned constant),,11,True,56,32
+con s0.6,constant,fixed t=8 (tuned constant),,12,True,57,32
+con s0.6,constant,fixed t=8 (tuned constant),,13,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,14,True,46,24
+con s0.6,constant,fixed t=8 (tuned constant),,15,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,16,True,54,32
+con s0.6,constant,fixed t=8 (tuned constant),,17,True,53,32
+con s0.6,constant,fixed t=8 (tuned constant),,18,True,47,24
+con s0.6,constant,fixed t=8 (tuned constant),,19,True,54,32
+con s0.6,constant,fixed t=60 (tuned diminishing),,0,True,138,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,1,True,135,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,2,True,133,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,3,True,134,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,4,True,136,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,5,True,138,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,6,True,134,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,7,True,136,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,8,True,134,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,9,True,134,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,10,True,134,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,11,True,136,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,12,True,139,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,13,True,138,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,14,True,136,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,15,True,135,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,16,True,143,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,17,True,136,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,18,True,136,16
+con s0.6,constant,fixed t=60 (tuned diminishing),,19,True,136,16
+con s0.6,constant,fixed t=12 (minimax),,0,True,69,32
+con s0.6,constant,fixed t=12 (minimax),,1,True,56,24
+con s0.6,constant,fixed t=12 (minimax),,2,True,52,24
+con s0.6,constant,fixed t=12 (minimax),,3,True,54,24
+con s0.6,constant,fixed t=12 (minimax),,4,True,56,24
+con s0.6,constant,fixed t=12 (minimax),,5,True,59,24
+con s0.6,constant,fixed t=12 (minimax),,6,True,55,24
+con s0.6,constant,fixed t=12 (minimax),,7,True,71,32
+con s0.6,constant,fixed t=12 (minimax),,8,True,44,16
+con s0.6,constant,fixed t=12 (minimax),,9,True,53,24
+con s0.6,constant,fixed t=12 (minimax),,10,True,58,24
+con s0.6,constant,fixed t=12 (minimax),,11,True,60,24
+con s0.6,constant,fixed t=12 (minimax),,12,True,56,24
+con s0.6,constant,fixed t=12 (minimax),,13,True,57,24
+con s0.6,constant,fixed t=12 (minimax),,14,True,53,24
+con s0.6,constant,fixed t=12 (minimax),,15,True,54,24
+con s0.6,constant,fixed t=12 (minimax),,16,True,60,24
+con s0.6,constant,fixed t=12 (minimax),,17,True,69,32
+con s0.6,constant,fixed t=12 (minimax),,18,True,53,24
+con s0.6,constant,fixed t=12 (minimax),,19,True,69,32
+con s0.6,constant,max_retry k=8 (minimax),,0,True,68,34
+con s0.6,constant,max_retry k=8 (minimax),,1,True,63,31
+con s0.6,constant,max_retry k=8 (minimax),,2,True,52,24
+con s0.6,constant,max_retry k=8 (minimax),,3,True,64,32
+con s0.6,constant,max_retry k=8 (minimax),,4,True,65,30
+con s0.6,constant,max_retry k=8 (minimax),,5,True,61,30
+con s0.6,constant,max_retry k=8 (minimax),,6,True,57,26
+con s0.6,constant,max_retry k=8 (minimax),,7,True,72,35
+con s0.6,constant,max_retry k=8 (minimax),,8,True,52,23
+con s0.6,constant,max_retry k=8 (minimax),,9,True,60,29
+con s0.6,constant,max_retry k=8 (minimax),,10,True,70,33
+con s0.6,constant,max_retry k=8 (minimax),,11,True,69,34
+con s0.6,constant,max_retry k=8 (minimax),,12,True,63,28
+con s0.6,constant,max_retry k=8 (minimax),,13,True,61,29
+con s0.6,constant,max_retry k=8 (minimax),,14,True,58,27
+con s0.6,constant,max_retry k=8 (minimax),,15,True,62,31
+con s0.6,constant,max_retry k=8 (minimax),,16,True,61,30
+con s0.6,constant,max_retry k=8 (minimax),,17,True,63,30
+con s0.6,constant,max_retry k=8 (minimax),,18,True,58,26
+con s0.6,constant,max_retry k=8 (minimax),,19,True,67,33
+con s0.6,constant,median g=2 (minimax),,0,False,12000,10582
+con s0.6,constant,median g=2 (minimax),,1,False,12000,10566
+con s0.6,constant,median g=2 (minimax),,2,True,123,30
+con s0.6,constant,median g=2 (minimax),,3,False,12000,10563
+con s0.6,constant,median g=2 (minimax),,4,False,12000,11776
+con s0.6,constant,median g=2 (minimax),,5,False,12000,10569
+con s0.6,constant,median g=2 (minimax),,6,False,12000,10581
+con s0.6,constant,median g=2 (minimax),,7,False,12000,10601
+con s0.6,constant,median g=2 (minimax),,8,True,138,30
+con s0.6,constant,median g=2 (minimax),,9,False,12000,11548
+con s0.6,constant,median g=2 (minimax),,10,False,12000,10596
+con s0.6,constant,median g=2 (minimax),,11,False,12000,10582
+con s0.6,constant,median g=2 (minimax),,12,False,12000,11901
+con s0.6,constant,median g=2 (minimax),,13,False,12000,10579
+con s0.6,constant,median g=2 (minimax),,14,False,12000,10564
+con s0.6,constant,median g=2 (minimax),,15,False,12000,10600
+con s0.6,constant,median g=2 (minimax),,16,False,12000,10577
+con s0.6,constant,median g=2 (minimax),,17,False,12000,10566
+con s0.6,constant,median g=2 (minimax),,18,False,12000,10585
+con s0.6,constant,median g=2 (minimax),,19,False,12000,10578
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,0,False,12000,10582
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,1,True,130,32
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,2,True,129,31
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,3,False,12000,10564
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,4,False,12000,10562
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,5,False,12000,10569
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,6,False,12000,10583
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,7,False,12000,10602
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,8,True,138,30
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,9,True,116,32
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,10,False,12000,10596
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,11,False,12000,10582
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,12,False,12000,10608
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,13,False,12000,10579
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,14,False,12000,10564
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,15,False,12000,10600
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,16,False,12000,10579
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,17,False,12000,10566
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,18,False,12000,10585
+con s0.6,constant,"asha r0=2,eta=2 (minimax)",,19,False,12000,10578
+con s0.6,constant,mvt_adaptive,,0,False,12000,0
+con s0.6,constant,mvt_adaptive,,1,False,12000,0
+con s0.6,constant,mvt_adaptive,,2,False,12000,0
+con s0.6,constant,mvt_adaptive,,3,False,12000,0
+con s0.6,constant,mvt_adaptive,,4,False,12000,0
+con s0.6,constant,mvt_adaptive,,5,False,12000,0
+con s0.6,constant,mvt_adaptive,,6,False,12000,0
+con s0.6,constant,mvt_adaptive,,7,False,12000,0
+con s0.6,constant,mvt_adaptive,,8,False,12000,0
+con s0.6,constant,mvt_adaptive,,9,False,12000,0
+con s0.6,constant,mvt_adaptive,,10,False,12000,0
+con s0.6,constant,mvt_adaptive,,11,False,12000,0
+con s0.6,constant,mvt_adaptive,,12,False,12000,0
+con s0.6,constant,mvt_adaptive,,13,False,12000,0
+con s0.6,constant,mvt_adaptive,,14,False,12000,0
+con s0.6,constant,mvt_adaptive,,15,False,12000,0
+con s0.6,constant,mvt_adaptive,,16,False,12000,0
+con s0.6,constant,mvt_adaptive,,17,False,12000,0
+con s0.6,constant,mvt_adaptive,,18,False,12000,0
+con s0.6,constant,mvt_adaptive,,19,False,12000,0
+con s0.6,constant,mvt_slope,,0,False,12000,8703
+con s0.6,constant,mvt_slope,,1,True,60,33
+con s0.6,constant,mvt_slope,,2,True,54,25
+con s0.6,constant,mvt_slope,,3,True,85,35
+con s0.6,constant,mvt_slope,,4,True,66,31
+con s0.6,constant,mvt_slope,,5,True,79,34
+con s0.6,constant,mvt_slope,,6,False,12000,8696
+con s0.6,constant,mvt_slope,,7,False,12000,8691
+con s0.6,constant,mvt_slope,,8,True,72,25
+con s0.6,constant,mvt_slope,,9,True,66,37
+con s0.6,constant,mvt_slope,,10,False,12000,8706
+con s0.6,constant,mvt_slope,,11,True,87,37
+con s0.6,constant,mvt_slope,,12,True,77,38
+con s0.6,constant,mvt_slope,,13,True,81,33
+con s0.6,constant,mvt_slope,,14,True,66,32
+con s0.6,constant,mvt_slope,,15,True,85,29
+con s0.6,constant,mvt_slope,,16,False,12000,8686
+con s0.6,constant,mvt_slope,,17,False,12000,8708
+con s0.6,constant,mvt_slope,,18,True,62,31
+con s0.6,constant,mvt_slope,,19,True,79,30
+con s0.6,constant,guarded_mvt,,0,True,87,22
+con s0.6,constant,guarded_mvt,,1,True,75,21
+con s0.6,constant,guarded_mvt,,2,True,64,17
+con s0.6,constant,guarded_mvt,,3,True,78,21
+con s0.6,constant,guarded_mvt,,4,True,80,21
+con s0.6,constant,guarded_mvt,,5,True,80,20
+con s0.6,constant,guarded_mvt,,6,True,84,24
+con s0.6,constant,guarded_mvt,,7,True,89,25
+con s0.6,constant,guarded_mvt,,8,True,61,15
+con s0.6,constant,guarded_mvt,,9,True,73,21
+con s0.6,constant,guarded_mvt,,10,True,81,23
+con s0.6,constant,guarded_mvt,,11,True,80,23
+con s0.6,constant,guarded_mvt,,12,True,86,25
+con s0.6,constant,guarded_mvt,,13,True,74,18
+con s0.6,constant,guarded_mvt,,14,True,78,22
+con s0.6,constant,guarded_mvt,,15,True,82,22
+con s0.6,constant,guarded_mvt,,16,True,81,21
+con s0.6,constant,guarded_mvt,,17,True,86,22
+con s0.6,constant,guarded_mvt,,18,True,75,20
+con s0.6,constant,guarded_mvt,,19,True,79,20
+con s0.6,constant,guarded_mvt_dyn,,0,True,74,26
+con s0.6,constant,guarded_mvt_dyn,,1,True,75,19
+con s0.6,constant,guarded_mvt_dyn,,2,True,53,25
+con s0.6,constant,guarded_mvt_dyn,,3,True,84,19
+con s0.6,constant,guarded_mvt_dyn,,4,True,86,18
+con s0.6,constant,guarded_mvt_dyn,,5,True,106,16
+con s0.6,constant,guarded_mvt_dyn,,6,True,92,23
+con s0.6,constant,guarded_mvt_dyn,,7,True,100,23
+con s0.6,constant,guarded_mvt_dyn,,8,True,79,15
+con s0.6,constant,guarded_mvt_dyn,,9,True,62,20
+con s0.6,constant,guarded_mvt_dyn,,10,True,74,22
+con s0.6,constant,guarded_mvt_dyn,,11,True,73,23
+con s0.6,constant,guarded_mvt_dyn,,12,True,98,17
+con s0.6,constant,guarded_mvt_dyn,,13,True,102,16
+con s0.6,constant,guarded_mvt_dyn,,14,True,90,21
+con s0.6,constant,guarded_mvt_dyn,,15,True,91,22
+con s0.6,constant,guarded_mvt_dyn,,16,True,74,26
+con s0.6,constant,guarded_mvt_dyn,,17,True,116,17
+con s0.6,constant,guarded_mvt_dyn,,18,True,76,21
+con s0.6,constant,guarded_mvt_dyn,,19,True,104,20
+con s0.6,constant,guarded_mvt_learned,,0,True,57,34
+con s0.6,constant,guarded_mvt_learned,,1,True,51,31
+con s0.6,constant,guarded_mvt_learned,,2,True,37,25
+con s0.6,constant,guarded_mvt_learned,,3,True,59,31
+con s0.6,constant,guarded_mvt_learned,,4,True,49,31
+con s0.6,constant,guarded_mvt_learned,,5,True,58,31
+con s0.6,constant,guarded_mvt_learned,,6,True,57,26
+con s0.6,constant,guarded_mvt_learned,,7,False,12000,7381
+con s0.6,constant,guarded_mvt_learned,,8,True,50,26
+con s0.6,constant,guarded_mvt_learned,,9,True,48,32
+con s0.6,constant,guarded_mvt_learned,,10,True,53,34
+con s0.6,constant,guarded_mvt_learned,,11,True,69,36
+con s0.6,constant,guarded_mvt_learned,,12,True,59,28
+con s0.6,constant,guarded_mvt_learned,,13,True,58,30
+con s0.6,constant,guarded_mvt_learned,,14,True,52,29
+con s0.6,constant,guarded_mvt_learned,,15,True,60,32
+con s0.6,constant,guarded_mvt_learned,,16,True,59,29
+con s0.6,constant,guarded_mvt_learned,,17,True,57,31
+con s0.6,constant,guarded_mvt_learned,,18,True,47,31
+con s0.6,constant,guarded_mvt_learned,,19,True,58,31
+con s1.2,constant,fixed (tuned per scenario),t=8,0,True,54,32
+con s1.2,constant,fixed (tuned per scenario),t=8,1,True,44,24
+con s1.2,constant,fixed (tuned per scenario),t=8,2,True,42,24
+con s1.2,constant,fixed (tuned per scenario),t=8,3,True,41,24
+con s1.2,constant,fixed (tuned per scenario),t=8,4,True,41,24
+con s1.2,constant,fixed (tuned per scenario),t=8,5,True,45,24
+con s1.2,constant,fixed (tuned per scenario),t=8,6,True,53,32
+con s1.2,constant,fixed (tuned per scenario),t=8,7,True,53,32
+con s1.2,constant,fixed (tuned per scenario),t=8,8,True,42,24
+con s1.2,constant,fixed (tuned per scenario),t=8,9,True,41,24
+con s1.2,constant,fixed (tuned per scenario),t=8,10,True,59,32
+con s1.2,constant,fixed (tuned per scenario),t=8,11,True,46,24
+con s1.2,constant,fixed (tuned per scenario),t=8,12,True,45,24
+con s1.2,constant,fixed (tuned per scenario),t=8,13,True,43,24
+con s1.2,constant,fixed (tuned per scenario),t=8,14,True,42,24
+con s1.2,constant,fixed (tuned per scenario),t=8,15,True,53,32
+con s1.2,constant,fixed (tuned per scenario),t=8,16,True,53,32
+con s1.2,constant,fixed (tuned per scenario),t=8,17,True,53,32
+con s1.2,constant,fixed (tuned per scenario),t=8,18,True,53,32
+con s1.2,constant,fixed (tuned per scenario),t=8,19,True,44,24
+con s1.2,constant,fixed t=8 (tuned constant),,0,True,54,32
+con s1.2,constant,fixed t=8 (tuned constant),,1,True,44,24
+con s1.2,constant,fixed t=8 (tuned constant),,2,True,42,24
+con s1.2,constant,fixed t=8 (tuned constant),,3,True,41,24
+con s1.2,constant,fixed t=8 (tuned constant),,4,True,41,24
+con s1.2,constant,fixed t=8 (tuned constant),,5,True,45,24
+con s1.2,constant,fixed t=8 (tuned constant),,6,True,53,32
+con s1.2,constant,fixed t=8 (tuned constant),,7,True,53,32
+con s1.2,constant,fixed t=8 (tuned constant),,8,True,42,24
+con s1.2,constant,fixed t=8 (tuned constant),,9,True,41,24
+con s1.2,constant,fixed t=8 (tuned constant),,10,True,59,32
+con s1.2,constant,fixed t=8 (tuned constant),,11,True,46,24
+con s1.2,constant,fixed t=8 (tuned constant),,12,True,45,24
+con s1.2,constant,fixed t=8 (tuned constant),,13,True,43,24
+con s1.2,constant,fixed t=8 (tuned constant),,14,True,42,24
+con s1.2,constant,fixed t=8 (tuned constant),,15,True,53,32
+con s1.2,constant,fixed t=8 (tuned constant),,16,True,53,32
+con s1.2,constant,fixed t=8 (tuned constant),,17,True,53,32
+con s1.2,constant,fixed t=8 (tuned constant),,18,True,53,32
+con s1.2,constant,fixed t=8 (tuned constant),,19,True,44,24
+con s1.2,constant,fixed t=60 (tuned diminishing),,0,True,134,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,1,True,137,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,2,True,135,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,3,True,133,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,4,True,133,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,5,True,137,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,6,True,133,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,7,True,136,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,8,True,132,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,9,True,134,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,10,True,137,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,11,True,138,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,12,True,134,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,13,True,136,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,14,True,137,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,15,True,138,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,16,True,134,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,17,True,135,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,18,True,134,16
+con s1.2,constant,fixed t=60 (tuned diminishing),,19,True,134,16
+con s1.2,constant,fixed t=12 (minimax),,0,True,59,24
+con s1.2,constant,fixed t=12 (minimax),,1,True,52,24
+con s1.2,constant,fixed t=12 (minimax),,2,True,52,24
+con s1.2,constant,fixed t=12 (minimax),,3,True,52,24
+con s1.2,constant,fixed t=12 (minimax),,4,True,52,24
+con s1.2,constant,fixed t=12 (minimax),,5,True,54,24
+con s1.2,constant,fixed t=12 (minimax),,6,True,53,24
+con s1.2,constant,fixed t=12 (minimax),,7,True,57,24
+con s1.2,constant,fixed t=12 (minimax),,8,True,52,24
+con s1.2,constant,fixed t=12 (minimax),,9,True,55,24
+con s1.2,constant,fixed t=12 (minimax),,10,True,69,32
+con s1.2,constant,fixed t=12 (minimax),,11,True,54,24
+con s1.2,constant,fixed t=12 (minimax),,12,True,55,24
+con s1.2,constant,fixed t=12 (minimax),,13,True,54,24
+con s1.2,constant,fixed t=12 (minimax),,14,True,52,24
+con s1.2,constant,fixed t=12 (minimax),,15,True,53,24
+con s1.2,constant,fixed t=12 (minimax),,16,True,55,24
+con s1.2,constant,fixed t=12 (minimax),,17,True,54,24
+con s1.2,constant,fixed t=12 (minimax),,18,True,54,24
+con s1.2,constant,fixed t=12 (minimax),,19,True,52,24
+con s1.2,constant,max_retry k=8 (minimax),,0,True,56,27
+con s1.2,constant,max_retry k=8 (minimax),,1,True,55,27
+con s1.2,constant,max_retry k=8 (minimax),,2,True,50,24
+con s1.2,constant,max_retry k=8 (minimax),,3,True,49,24
+con s1.2,constant,max_retry k=8 (minimax),,4,True,54,25
+con s1.2,constant,max_retry k=8 (minimax),,5,True,54,25
+con s1.2,constant,max_retry k=8 (minimax),,6,True,57,27
+con s1.2,constant,max_retry k=8 (minimax),,7,True,64,31
+con s1.2,constant,max_retry k=8 (minimax),,8,True,51,25
+con s1.2,constant,max_retry k=8 (minimax),,9,True,49,24
+con s1.2,constant,max_retry k=8 (minimax),,10,True,66,32
+con s1.2,constant,max_retry k=8 (minimax),,11,True,58,29
+con s1.2,constant,max_retry k=8 (minimax),,12,True,56,26
+con s1.2,constant,max_retry k=8 (minimax),,13,True,54,26
+con s1.2,constant,max_retry k=8 (minimax),,14,True,49,23
+con s1.2,constant,max_retry k=8 (minimax),,15,True,56,25
+con s1.2,constant,max_retry k=8 (minimax),,16,True,59,27
+con s1.2,constant,max_retry k=8 (minimax),,17,True,53,26
+con s1.2,constant,max_retry k=8 (minimax),,18,True,58,27
+con s1.2,constant,max_retry k=8 (minimax),,19,True,55,26
+con s1.2,constant,median g=2 (minimax),,0,True,144,34
+con s1.2,constant,median g=2 (minimax),,1,True,129,30
+con s1.2,constant,median g=2 (minimax),,2,True,137,31
+con s1.2,constant,median g=2 (minimax),,3,True,130,22
+con s1.2,constant,median g=2 (minimax),,4,True,128,30
+con s1.2,constant,median g=2 (minimax),,5,True,139,30
+con s1.2,constant,median g=2 (minimax),,6,True,138,29
+con s1.2,constant,median g=2 (minimax),,7,False,12000,10577
+con s1.2,constant,median g=2 (minimax),,8,True,136,28
+con s1.2,constant,median g=2 (minimax),,9,True,129,26
+con s1.2,constant,median g=2 (minimax),,10,False,12000,10580
+con s1.2,constant,median g=2 (minimax),,11,True,137,31
+con s1.2,constant,median g=2 (minimax),,12,False,12000,10561
+con s1.2,constant,median g=2 (minimax),,13,True,129,32
+con s1.2,constant,median g=2 (minimax),,14,True,130,29
+con s1.2,constant,median g=2 (minimax),,15,False,12000,10554
+con s1.2,constant,median g=2 (minimax),,16,True,145,31
+con s1.2,constant,median g=2 (minimax),,17,True,129,27
+con s1.2,constant,median g=2 (minimax),,18,True,144,31
+con s1.2,constant,median g=2 (minimax),,19,True,131,32
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,0,True,144,34
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,1,True,129,30
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,2,True,145,32
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,3,True,99,24
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,4,True,128,29
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,5,True,139,30
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,6,True,138,29
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,7,False,12000,10577
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,8,True,136,28
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,9,True,129,26
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,10,False,12000,10581
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,11,True,137,31
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,12,False,12000,10561
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,13,True,129,32
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,14,True,130,29
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,15,False,12000,10554
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,16,True,145,31
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,17,True,129,27
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,18,True,144,31
+con s1.2,constant,"asha r0=2,eta=2 (minimax)",,19,True,131,32
+con s1.2,constant,mvt_adaptive,,0,False,12000,0
+con s1.2,constant,mvt_adaptive,,1,False,12000,0
+con s1.2,constant,mvt_adaptive,,2,False,12000,0
+con s1.2,constant,mvt_adaptive,,3,False,12000,0
+con s1.2,constant,mvt_adaptive,,4,False,12000,0
+con s1.2,constant,mvt_adaptive,,5,False,12000,0
+con s1.2,constant,mvt_adaptive,,6,False,12000,0
+con s1.2,constant,mvt_adaptive,,7,False,12000,0
+con s1.2,constant,mvt_adaptive,,8,False,12000,0
+con s1.2,constant,mvt_adaptive,,9,False,12000,0
+con s1.2,constant,mvt_adaptive,,10,False,12000,0
+con s1.2,constant,mvt_adaptive,,11,False,12000,0
+con s1.2,constant,mvt_adaptive,,12,False,12000,0
+con s1.2,constant,mvt_adaptive,,13,False,12000,0
+con s1.2,constant,mvt_adaptive,,14,False,12000,0
+con s1.2,constant,mvt_adaptive,,15,False,12000,0
+con s1.2,constant,mvt_adaptive,,16,False,12000,0
+con s1.2,constant,mvt_adaptive,,17,False,12000,0
+con s1.2,constant,mvt_adaptive,,18,False,12000,0
+con s1.2,constant,mvt_adaptive,,19,False,12000,0
+con s1.2,constant,mvt_slope,,0,True,59,30
+con s1.2,constant,mvt_slope,,1,True,67,31
+con s1.2,constant,mvt_slope,,2,True,50,25
+con s1.2,constant,mvt_slope,,3,True,57,21
+con s1.2,constant,mvt_slope,,4,True,47,22
+con s1.2,constant,mvt_slope,,5,True,80,30
+con s1.2,constant,mvt_slope,,6,True,82,28
+con s1.2,constant,mvt_slope,,7,True,68,34
+con s1.2,constant,mvt_slope,,8,True,72,25
+con s1.2,constant,mvt_slope,,9,True,62,26
+con s1.2,constant,mvt_slope,,10,True,67,32
+con s1.2,constant,mvt_slope,,11,True,64,28
+con s1.2,constant,mvt_slope,,12,True,66,30
+con s1.2,constant,mvt_slope,,13,True,78,29
+con s1.2,constant,mvt_slope,,14,True,55,26
+con s1.2,constant,mvt_slope,,15,True,90,29
+con s1.2,constant,mvt_slope,,16,True,91,31
+con s1.2,constant,mvt_slope,,17,True,63,27
+con s1.2,constant,mvt_slope,,18,True,67,29
+con s1.2,constant,mvt_slope,,19,True,85,27
+con s1.2,constant,guarded_mvt,,0,True,77,22
+con s1.2,constant,guarded_mvt,,1,True,77,22
+con s1.2,constant,guarded_mvt,,2,True,61,16
+con s1.2,constant,guarded_mvt,,3,True,62,16
+con s1.2,constant,guarded_mvt,,4,True,74,20
+con s1.2,constant,guarded_mvt,,5,True,80,22
+con s1.2,constant,guarded_mvt,,6,True,74,22
+con s1.2,constant,guarded_mvt,,7,True,81,22
+con s1.2,constant,guarded_mvt,,8,True,64,16
+con s1.2,constant,guarded_mvt,,9,True,70,21
+con s1.2,constant,guarded_mvt,,10,True,79,20
+con s1.2,constant,guarded_mvt,,11,True,77,22
+con s1.2,constant,guarded_mvt,,12,True,75,20
+con s1.2,constant,guarded_mvt,,13,True,78,19
+con s1.2,constant,guarded_mvt,,14,True,71,20
+con s1.2,constant,guarded_mvt,,15,True,78,20
+con s1.2,constant,guarded_mvt,,16,True,76,22
+con s1.2,constant,guarded_mvt,,17,True,76,20
+con s1.2,constant,guarded_mvt,,18,True,76,22
+con s1.2,constant,guarded_mvt,,19,True,78,22
+con s1.2,constant,guarded_mvt_dyn,,0,True,72,25
+con s1.2,constant,guarded_mvt_dyn,,1,True,74,24
+con s1.2,constant,guarded_mvt_dyn,,2,True,61,16
+con s1.2,constant,guarded_mvt_dyn,,3,True,68,16
+con s1.2,constant,guarded_mvt_dyn,,4,True,79,19
+con s1.2,constant,guarded_mvt_dyn,,5,True,97,18
+con s1.2,constant,guarded_mvt_dyn,,6,True,81,21
+con s1.2,constant,guarded_mvt_dyn,,7,True,86,24
+con s1.2,constant,guarded_mvt_dyn,,8,True,94,16
+con s1.2,constant,guarded_mvt_dyn,,9,True,65,24
+con s1.2,constant,guarded_mvt_dyn,,10,True,93,21
+con s1.2,constant,guarded_mvt_dyn,,11,True,70,23
+con s1.2,constant,guarded_mvt_dyn,,12,True,89,20
+con s1.2,constant,guarded_mvt_dyn,,13,True,89,18
+con s1.2,constant,guarded_mvt_dyn,,14,True,73,20
+con s1.2,constant,guarded_mvt_dyn,,15,True,98,20
+con s1.2,constant,guarded_mvt_dyn,,16,True,65,28
+con s1.2,constant,guarded_mvt_dyn,,17,True,99,20
+con s1.2,constant,guarded_mvt_dyn,,18,True,61,24
+con s1.2,constant,guarded_mvt_dyn,,19,True,90,16
+con s1.2,constant,guarded_mvt_learned,,0,True,47,31
+con s1.2,constant,guarded_mvt_learned,,1,True,53,30
+con s1.2,constant,guarded_mvt_learned,,2,True,38,25
+con s1.2,constant,guarded_mvt_learned,,3,True,38,25
+con s1.2,constant,guarded_mvt_learned,,4,True,42,27
+con s1.2,constant,guarded_mvt_learned,,5,True,56,30
+con s1.2,constant,guarded_mvt_learned,,6,True,55,27
+con s1.2,constant,guarded_mvt_learned,,7,True,55,33
+con s1.2,constant,guarded_mvt_learned,,8,True,49,27
+con s1.2,constant,guarded_mvt_learned,,9,True,46,26
+con s1.2,constant,guarded_mvt_learned,,10,True,65,33
+con s1.2,constant,guarded_mvt_learned,,11,True,55,30
+con s1.2,constant,guarded_mvt_learned,,12,True,53,31
+con s1.2,constant,guarded_mvt_learned,,13,True,47,27
+con s1.2,constant,guarded_mvt_learned,,14,True,45,27
+con s1.2,constant,guarded_mvt_learned,,15,True,56,27
+con s1.2,constant,guarded_mvt_learned,,16,True,59,29
+con s1.2,constant,guarded_mvt_learned,,17,True,55,30
+con s1.2,constant,guarded_mvt_learned,,18,True,48,29
+con s1.2,constant,guarded_mvt_learned,,19,True,50,26
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,0,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,1,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,2,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,3,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,4,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,5,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,6,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,7,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,8,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,9,True,30,16
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,10,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,11,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,12,True,41,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,13,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,14,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,15,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,16,True,41,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,17,True,40,24
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,18,True,29,16
+con s1.2 cost/2,constant,fixed (tuned per scenario),t=8,19,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,0,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,1,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,2,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,3,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,4,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,5,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,6,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,7,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,8,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,9,True,30,16
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,10,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,11,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,12,True,41,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,13,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,14,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,15,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,16,True,41,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,17,True,40,24
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,18,True,29,16
+con s1.2 cost/2,constant,fixed t=8 (tuned constant),,19,True,40,24
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,0,True,135,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,1,True,135,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,2,True,133,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,3,True,131,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,4,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,5,True,137,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,6,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,7,True,134,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,8,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,9,True,135,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,10,True,138,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,11,True,133,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,12,True,133,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,13,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,14,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,15,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,16,True,133,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,17,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,18,True,132,16
+con s1.2 cost/2,constant,fixed t=60 (tuned diminishing),,19,True,134,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,0,True,52,24
+con s1.2 cost/2,constant,fixed t=12 (minimax),,1,True,39,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,2,True,38,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,3,True,36,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,4,True,37,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,5,True,52,24
+con s1.2 cost/2,constant,fixed t=12 (minimax),,6,True,52,24
+con s1.2 cost/2,constant,fixed t=12 (minimax),,7,True,52,24
+con s1.2 cost/2,constant,fixed t=12 (minimax),,8,True,37,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,9,True,40,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,10,True,52,24
+con s1.2 cost/2,constant,fixed t=12 (minimax),,11,True,39,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,12,True,41,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,13,True,41,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,14,True,36,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,15,True,43,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,16,True,52,24
+con s1.2 cost/2,constant,fixed t=12 (minimax),,17,True,37,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,18,True,38,16
+con s1.2 cost/2,constant,fixed t=12 (minimax),,19,True,38,16
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,0,True,50,22
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,1,True,40,16
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,2,True,41,17
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,3,True,39,17
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,4,True,41,17
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,5,True,41,17
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,6,True,48,23
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,7,True,46,22
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,8,True,44,19
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,9,True,40,17
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,10,True,51,25
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,11,True,42,18
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,12,True,47,22
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,13,True,49,22
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,14,True,45,23
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,15,True,49,23
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,16,True,52,23
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,17,True,40,17
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,18,True,39,16
+con s1.2 cost/2,constant,max_retry k=8 (minimax),,19,True,48,22
+con s1.2 cost/2,constant,median g=2 (minimax),,0,True,133,26
+con s1.2 cost/2,constant,median g=2 (minimax),,1,True,144,26
+con s1.2 cost/2,constant,median g=2 (minimax),,2,True,121,20
+con s1.2 cost/2,constant,median g=2 (minimax),,3,True,129,20
+con s1.2 cost/2,constant,median g=2 (minimax),,4,True,128,23
+con s1.2 cost/2,constant,median g=2 (minimax),,5,True,127,25
+con s1.2 cost/2,constant,median g=2 (minimax),,6,True,128,23
+con s1.2 cost/2,constant,median g=2 (minimax),,7,True,137,28
+con s1.2 cost/2,constant,median g=2 (minimax),,8,True,121,20
+con s1.2 cost/2,constant,median g=2 (minimax),,9,True,135,23
+con s1.2 cost/2,constant,median g=2 (minimax),,10,True,121,28
+con s1.2 cost/2,constant,median g=2 (minimax),,11,True,127,25
+con s1.2 cost/2,constant,median g=2 (minimax),,12,True,145,26
+con s1.2 cost/2,constant,median g=2 (minimax),,13,True,138,23
+con s1.2 cost/2,constant,median g=2 (minimax),,14,True,132,25
+con s1.2 cost/2,constant,median g=2 (minimax),,15,True,137,28
+con s1.2 cost/2,constant,median g=2 (minimax),,16,True,129,27
+con s1.2 cost/2,constant,median g=2 (minimax),,17,True,131,24
+con s1.2 cost/2,constant,median g=2 (minimax),,18,True,137,22
+con s1.2 cost/2,constant,median g=2 (minimax),,19,True,128,23
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,0,True,133,26
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,1,True,132,22
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,2,True,128,22
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,3,True,121,19
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,4,True,127,24
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,5,True,127,25
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,6,True,128,23
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,7,True,130,27
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,8,True,127,22
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,9,True,128,23
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,10,True,121,28
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,11,True,128,23
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,12,True,143,28
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,13,True,138,23
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,14,True,137,23
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,15,True,137,28
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,16,True,129,27
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,17,True,114,22
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,18,True,137,22
+con s1.2 cost/2,constant,"asha r0=2,eta=2 (minimax)",,19,True,128,23
+con s1.2 cost/2,constant,mvt_adaptive,,0,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,1,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,2,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,3,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,4,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,5,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,6,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,7,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,8,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,9,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,10,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,11,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,12,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,13,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,14,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,15,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,16,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,17,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,18,False,12000,0
+con s1.2 cost/2,constant,mvt_adaptive,,19,False,12000,0
+con s1.2 cost/2,constant,mvt_slope,,0,True,50,24
+con s1.2 cost/2,constant,mvt_slope,,1,True,70,24
+con s1.2 cost/2,constant,mvt_slope,,2,True,44,17
+con s1.2 cost/2,constant,mvt_slope,,3,True,54,20
+con s1.2 cost/2,constant,mvt_slope,,4,True,51,22
+con s1.2 cost/2,constant,mvt_slope,,5,True,74,20
+con s1.2 cost/2,constant,mvt_slope,,6,True,71,21
+con s1.2 cost/2,constant,mvt_slope,,7,True,54,21
+con s1.2 cost/2,constant,mvt_slope,,8,True,68,20
+con s1.2 cost/2,constant,mvt_slope,,9,True,68,19
+con s1.2 cost/2,constant,mvt_slope,,10,True,40,23
+con s1.2 cost/2,constant,mvt_slope,,11,True,48,25
+con s1.2 cost/2,constant,mvt_slope,,12,True,60,22
+con s1.2 cost/2,constant,mvt_slope,,13,True,73,25
+con s1.2 cost/2,constant,mvt_slope,,14,True,47,18
+con s1.2 cost/2,constant,mvt_slope,,15,True,97,23
+con s1.2 cost/2,constant,mvt_slope,,16,True,89,24
+con s1.2 cost/2,constant,mvt_slope,,17,True,41,21
+con s1.2 cost/2,constant,mvt_slope,,18,True,38,18
+con s1.2 cost/2,constant,mvt_slope,,19,True,72,25
+con s1.2 cost/2,constant,guarded_mvt,,0,True,67,18
+con s1.2 cost/2,constant,guarded_mvt,,1,True,59,16
+con s1.2 cost/2,constant,guarded_mvt,,2,True,57,16
+con s1.2 cost/2,constant,guarded_mvt,,3,True,56,15
+con s1.2 cost/2,constant,guarded_mvt,,4,True,56,16
+con s1.2 cost/2,constant,guarded_mvt,,5,True,63,16
+con s1.2 cost/2,constant,guarded_mvt,,6,True,60,16
+con s1.2 cost/2,constant,guarded_mvt,,7,True,65,17
+con s1.2 cost/2,constant,guarded_mvt,,8,True,60,16
+con s1.2 cost/2,constant,guarded_mvt,,9,True,56,16
+con s1.2 cost/2,constant,guarded_mvt,,10,True,69,18
+con s1.2 cost/2,constant,guarded_mvt,,11,True,59,16
+con s1.2 cost/2,constant,guarded_mvt,,12,True,61,16
+con s1.2 cost/2,constant,guarded_mvt,,13,True,61,16
+con s1.2 cost/2,constant,guarded_mvt,,14,True,58,16
+con s1.2 cost/2,constant,guarded_mvt,,15,True,63,16
+con s1.2 cost/2,constant,guarded_mvt,,16,True,63,16
+con s1.2 cost/2,constant,guarded_mvt,,17,True,56,16
+con s1.2 cost/2,constant,guarded_mvt,,18,True,56,15
+con s1.2 cost/2,constant,guarded_mvt,,19,True,58,14
+con s1.2 cost/2,constant,guarded_mvt_dyn,,0,True,51,18
+con s1.2 cost/2,constant,guarded_mvt_dyn,,1,True,66,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,2,True,43,17
+con s1.2 cost/2,constant,guarded_mvt_dyn,,3,True,66,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,4,True,55,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,5,True,60,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,6,True,53,22
+con s1.2 cost/2,constant,guarded_mvt_dyn,,7,True,64,22
+con s1.2 cost/2,constant,guarded_mvt_dyn,,8,True,71,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,9,True,49,17
+con s1.2 cost/2,constant,guarded_mvt_dyn,,10,True,51,17
+con s1.2 cost/2,constant,guarded_mvt_dyn,,11,True,45,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,12,True,74,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,13,True,73,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,14,True,56,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,15,True,77,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,16,True,65,23
+con s1.2 cost/2,constant,guarded_mvt_dyn,,17,True,49,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,18,True,43,16
+con s1.2 cost/2,constant,guarded_mvt_dyn,,19,True,67,15
+con s1.2 cost/2,constant,guarded_mvt_learned,,0,True,38,23
+con s1.2 cost/2,constant,guarded_mvt_learned,,1,True,38,20
+con s1.2 cost/2,constant,guarded_mvt_learned,,2,True,32,22
+con s1.2 cost/2,constant,guarded_mvt_learned,,3,True,30,18
+con s1.2 cost/2,constant,guarded_mvt_learned,,4,True,31,18
+con s1.2 cost/2,constant,guarded_mvt_learned,,5,True,41,20
+con s1.2 cost/2,constant,guarded_mvt_learned,,6,True,42,18
+con s1.2 cost/2,constant,guarded_mvt_learned,,7,True,42,22
+con s1.2 cost/2,constant,guarded_mvt_learned,,8,True,42,21
+con s1.2 cost/2,constant,guarded_mvt_learned,,9,True,37,18
+con s1.2 cost/2,constant,guarded_mvt_learned,,10,True,33,23
+con s1.2 cost/2,constant,guarded_mvt_learned,,11,True,30,20
+con s1.2 cost/2,constant,guarded_mvt_learned,,12,True,46,24
+con s1.2 cost/2,constant,guarded_mvt_learned,,13,True,46,24
+con s1.2 cost/2,constant,guarded_mvt_learned,,14,True,39,22
+con s1.2 cost/2,constant,guarded_mvt_learned,,15,True,48,24
+con s1.2 cost/2,constant,guarded_mvt_learned,,16,True,47,24
+con s1.2 cost/2,constant,guarded_mvt_learned,,17,True,31,19
+con s1.2 cost/2,constant,guarded_mvt_learned,,18,True,28,18
+con s1.2 cost/2,constant,guarded_mvt_learned,,19,True,43,22
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,0,True,71,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,1,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,2,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,3,True,57,24
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,4,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,5,True,71,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,6,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,7,True,80,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,8,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,9,True,54,24
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,10,True,70,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,11,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,12,True,71,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,13,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,14,True,54,24
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,15,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,16,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,17,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,18,True,69,32
+con s1.2 cost*2,constant,fixed (tuned per scenario),t=12,19,True,69,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,0,False,12000,7384
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,1,True,54,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,2,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,3,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,4,True,54,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,5,False,12000,7384
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,6,True,55,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,7,False,12000,7384
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,8,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,9,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,10,False,12000,7384
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,11,True,55,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,12,True,57,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,13,True,54,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,14,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,15,True,54,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,16,True,92,56
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,17,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,18,True,53,32
+con s1.2 cost*2,constant,fixed t=8 (tuned constant),,19,True,55,32
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,0,True,170,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,1,True,158,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,2,True,158,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,3,True,133,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,4,True,146,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,5,True,199,24
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,6,True,140,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,7,True,173,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,8,True,196,24
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,9,True,134,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,10,True,138,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,11,True,146,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,12,True,147,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,13,True,148,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,14,True,155,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,15,True,142,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,16,True,147,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,17,True,196,24
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,18,True,143,16
+con s1.2 cost*2,constant,fixed t=60 (tuned diminishing),,19,True,153,16
+con s1.2 cost*2,constant,fixed t=12 (minimax),,0,True,71,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,1,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,2,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,3,True,57,24
+con s1.2 cost*2,constant,fixed t=12 (minimax),,4,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,5,True,71,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,6,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,7,True,80,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,8,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,9,True,54,24
+con s1.2 cost*2,constant,fixed t=12 (minimax),,10,True,70,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,11,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,12,True,71,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,13,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,14,True,54,24
+con s1.2 cost*2,constant,fixed t=12 (minimax),,15,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,16,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,17,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,18,True,69,32
+con s1.2 cost*2,constant,fixed t=12 (minimax),,19,True,69,32
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,0,False,12000,7377
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,1,True,67,35
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,2,True,56,27
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,3,True,60,30
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,4,True,63,31
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,5,False,12000,7377
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,6,True,66,34
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,7,False,12000,7379
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,8,True,57,30
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,9,True,64,29
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,10,False,12000,7379
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,11,True,69,34
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,12,False,12000,7378
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,13,True,68,32
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,14,True,55,25
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,15,True,63,32
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,16,True,64,31
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,17,True,65,32
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,18,True,62,31
+con s1.2 cost*2,constant,max_retry k=8 (minimax),,19,True,67,33
+con s1.2 cost*2,constant,median g=2 (minimax),,0,False,12000,10614
+con s1.2 cost*2,constant,median g=2 (minimax),,1,False,12000,10591
+con s1.2 cost*2,constant,median g=2 (minimax),,2,True,137,33
+con s1.2 cost*2,constant,median g=2 (minimax),,3,True,128,32
+con s1.2 cost*2,constant,median g=2 (minimax),,4,False,12000,10564
+con s1.2 cost*2,constant,median g=2 (minimax),,5,False,12000,10584
+con s1.2 cost*2,constant,median g=2 (minimax),,6,False,12000,10578
+con s1.2 cost*2,constant,median g=2 (minimax),,7,False,12000,10615
+con s1.2 cost*2,constant,median g=2 (minimax),,8,True,138,31
+con s1.2 cost*2,constant,median g=2 (minimax),,9,False,12000,10563
+con s1.2 cost*2,constant,median g=2 (minimax),,10,False,12000,10603
+con s1.2 cost*2,constant,median g=2 (minimax),,11,False,12000,10586
+con s1.2 cost*2,constant,median g=2 (minimax),,12,False,12000,10593
+con s1.2 cost*2,constant,median g=2 (minimax),,13,False,12000,10574
+con s1.2 cost*2,constant,median g=2 (minimax),,14,True,137,32
+con s1.2 cost*2,constant,median g=2 (minimax),,15,False,12000,10598
+con s1.2 cost*2,constant,median g=2 (minimax),,16,False,12000,10573
+con s1.2 cost*2,constant,median g=2 (minimax),,17,False,12000,10576
+con s1.2 cost*2,constant,median g=2 (minimax),,18,False,12000,10589
+con s1.2 cost*2,constant,median g=2 (minimax),,19,False,12000,10577
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,0,False,12000,10614
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,1,False,12000,10591
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,2,True,137,33
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,3,True,128,32
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,4,False,12000,10571
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,5,False,12000,10584
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,6,False,12000,10579
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,7,False,12000,10615
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,8,True,138,31
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,9,False,12000,10563
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,10,False,12000,10603
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,11,False,12000,10586
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,12,False,12000,10593
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,13,False,12000,10574
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,14,True,137,32
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,15,False,12000,10598
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,16,False,12000,10575
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,17,False,12000,10576
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,18,False,12000,10589
+con s1.2 cost*2,constant,"asha r0=2,eta=2 (minimax)",,19,False,12000,10579
+con s1.2 cost*2,constant,mvt_adaptive,,0,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,1,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,2,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,3,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,4,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,5,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,6,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,7,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,8,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,9,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,10,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,11,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,12,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,13,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,14,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,15,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,16,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,17,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,18,False,12000,0
+con s1.2 cost*2,constant,mvt_adaptive,,19,False,12000,0
+con s1.2 cost*2,constant,mvt_slope,,0,False,12000,8698
+con s1.2 cost*2,constant,mvt_slope,,1,False,12000,8691
+con s1.2 cost*2,constant,mvt_slope,,2,True,57,31
+con s1.2 cost*2,constant,mvt_slope,,3,True,87,32
+con s1.2 cost*2,constant,mvt_slope,,4,False,12000,8704
+con s1.2 cost*2,constant,mvt_slope,,5,False,12000,8704
+con s1.2 cost*2,constant,mvt_slope,,6,True,67,34
+con s1.2 cost*2,constant,mvt_slope,,7,False,12000,8693
+con s1.2 cost*2,constant,mvt_slope,,8,True,76,28
+con s1.2 cost*2,constant,mvt_slope,,9,True,84,31
+con s1.2 cost*2,constant,mvt_slope,,10,False,12000,8701
+con s1.2 cost*2,constant,mvt_slope,,11,False,12000,8698
+con s1.2 cost*2,constant,mvt_slope,,12,True,83,33
+con s1.2 cost*2,constant,mvt_slope,,13,False,12000,8706
+con s1.2 cost*2,constant,mvt_slope,,14,True,65,30
+con s1.2 cost*2,constant,mvt_slope,,15,False,12000,8696
+con s1.2 cost*2,constant,mvt_slope,,16,False,12000,8708
+con s1.2 cost*2,constant,mvt_slope,,17,False,12000,8683
+con s1.2 cost*2,constant,mvt_slope,,18,False,12000,8708
+con s1.2 cost*2,constant,mvt_slope,,19,False,12000,8700
+con s1.2 cost*2,constant,guarded_mvt,,0,True,94,27
+con s1.2 cost*2,constant,guarded_mvt,,1,True,90,23
+con s1.2 cost*2,constant,guarded_mvt,,2,True,92,25
+con s1.2 cost*2,constant,guarded_mvt,,3,True,75,21
+con s1.2 cost*2,constant,guarded_mvt,,4,True,91,29
+con s1.2 cost*2,constant,guarded_mvt,,5,True,98,29
+con s1.2 cost*2,constant,guarded_mvt,,6,True,88,24
+con s1.2 cost*2,constant,guarded_mvt,,7,True,102,31
+con s1.2 cost*2,constant,guarded_mvt,,8,True,86,25
+con s1.2 cost*2,constant,guarded_mvt,,9,True,78,22
+con s1.2 cost*2,constant,guarded_mvt,,10,True,99,29
+con s1.2 cost*2,constant,guarded_mvt,,11,True,96,27
+con s1.2 cost*2,constant,guarded_mvt,,12,True,96,27
+con s1.2 cost*2,constant,guarded_mvt,,13,True,99,29
+con s1.2 cost*2,constant,guarded_mvt,,14,True,80,21
+con s1.2 cost*2,constant,guarded_mvt,,15,True,90,25
+con s1.2 cost*2,constant,guarded_mvt,,16,True,92,26
+con s1.2 cost*2,constant,guarded_mvt,,17,True,94,26
+con s1.2 cost*2,constant,guarded_mvt,,18,True,86,24
+con s1.2 cost*2,constant,guarded_mvt,,19,True,91,27
+con s1.2 cost*2,constant,guarded_mvt_dyn,,0,True,115,26
+con s1.2 cost*2,constant,guarded_mvt_dyn,,1,True,127,21
+con s1.2 cost*2,constant,guarded_mvt_dyn,,2,True,87,26
+con s1.2 cost*2,constant,guarded_mvt_dyn,,3,True,81,23
+con s1.2 cost*2,constant,guarded_mvt_dyn,,4,True,103,27
+con s1.2 cost*2,constant,guarded_mvt_dyn,,5,True,118,25
+con s1.2 cost*2,constant,guarded_mvt_dyn,,6,True,109,23
+con s1.2 cost*2,constant,guarded_mvt_dyn,,7,True,98,29
+con s1.2 cost*2,constant,guarded_mvt_dyn,,8,True,99,22
+con s1.2 cost*2,constant,guarded_mvt_dyn,,9,True,80,23
+con s1.2 cost*2,constant,guarded_mvt_dyn,,10,True,122,28
+con s1.2 cost*2,constant,guarded_mvt_dyn,,11,True,93,28
+con s1.2 cost*2,constant,guarded_mvt_dyn,,12,True,107,27
+con s1.2 cost*2,constant,guarded_mvt_dyn,,13,True,102,30
+con s1.2 cost*2,constant,guarded_mvt_dyn,,14,True,106,21
+con s1.2 cost*2,constant,guarded_mvt_dyn,,15,True,83,32
+con s1.2 cost*2,constant,guarded_mvt_dyn,,16,True,102,23
+con s1.2 cost*2,constant,guarded_mvt_dyn,,17,True,106,27
+con s1.2 cost*2,constant,guarded_mvt_dyn,,18,True,75,29
+con s1.2 cost*2,constant,guarded_mvt_dyn,,19,True,124,21
+con s1.2 cost*2,constant,guarded_mvt_learned,,0,False,12000,7378
+con s1.2 cost*2,constant,guarded_mvt_learned,,1,True,63,35
+con s1.2 cost*2,constant,guarded_mvt_learned,,2,True,44,26
+con s1.2 cost*2,constant,guarded_mvt_learned,,3,True,55,31
+con s1.2 cost*2,constant,guarded_mvt_learned,,4,True,54,33
+con s1.2 cost*2,constant,guarded_mvt_learned,,5,False,12000,7384
+con s1.2 cost*2,constant,guarded_mvt_learned,,6,True,61,34
+con s1.2 cost*2,constant,guarded_mvt_learned,,7,False,12000,7380
+con s1.2 cost*2,constant,guarded_mvt_learned,,8,True,50,29
+con s1.2 cost*2,constant,guarded_mvt_learned,,9,True,60,33
+con s1.2 cost*2,constant,guarded_mvt_learned,,10,False,12000,7384
+con s1.2 cost*2,constant,guarded_mvt_learned,,11,True,62,36
+con s1.2 cost*2,constant,guarded_mvt_learned,,12,True,64,35
+con s1.2 cost*2,constant,guarded_mvt_learned,,13,True,68,34
+con s1.2 cost*2,constant,guarded_mvt_learned,,14,True,51,28
+con s1.2 cost*2,constant,guarded_mvt_learned,,15,True,61,34
+con s1.2 cost*2,constant,guarded_mvt_learned,,16,True,64,35
+con s1.2 cost*2,constant,guarded_mvt_learned,,17,True,65,33
+con s1.2 cost*2,constant,guarded_mvt_learned,,18,True,61,33
+con s1.2 cost*2,constant,guarded_mvt_learned,,19,True,64,36
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,0,True,122,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,1,True,142,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,2,True,115,24
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,3,True,102,24
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,4,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,5,True,128,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,6,True,126,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,7,True,129,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,8,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,9,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,10,True,124,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,11,True,122,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,12,True,122,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,13,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,14,True,95,24
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,15,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,16,True,124,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,17,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,18,True,121,32
+con s1.2 cost*4,constant,fixed (tuned per scenario),t=25,19,True,124,32
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,0,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,1,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,2,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,3,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,4,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,5,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,6,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,7,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,8,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,9,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,10,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,11,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,12,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,13,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,14,True,58,32
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,15,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,16,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,17,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,18,False,12000,7384
+con s1.2 cost*4,constant,fixed t=8 (tuned constant),,19,False,12000,7384
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,0,True,204,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,1,True,202,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,2,True,198,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,3,True,143,16
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,4,True,202,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,5,True,199,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,6,True,179,16
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,7,True,225,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,8,True,202,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,9,True,170,16
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,10,True,206,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,11,True,199,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,12,True,196,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,13,True,201,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,14,True,186,16
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,15,True,201,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,16,True,209,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,17,True,199,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,18,True,196,24
+con s1.2 cost*4,constant,fixed t=60 (tuned diminishing),,19,True,197,24
+con s1.2 cost*4,constant,fixed t=12 (minimax),,0,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,1,True,86,40
+con s1.2 cost*4,constant,fixed t=12 (minimax),,2,True,86,40
+con s1.2 cost*4,constant,fixed t=12 (minimax),,3,True,69,32
+con s1.2 cost*4,constant,fixed t=12 (minimax),,4,True,103,48
+con s1.2 cost*4,constant,fixed t=12 (minimax),,5,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,6,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,7,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,8,True,71,32
+con s1.2 cost*4,constant,fixed t=12 (minimax),,9,True,71,32
+con s1.2 cost*4,constant,fixed t=12 (minimax),,10,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,11,True,79,32
+con s1.2 cost*4,constant,fixed t=12 (minimax),,12,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,13,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,14,True,69,32
+con s1.2 cost*4,constant,fixed t=12 (minimax),,15,True,79,32
+con s1.2 cost*4,constant,fixed t=12 (minimax),,16,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,17,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,18,False,12000,5648
+con s1.2 cost*4,constant,fixed t=12 (minimax),,19,False,12000,5648
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,0,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,1,False,12000,7379
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,2,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,3,False,12000,7378
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,4,False,12000,7378
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,5,False,12000,7379
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,6,False,12000,7379
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,7,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,8,False,12000,7376
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,9,True,71,36
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,10,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,11,False,12000,7379
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,12,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,13,False,12000,7379
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,14,True,71,36
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,15,False,12000,7377
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,16,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,17,False,12000,7380
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,18,False,12000,7378
+con s1.2 cost*4,constant,max_retry k=8 (minimax),,19,False,12000,7379
+con s1.2 cost*4,constant,median g=2 (minimax),,0,False,12000,10650
+con s1.2 cost*4,constant,median g=2 (minimax),,1,False,12000,10615
+con s1.2 cost*4,constant,median g=2 (minimax),,2,False,12000,10590
+con s1.2 cost*4,constant,median g=2 (minimax),,3,False,12000,10580
+con s1.2 cost*4,constant,median g=2 (minimax),,4,False,12000,10585
+con s1.2 cost*4,constant,median g=2 (minimax),,5,False,12000,10633
+con s1.2 cost*4,constant,median g=2 (minimax),,6,False,12000,10634
+con s1.2 cost*4,constant,median g=2 (minimax),,7,False,12000,10636
+con s1.2 cost*4,constant,median g=2 (minimax),,8,False,12000,11670
+con s1.2 cost*4,constant,median g=2 (minimax),,9,False,12000,10613
+con s1.2 cost*4,constant,median g=2 (minimax),,10,False,12000,10647
+con s1.2 cost*4,constant,median g=2 (minimax),,11,False,12000,10631
+con s1.2 cost*4,constant,median g=2 (minimax),,12,False,12000,10632
+con s1.2 cost*4,constant,median g=2 (minimax),,13,False,12000,10601
+con s1.2 cost*4,constant,median g=2 (minimax),,14,False,12000,10579
+con s1.2 cost*4,constant,median g=2 (minimax),,15,False,12000,10611
+con s1.2 cost*4,constant,median g=2 (minimax),,16,False,12000,10625
+con s1.2 cost*4,constant,median g=2 (minimax),,17,False,12000,10589
+con s1.2 cost*4,constant,median g=2 (minimax),,18,False,12000,10620
+con s1.2 cost*4,constant,median g=2 (minimax),,19,False,12000,10610
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,0,False,12000,10634
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,1,False,12000,10615
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,2,False,12000,10590
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,3,False,12000,10580
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,4,False,12000,10596
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,5,False,12000,10628
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,6,False,12000,10626
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,7,False,12000,10632
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,8,False,12000,10577
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,9,False,12000,10613
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,10,False,12000,10633
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,11,False,12000,10629
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,12,False,12000,10632
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,13,False,12000,10601
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,14,False,12000,10579
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,15,False,12000,10611
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,16,False,12000,10622
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,17,False,12000,10589
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,18,False,12000,10642
+con s1.2 cost*4,constant,"asha r0=2,eta=2 (minimax)",,19,False,12000,10610
+con s1.2 cost*4,constant,mvt_adaptive,,0,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,1,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,2,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,3,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,4,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,5,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,6,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,7,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,8,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,9,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,10,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,11,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,12,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,13,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,14,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,15,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,16,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,17,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,18,False,12000,0
+con s1.2 cost*4,constant,mvt_adaptive,,19,False,12000,0
+con s1.2 cost*4,constant,mvt_slope,,0,False,12000,8704
+con s1.2 cost*4,constant,mvt_slope,,1,False,12000,8711
+con s1.2 cost*4,constant,mvt_slope,,2,False,12000,8712
+con s1.2 cost*4,constant,mvt_slope,,3,False,12000,8684
+con s1.2 cost*4,constant,mvt_slope,,4,False,12000,8709
+con s1.2 cost*4,constant,mvt_slope,,5,False,12000,8698
+con s1.2 cost*4,constant,mvt_slope,,6,False,12000,8694
+con s1.2 cost*4,constant,mvt_slope,,7,False,12000,8693
+con s1.2 cost*4,constant,mvt_slope,,8,False,12000,8698
+con s1.2 cost*4,constant,mvt_slope,,9,False,12000,8715
+con s1.2 cost*4,constant,mvt_slope,,10,False,12000,8720
+con s1.2 cost*4,constant,mvt_slope,,11,False,12000,8695
+con s1.2 cost*4,constant,mvt_slope,,12,False,12000,8708
+con s1.2 cost*4,constant,mvt_slope,,13,False,12000,8702
+con s1.2 cost*4,constant,mvt_slope,,14,True,82,35
+con s1.2 cost*4,constant,mvt_slope,,15,False,12000,8703
+con s1.2 cost*4,constant,mvt_slope,,16,False,12000,8715
+con s1.2 cost*4,constant,mvt_slope,,17,False,12000,8688
+con s1.2 cost*4,constant,mvt_slope,,18,False,12000,8716
+con s1.2 cost*4,constant,mvt_slope,,19,False,12000,8704
+con s1.2 cost*4,constant,guarded_mvt,,0,True,109,33
+con s1.2 cost*4,constant,guarded_mvt,,1,True,106,32
+con s1.2 cost*4,constant,guarded_mvt,,2,True,106,33
+con s1.2 cost*4,constant,guarded_mvt,,3,True,99,29
+con s1.2 cost*4,constant,guarded_mvt,,4,True,101,31
+con s1.2 cost*4,constant,guarded_mvt,,5,False,12000,4562
+con s1.2 cost*4,constant,guarded_mvt,,6,False,12000,4563
+con s1.2 cost*4,constant,guarded_mvt,,7,True,116,36
+con s1.2 cost*4,constant,guarded_mvt,,8,True,106,31
+con s1.2 cost*4,constant,guarded_mvt,,9,True,95,28
+con s1.2 cost*4,constant,guarded_mvt,,10,False,12000,4563
+con s1.2 cost*4,constant,guarded_mvt,,11,True,104,31
+con s1.2 cost*4,constant,guarded_mvt,,12,False,12000,4564
+con s1.2 cost*4,constant,guarded_mvt,,13,False,12000,4562
+con s1.2 cost*4,constant,guarded_mvt,,14,True,97,28
+con s1.2 cost*4,constant,guarded_mvt,,15,True,108,32
+con s1.2 cost*4,constant,guarded_mvt,,16,True,124,38
+con s1.2 cost*4,constant,guarded_mvt,,17,True,105,31
+con s1.2 cost*4,constant,guarded_mvt,,18,True,102,29
+con s1.2 cost*4,constant,guarded_mvt,,19,False,12000,4563
+con s1.2 cost*4,constant,guarded_mvt_dyn,,0,True,150,27
+con s1.2 cost*4,constant,guarded_mvt_dyn,,1,True,137,29
+con s1.2 cost*4,constant,guarded_mvt_dyn,,2,True,101,32
+con s1.2 cost*4,constant,guarded_mvt_dyn,,3,True,95,31
+con s1.2 cost*4,constant,guarded_mvt_dyn,,4,True,108,31
+con s1.2 cost*4,constant,guarded_mvt_dyn,,5,True,151,37
+con s1.2 cost*4,constant,guarded_mvt_dyn,,6,True,164,27
+con s1.2 cost*4,constant,guarded_mvt_dyn,,7,True,148,32
+con s1.2 cost*4,constant,guarded_mvt_dyn,,8,True,109,32
+con s1.2 cost*4,constant,guarded_mvt_dyn,,9,True,208,21
+con s1.2 cost*4,constant,guarded_mvt_dyn,,10,True,161,30
+con s1.2 cost*4,constant,guarded_mvt_dyn,,11,True,100,33
+con s1.2 cost*4,constant,guarded_mvt_dyn,,12,True,126,32
+con s1.2 cost*4,constant,guarded_mvt_dyn,,13,True,124,34
+con s1.2 cost*4,constant,guarded_mvt_dyn,,14,True,115,26
+con s1.2 cost*4,constant,guarded_mvt_dyn,,15,True,111,32
+con s1.2 cost*4,constant,guarded_mvt_dyn,,16,True,158,30
+con s1.2 cost*4,constant,guarded_mvt_dyn,,17,True,130,31
+con s1.2 cost*4,constant,guarded_mvt_dyn,,18,True,148,23
+con s1.2 cost*4,constant,guarded_mvt_dyn,,19,True,153,28
+con s1.2 cost*4,constant,guarded_mvt_learned,,0,False,12000,7380
+con s1.2 cost*4,constant,guarded_mvt_learned,,1,False,12000,7379
+con s1.2 cost*4,constant,guarded_mvt_learned,,2,True,58,37
+con s1.2 cost*4,constant,guarded_mvt_learned,,3,False,12000,7380
+con s1.2 cost*4,constant,guarded_mvt_learned,,4,False,12000,7385
+con s1.2 cost*4,constant,guarded_mvt_learned,,5,False,12000,7385
+con s1.2 cost*4,constant,guarded_mvt_learned,,6,False,12000,7382
+con s1.2 cost*4,constant,guarded_mvt_learned,,7,False,12000,7383
+con s1.2 cost*4,constant,guarded_mvt_learned,,8,False,12000,7379
+con s1.2 cost*4,constant,guarded_mvt_learned,,9,True,66,39
+con s1.2 cost*4,constant,guarded_mvt_learned,,10,False,12000,7382
+con s1.2 cost*4,constant,guarded_mvt_learned,,11,False,12000,7379
+con s1.2 cost*4,constant,guarded_mvt_learned,,12,False,12000,7380
+con s1.2 cost*4,constant,guarded_mvt_learned,,13,False,12000,7379
+con s1.2 cost*4,constant,guarded_mvt_learned,,14,True,61,36
+con s1.2 cost*4,constant,guarded_mvt_learned,,15,False,12000,7381
+con s1.2 cost*4,constant,guarded_mvt_learned,,16,False,12000,7380
+con s1.2 cost*4,constant,guarded_mvt_learned,,17,False,12000,7380
+con s1.2 cost*4,constant,guarded_mvt_learned,,18,False,12000,7378
+con s1.2 cost*4,constant,guarded_mvt_learned,,19,False,12000,7381

@@ -247,13 +247,18 @@ class LiveHttpService(_BaseService):
     the default path.
     """
 
-    def __init__(self, service_id: int, base_url: str, holds_flag: bool = False) -> None:
+    def __init__(self, service_id: int, base_url: str, holds_flag: bool = False, *,
+                 max_value: float = float("inf"), n_art: int = 32,
+                 prior: float = 1.0, foothold_value: float = 10.0) -> None:
         super().__init__(service_id, access_cost=1.0, holds_flag=holds_flag,
                          burst_p=1.0, seed=service_id)
         self.base_url = base_url.rstrip("/")
         self._session = None
         self._token: str | None = None
-        self._set_prior(1.0)
+        self._max_value = float(max_value)    # known collectable value (coverage objective)
+        self.n_art = int(n_art)
+        self.foothold_value = float(foothold_value)
+        self._set_prior(float(prior))
 
     def _http(self):
         if self._session is None:
@@ -298,7 +303,8 @@ class LiveHttpService(_BaseService):
         except Exception:
             ok = False
         self.access_gained = ok
-        return Evidence("foothold_shell", ref, value=10.0 if ok else 0.0, grounded=ok)
+        return Evidence("foothold_shell", ref, value=self.foothold_value if ok else 0.0,
+                        grounded=ok)
 
     def collect(self, rng):
         ref = f"svc{self.service_id}"
@@ -320,11 +326,12 @@ class LiveHttpService(_BaseService):
         return Evidence(milestone, f"{ref}:art{c}", value=float(size), grounded=ok)
 
     def exhausted(self) -> bool:
-        return self.collected >= 32            # bounded collection depth on the live range
+        return self.collected >= self.n_art    # bounded collection depth on the live range
 
     @property
     def max_value(self) -> float:
-        return float("inf")       # unknown a priori on the live range -> use the flag objective
+        # inf unless the range manifest states it; with inf, use the flag objective
+        return self._max_value
 
     def close(self) -> None:
         if self._session is not None:

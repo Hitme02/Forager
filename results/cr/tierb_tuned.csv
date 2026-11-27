@@ -1,0 +1,11 @@
+regime,sigma,family,best
+diminishing,0.0,fixed,t=16
+diminishing,0.3,fixed,t=25
+diminishing,0.6,fixed,t=25
+diminishing,0.9,fixed,t=40
+diminishing,1.2,fixed,t=60
+constant,0.0,fixed,t=8
+constant,0.3,fixed,t=8
+constant,0.6,fixed,t=8
+constant,0.9,fixed,t=8
+constant,1.2,fixed,t=8

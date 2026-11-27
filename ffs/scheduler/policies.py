@@ -298,14 +298,40 @@ class GuardedMVT(MVT):
     decline_frac: float = 0.5        # "declined" := smoothed rate <= decline_frac * peak
     peak_floor_frac: float = 0.05    # peak must exceed this * R to count as productive
     budget_cap: float = 16.0         # committed budget when no diminishing evidence is seen
+    # Stall-budget mode. "static" uses `budget_cap` as a fixed tick count (the submitted
+    # configuration). "dynamic" re-derives the budget online from the pool's own completed
+    # stalls (zero-gain runs that ended in a gain): budget = budget_kappa * mean completed-stall
+    # length, clipped to [budget_min, budget_max], with `budget_cap` as the warm start until
+    # `budget_warmup` completed stalls have been seen. budget_kappa is dimensionless (a multiple
+    # of the observed wait), so the budget rescales with the target's hazard instead of being a
+    # hand-set tick count. Since completed stalls are truncated at the current budget, the
+    # update has a non-zero fixed point only for kappa > 2 (at kappa = 3 it settles at 1.8-2.0x
+    # the mean of a geometric wait for per-tick hazards 0.05-0.2); kappa <= 2 collapses.
+    budget_mode: str = "static"
+    budget_kappa: float = 3.0
+    budget_min: float = 4.0
+    budget_max: float = 256.0
+    budget_warmup: int = 5
     name: str = field(default="guarded_mvt", init=False)
 
     eps: float = 1e-9                # a gain above this counts as "productive this tick"
 
     def reset(self, patches: list[Patch], rng: np.random.Generator) -> None:
         super().reset(patches, rng)
+        if self.budget_mode not in ("static", "dynamic"):
+            raise ValueError(f"unknown budget_mode: {self.budget_mode!r}")
         self._peak: dict[int, float] = {}
         self._stall: dict[int, int] = {}
+        self._stall_sum = 0.0            # total length of completed stalls (pool-wide)
+        self._stall_n = 0                # number of completed stalls (pool-wide)
+
+    @property
+    def current_budget(self) -> float:
+        """The stall budget in force now (static, or the online dynamic estimate)."""
+        if self.budget_mode == "static" or self._stall_n < self.budget_warmup:
+            return float(self.budget_cap)
+        b = self.budget_kappa * self._stall_sum / self._stall_n
+        return float(min(self.budget_max, max(self.budget_min, b)))
 
     def on_assign(self, worker: WorkerView) -> None:
         super().on_assign(worker)
@@ -319,6 +345,10 @@ class GuardedMVT(MVT):
             self._peak[worker.wid] = max(self._peak.get(worker.wid, 0.0), est.rate)
         # Ticks since the branch last produced a gain -> a regime-agnostic "stalled" signal.
         if gain > self.eps:
+            run = self._stall.get(worker.wid, 0)
+            if run > 0:                  # a stall just ended in a gain: one completed wait
+                self._stall_sum += run
+                self._stall_n += 1
             self._stall[worker.wid] = 0
         else:
             self._stall[worker.wid] = self._stall.get(worker.wid, 0) + 1
@@ -341,7 +371,7 @@ class GuardedMVT(MVT):
         # covers both the uncracked memoryless branch (commit a budget, then migrate) and the
         # exhausted branch (migrate promptly), without ever cutting off a rich branch still
         # paying out (its stall counter keeps resetting while it yields).
-        return self._stall.get(worker.wid, 0) >= self.budget_cap
+        return self._stall.get(worker.wid, 0) >= self.current_budget
 
 
 @dataclass
@@ -433,6 +463,143 @@ class RestlessIndex(Policy):
 
 
 # --------------------------------------------------------------------------- #
+# Published early-stopping comparators (hyper-parameter-optimisation literature)
+# --------------------------------------------------------------------------- #
+class _BranchCurves:
+    """Per-branch learning curves (cumulative yield after each unit of branch compute).
+
+    Shared bookkeeping for the early-stopping comparators below: a branch is treated like a
+    training run whose "learning curve" is its cumulative validated yield as a function of
+    compute spent on it (across visits). Prefix sums make running averages O(1)."""
+
+    def __init__(self) -> None:
+        self.cum: dict[int, list[float]] = {}      # pid -> cumulative yield after k units
+        self.prefix: dict[int, list[float]] = {}   # pid -> prefix sums of `cum`
+
+    def add(self, pid: int, gain: float) -> int:
+        c = self.cum.setdefault(pid, [])
+        p = self.prefix.setdefault(pid, [])
+        y = (c[-1] if c else 0.0) + gain
+        c.append(y)
+        p.append((p[-1] if p else 0.0) + y)
+        return len(c)                                # compute spent on pid so far
+
+    def length(self, pid: int) -> int:
+        return len(self.cum.get(pid, ()))
+
+
+@dataclass
+class MedianStopping(Policy):
+    """Median stopping rule (Golovin et al., Google Vizier, KDD 2017), adapted to branches.
+
+    Vizier stops a trial at step s if its best objective so far is strictly worse than the
+    median of the running averages of the other trials' objectives up to step s. Here a
+    branch's objective at compute c is its cumulative yield y(c) (monotone, so "best so far" is
+    the current value); after a grace period of `grace` units a branch is abandoned when y(c)
+    falls below the median, over other branches already worked for at least c units, of their
+    running averages (1/c) sum_{k<=c} y(k). At least `min_peers` such branches are required for a
+    comparison. A branch that is never out-performed is worked until it is effectively depleted
+    (the TopK depletion test), so no branch is worked forever. Selection is the shared default.
+    """
+
+    grace: int = 4
+    min_peers: int = 3
+    deplete_eps: float = 1e-2
+    name: str = field(default="median_stopping", init=False)
+
+    def reset(self, patches: list[Patch], rng: np.random.Generator) -> None:
+        super().reset(patches, rng)
+        self._curves = _BranchCurves()
+        self._stop: dict[int, bool] = {}
+
+    def on_assign(self, worker: WorkerView) -> None:
+        worker.marg_est = make_marginal_estimator("recent_slope", half_life=6.0)
+        self._stop[worker.wid] = False
+
+    def observe(self, worker: WorkerView, gain: float) -> None:
+        if worker.patch is None:
+            return
+        if worker.marg_est is not None:
+            worker.marg_est.update(gain)
+        pid = worker.patch.patch_id
+        c = self._curves.add(pid, gain)
+        if c < self.grace:
+            return
+        peers = []
+        for qid, pre in self._curves.prefix.items():
+            if qid != pid and len(pre) >= c:
+                peers.append(pre[c - 1] / c)
+        if len(peers) >= self.min_peers:
+            y = self._curves.cum[pid][-1]
+            self._stop[worker.wid] = y < float(np.median(peers))
+
+    def should_abandon(self, worker: WorkerView, R: float, memory: "BranchMemory") -> bool:
+        if self._stop.get(worker.wid, False):
+            return True
+        est = worker.marg_est
+        return est is not None and est.n >= 4 and est.rate <= self.deplete_eps
+
+
+@dataclass
+class ASHA(Policy):
+    """Asynchronous successive halving (Li et al., MLSys 2020), adapted to branches.
+
+    ASHA allocates compute to many configurations in rungs: budgets r0, r0*eta, r0*eta^2, ...
+    and, asynchronously as workers free up, promotes a configuration to the next rung only if it
+    ranks in the top 1/eta of the configurations that have reached its current rung. The
+    asynchronous form fits a parallel pool directly. Here a configuration is a branch, its
+    budget is the compute spent on it, and its score at a rung is its cumulative yield there.
+    When a worker's branch reaches rung k it continues only if it is in the top
+    max(1, floor(n_k / eta)) of the n_k scores recorded at rung k so far (itself included);
+    otherwise it is abandoned. Past the last rung a branch is worked until depleted (TopK test).
+    """
+
+    r0: float = 4.0
+    eta: float = 3.0
+    max_budget: float = 400.0
+    deplete_eps: float = 1e-2
+    name: str = field(default="asha", init=False)
+
+    def reset(self, patches: list[Patch], rng: np.random.Generator) -> None:
+        super().reset(patches, rng)
+        self._curves = _BranchCurves()
+        rungs, r = [], float(self.r0)
+        while r <= self.max_budget:
+            rungs.append(int(round(r)))
+            r *= self.eta
+        self._rungs = sorted(set(rungs))
+        self._rung_scores: dict[int, list[float]] = {r: [] for r in self._rungs}
+        self._recorded: set[tuple[int, int]] = set()
+        self._stop: dict[int, bool] = {}
+
+    def on_assign(self, worker: WorkerView) -> None:
+        worker.marg_est = make_marginal_estimator("recent_slope", half_life=6.0)
+        self._stop[worker.wid] = False
+
+    def observe(self, worker: WorkerView, gain: float) -> None:
+        if worker.patch is None:
+            return
+        if worker.marg_est is not None:
+            worker.marg_est.update(gain)
+        pid = worker.patch.patch_id
+        c = self._curves.add(pid, gain)
+        if c in self._rung_scores and (pid, c) not in self._recorded:
+            self._recorded.add((pid, c))
+            score = self._curves.cum[pid][-1]
+            scores = self._rung_scores[c]
+            scores.append(score)
+            k = max(1, int(np.floor(len(scores) / self.eta)))
+            threshold = sorted(scores, reverse=True)[k - 1]
+            self._stop[worker.wid] = score < threshold
+
+    def should_abandon(self, worker: WorkerView, R: float, memory: "BranchMemory") -> bool:
+        if self._stop.get(worker.wid, False):
+            return True
+        est = worker.marg_est
+        return est is not None and est.n >= 4 and est.rate <= self.deplete_eps
+
+
+# --------------------------------------------------------------------------- #
 # Factory
 # --------------------------------------------------------------------------- #
 def make_policy(spec: dict) -> Policy:
@@ -449,6 +616,8 @@ def make_policy(spec: dict) -> Policy:
         "mvt": MVT,
         "guarded_mvt": GuardedMVT,
         "oracle_mvt": OracleMVT,
+        "median_stopping": MedianStopping,
+        "asha": ASHA,
     }
     if kind not in table:
         raise ValueError(f"unknown policy type: {kind!r}")
