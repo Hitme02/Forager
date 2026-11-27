@@ -40,6 +40,7 @@ class Worker:
     last_gain: float = 0.0
     entry_ticks: int = 0             # productive ticks counted toward the entry phase
     entry_yield: float = 0.0         # yield accumulated during the entry phase
+    entry_elapsed: int = 0           # all ticks elapsed in the entry phase ("productive" mode)
     marg_est: MarginalEstimator | None = None   # policy-owned scratch
 
 
@@ -67,6 +68,7 @@ class EngineConfig:
     n_workers: int = 8
     entry_window: int = 5                      # productive ticks defining a branch's fresh phase
     frontier_half_life_entries: float = 15.0   # EWMA memory of R, in branch entries
+    entry_mode: str = "ticks"                  # "ticks" (submitted) | "productive" (ramp-aware)
 
 
 @dataclass
@@ -106,6 +108,7 @@ class Scheduler:
             switch_cost=env.cfg.switch_cost,
             entry_window=cfg.entry_window,
             half_life_entries=cfg.frontier_half_life_entries,
+            entry_mode=cfg.entry_mode,
         )
 
         policy.reset(env.patches, rng)
@@ -129,6 +132,7 @@ class Scheduler:
         worker.time_on_patch = 0
         worker.entry_ticks = 0
         worker.entry_yield = 0.0
+        worker.entry_elapsed = 0
         self.memory.assigned.add(choice.patch_id)
         self.policy.on_assign(worker)
 
@@ -142,11 +146,20 @@ class Scheduler:
         w.last_gain = gain
         w.time_on_patch += 1
         # Accumulate the branch's "fresh phase" intake to feed the opportunity-rate R.
-        if w.entry_ticks < self.frontier.entry_window:
+        k = self.frontier.entry_window
+        if self.cfg.entry_mode == "productive":
+            if w.entry_ticks < k:
+                w.entry_yield += gain
+                w.entry_elapsed += 1
+                if gain > 1e-12:
+                    w.entry_ticks += 1
+                    if w.entry_ticks == k:
+                        self.frontier.record_entry_phase(w.entry_yield, w.entry_elapsed)
+        elif w.entry_ticks < k:
             w.entry_yield += gain
             w.entry_ticks += 1
-            if w.entry_ticks == self.frontier.entry_window:
-                self.frontier.record_entry_phase(w.entry_yield / self.frontier.entry_window)
+            if w.entry_ticks == k:
+                self.frontier.record_entry_phase(w.entry_yield / k)
         self.memory.on_gain(w.patch.patch_id, gain)
         self.policy.observe(w, gain)
         return gain

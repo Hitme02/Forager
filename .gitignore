@@ -5,5 +5,11 @@ __pycache__/
 results/*.csv
 results/*.png
 results/*.json
-results/*.log
 .DS_Store
+*.log
+# LaTeX build artefacts
+*.aux
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz

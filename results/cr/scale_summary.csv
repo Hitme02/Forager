@@ -1,0 +1,109 @@
+scenario,policy,solve_rate,ticks,ratio
+dim s1.2,fixed (tuned per scenario),1.0,95.05,1.0
+dim s1.2,fixed t=8 (tuned constant),1.0,136.85,1.4397685428721725
+dim s1.2,fixed t=60 (tuned diminishing),1.0,95.05,1.0
+dim s1.2,fixed t=12 (minimax),1.0,129.95,1.3671751709626512
+dim s1.2,max_retry k=8 (minimax),1.0,134.3,1.4129405576012626
+dim s1.2,median g=2 (minimax),1.0,102.25,1.075749605470805
+dim s1.2,"asha r0=2,eta=2 (minimax)",1.0,127.75,1.3440294581799053
+dim s1.2,mvt_adaptive,1.0,89.85,0.9452919516044187
+dim s1.2,mvt_slope,1.0,89.85,0.9452919516044187
+dim s1.2,guarded_mvt,1.0,85.8,0.902682798527091
+dim s1.2,guarded_mvt_dyn,1.0,85.8,0.902682798527091
+dim s1.2,guarded_mvt_learned,1.0,87.3,0.9184639663335087
+dim s1.2 tau/2,fixed (tuned per scenario),1.0,51.4,1.0
+dim s1.2 tau/2,fixed t=8 (tuned constant),1.0,79.85,1.5535019455252919
+dim s1.2 tau/2,fixed t=60 (tuned diminishing),1.0,61.65,1.1994163424124513
+dim s1.2 tau/2,fixed t=12 (minimax),1.0,76.25,1.4834630350194553
+dim s1.2 tau/2,max_retry k=8 (minimax),1.0,66.7,1.2976653696498055
+dim s1.2 tau/2,median g=2 (minimax),1.0,53.0,1.0311284046692608
+dim s1.2 tau/2,"asha r0=2,eta=2 (minimax)",1.0,77.2,1.5019455252918288
+dim s1.2 tau/2,mvt_adaptive,1.0,46.4,0.9027237354085603
+dim s1.2 tau/2,mvt_slope,1.0,46.4,0.9027237354085603
+dim s1.2 tau/2,guarded_mvt,1.0,45.55,0.8861867704280155
+dim s1.2 tau/2,guarded_mvt_dyn,1.0,45.55,0.8861867704280155
+dim s1.2 tau/2,guarded_mvt_learned,1.0,45.35,0.8822957198443581
+dim s1.2 tau*2,fixed (tuned per scenario),1.0,187.1,1.0
+dim s1.2 tau*2,fixed t=8 (tuned constant),1.0,254.4,1.3597006948156067
+dim s1.2 tau*2,fixed t=60 (tuned diminishing),1.0,226.25,1.209246392303581
+dim s1.2 tau*2,fixed t=12 (minimax),1.0,230.3,1.2308925708177447
+dim s1.2 tau*2,max_retry k=8 (minimax),1.0,268.35,1.4342597541421702
+dim s1.2 tau*2,median g=2 (minimax),1.0,198.15,1.0590593265633352
+dim s1.2 tau*2,"asha r0=2,eta=2 (minimax)",1.0,221.65,1.1846606092998397
+dim s1.2 tau*2,mvt_adaptive,1.0,178.5,0.954035275253875
+dim s1.2 tau*2,mvt_slope,1.0,178.5,0.954035275253875
+dim s1.2 tau*2,guarded_mvt,1.0,173.4,0.9267771245323357
+dim s1.2 tau*2,guarded_mvt_dyn,1.0,173.4,0.9267771245323357
+dim s1.2 tau*2,guarded_mvt_learned,1.0,174.35,0.9318546231961518
+con s0.3,fixed (tuned per scenario),0.95,55.21052631578947,inf
+con s0.3,fixed t=8 (tuned constant),0.95,55.21052631578947,inf
+con s0.3,fixed t=60 (tuned diminishing),1.0,137.8,2.495900857959962
+con s0.3,fixed t=12 (minimax),1.0,58.1,1.0523355576739752
+con s0.3,max_retry k=8 (minimax),0.9,62.72222222222222,inf
+con s0.3,median g=2 (minimax),0.05,133.0,inf
+con s0.3,"asha r0=2,eta=2 (minimax)",0.0,,inf
+con s0.3,mvt_adaptive,0.0,,inf
+con s0.3,mvt_slope,0.4,78.75,inf
+con s0.3,guarded_mvt,1.0,75.15,1.3611534795042899
+con s0.3,guarded_mvt_dyn,1.0,83.75,1.5169208770257387
+con s0.3,guarded_mvt_learned,0.85,54.64705882352941,inf
+con s0.6,fixed (tuned per scenario),1.0,53.5,1.0
+con s0.6,fixed t=8 (tuned constant),1.0,53.5,1.0
+con s0.6,fixed t=60 (tuned diminishing),1.0,136.05,2.5429906542056075
+con s0.6,fixed t=12 (minimax),1.0,57.9,1.0822429906542055
+con s0.6,max_retry k=8 (minimax),1.0,62.3,1.1644859813084112
+con s0.6,median g=2 (minimax),0.1,130.5,inf
+con s0.6,"asha r0=2,eta=2 (minimax)",0.2,128.25,inf
+con s0.6,mvt_adaptive,0.0,,inf
+con s0.6,mvt_slope,0.7,72.78571428571429,inf
+con s0.6,guarded_mvt,1.0,78.65,1.4700934579439253
+con s0.6,guarded_mvt_dyn,1.0,85.45,1.597196261682243
+con s0.6,guarded_mvt_learned,0.95,54.63157894736842,inf
+con s1.2,fixed (tuned per scenario),1.0,47.35,1.0
+con s1.2,fixed t=8 (tuned constant),1.0,47.35,1.0
+con s1.2,fixed t=60 (tuned diminishing),1.0,135.05,2.852164730728617
+con s1.2,fixed t=12 (minimax),1.0,54.5,1.1510031678986272
+con s1.2,max_retry k=8 (minimax),1.0,55.15,1.1647307286166841
+con s1.2,median g=2 (minimax),0.8,134.6875,inf
+con s1.2,"asha r0=2,eta=2 (minimax)",0.8,133.25,inf
+con s1.2,mvt_adaptive,0.0,,inf
+con s1.2,mvt_slope,1.0,68.5,1.446673706441394
+con s1.2,guarded_mvt,1.0,74.2,1.5670538542766632
+con s1.2,guarded_mvt_dyn,1.0,80.2,1.6937697993664202
+con s1.2,guarded_mvt_learned,1.0,50.6,1.068637803590285
+con s1.2 cost/2,fixed (tuned per scenario),1.0,39.05,1.0
+con s1.2 cost/2,fixed t=8 (tuned constant),1.0,39.05,1.0
+con s1.2 cost/2,fixed t=60 (tuned diminishing),1.0,133.35,3.414852752880922
+con s1.2 cost/2,fixed t=12 (minimax),1.0,42.6,1.090909090909091
+con s1.2 cost/2,max_retry k=8 (minimax),1.0,44.6,1.1421254801536493
+con s1.2 cost/2,median g=2 (minimax),1.0,131.4,3.364916773367478
+con s1.2 cost/2,"asha r0=2,eta=2 (minimax)",1.0,129.65,3.3201024327784894
+con s1.2 cost/2,mvt_adaptive,0.0,,inf
+con s1.2 cost/2,mvt_slope,1.0,60.45,1.5480153649167736
+con s1.2 cost/2,guarded_mvt,1.0,60.15,1.5403329065300897
+con s1.2 cost/2,guarded_mvt_dyn,1.0,58.9,1.5083226632522408
+con s1.2 cost/2,guarded_mvt_learned,1.0,38.2,0.9782330345710629
+con s1.2 cost*2,fixed (tuned per scenario),1.0,67.8,1.0
+con s1.2 cost*2,fixed t=8 (tuned constant),0.8,56.3125,inf
+con s1.2 cost*2,fixed t=60 (tuned diminishing),1.0,156.1,2.3023598820059
+con s1.2 cost*2,fixed t=12 (minimax),1.0,67.8,1.0
+con s1.2 cost*2,max_retry k=8 (minimax),0.75,63.06666666666667,inf
+con s1.2 cost*2,median g=2 (minimax),0.2,135.0,inf
+con s1.2 cost*2,"asha r0=2,eta=2 (minimax)",0.2,135.0,inf
+con s1.2 cost*2,mvt_adaptive,0.0,,inf
+con s1.2 cost*2,mvt_slope,0.35,74.14285714285714,inf
+con s1.2 cost*2,guarded_mvt,1.0,90.85,1.3399705014749261
+con s1.2 cost*2,guarded_mvt_dyn,1.0,101.85,1.502212389380531
+con s1.2 cost*2,guarded_mvt_learned,0.8,59.1875,inf
+con s1.2 cost*4,fixed (tuned per scenario),1.0,121.1,1.0
+con s1.2 cost*4,fixed t=8 (tuned constant),0.05,58.0,inf
+con s1.2 cost*4,fixed t=60 (tuned diminishing),1.0,195.7,1.616019818331957
+con s1.2 cost*4,fixed t=12 (minimax),0.45,79.22222222222223,inf
+con s1.2 cost*4,max_retry k=8 (minimax),0.1,71.0,inf
+con s1.2 cost*4,median g=2 (minimax),0.0,,inf
+con s1.2 cost*4,"asha r0=2,eta=2 (minimax)",0.0,,inf
+con s1.2 cost*4,mvt_adaptive,0.0,,inf
+con s1.2 cost*4,mvt_slope,0.05,82.0,inf
+con s1.2 cost*4,guarded_mvt,0.7,105.57142857142857,inf
+con s1.2 cost*4,guarded_mvt_dyn,1.0,134.85,1.1135425268373245
+con s1.2 cost*4,guarded_mvt_learned,0.15,61.666666666666664,inf

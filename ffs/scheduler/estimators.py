@@ -188,6 +188,10 @@ class AdaptiveMarginalEstimator(MarginalEstimator):
     hit_half_life: float = 20.0     # memory of the hit-rate estimate p_hat
     p_floor: float = 0.02           # floor on p_hat (bounds eff_half_life)
     optimistic_rate: float = 1e6    # reported rate before any informative event
+    # Seed for p_hat. None (as submitted) seeds it from the first tick's hit/miss; a value
+    # (e.g. 1.0) seeds it optimistically, so a branch whose first action yields nothing (an
+    # agent's premature step) is not read as bursty. Identical when the first tick is a hit.
+    hit_init: float | None = None
 
     _rate: float = 0.0
     _phat: float = 0.0
@@ -208,7 +212,11 @@ class AdaptiveMarginalEstimator(MarginalEstimator):
     def update(self, gain: float) -> None:
         self._total += 1
         hit = 1.0 if gain > 1e-12 else 0.0
-        self._phat = hit if self._total == 1 else (1.0 - self._a_hit) * self._phat + self._a_hit * hit
+        if self._total == 1:
+            self._phat = hit if self.hit_init is None else (
+                (1.0 - self._a_hit) * self.hit_init + self._a_hit * hit)
+        else:
+            self._phat = (1.0 - self._a_hit) * self._phat + self._a_hit * hit
         if hit:
             self._nonzero += 1
         eff_hl = min(self.max_half_life, self.base_half_life / max(self._phat, self.p_floor))
@@ -243,7 +251,7 @@ def make_marginal_estimator(name: str, **kw) -> MarginalEstimator:
         return BayesianMarginalEstimator(**{k: v for k, v in kw.items() if k in allowed})
     if name in ("adaptive", "burst_adaptive", "adaptive_slope"):
         allowed = {"base_half_life", "max_half_life", "hit_half_life", "p_floor",
-                   "optimistic_rate"}
+                   "optimistic_rate", "hit_init"}
         return AdaptiveMarginalEstimator(**{k: v for k, v in kw.items() if k in allowed})
     raise ValueError(f"unknown marginal estimator: {name!r}")
 
@@ -283,6 +291,12 @@ class FrontierRateEstimator:
     switch_cost: float = 5.0
     entry_window: int = 5          # productive ticks that define a branch's "fresh" phase
     half_life_entries: float = 15.0
+    # "ticks" (as submitted): the entry phase is the first `entry_window` ticks on a branch.
+    # "productive": it lasts until `entry_window` ticks with non-zero gain have been seen, and
+    # its rate is yield / (elapsed ticks + switch_cost), so an agent's reconnaissance ramp is
+    # charged as travel time instead of diluting the fresh-branch intake. When every tick is
+    # productive the two modes coincide exactly.
+    entry_mode: str = "ticks"
     _f: float = 0.0                # EWMA of fresh entry-phase intake rate
     _n: int = 0                    # number of recorded entry-phase samples
     _alpha: float = 0.0
@@ -294,8 +308,15 @@ class FrontierRateEstimator:
         self._f = 0.0
         self._n = 0
 
-    def record_entry_phase(self, entry_rate: float) -> None:
-        """Record the mean intake over a freshly entered branch's first `entry_window` ticks."""
+    def record_entry_phase(self, entry_rate: float, elapsed: int | None = None) -> None:
+        """Record a freshly entered branch's entry-phase intake.
+
+        "ticks" mode: `entry_rate` is the mean gain over the first `entry_window` ticks.
+        "productive" mode: `entry_rate` is the entry-phase yield and `elapsed` the ticks it
+        took; it is stored rescaled so that `rate` returns yield / (elapsed + switch_cost)."""
+        if self.entry_mode == "productive" and elapsed is not None:
+            k, s = self.entry_window, self.switch_cost
+            entry_rate = entry_rate * (k + s) / (k * (elapsed + s))
         self._f = entry_rate if self._n == 0 else (1.0 - self._alpha) * self._f + self._alpha * entry_rate
         self._n += 1
 

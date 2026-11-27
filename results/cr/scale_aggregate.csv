@@ -1,0 +1,13 @@
+policy,solved_all,min_solve,worst_ratio,geo_ratio
+fixed (tuned per scenario),8,0.95,inf,1.0
+fixed t=8 (tuned constant),6,0.05,inf,1.2036714703443763
+fixed t=60 (tuned diminishing),9,1.0,3.414852752880922,1.9070327368872981
+fixed t=12 (minimax),8,0.45,inf,1.1724197982252504
+max_retry k=8 (minimax),6,0.1,inf,1.2637601970254593
+median g=2 (minimax),4,0.0,inf,1.410034180802529
+"asha r0=2,eta=2 (minimax)",4,0.0,inf,1.6786188665891444
+mvt_adaptive,3,0.0,inf,0.9337452772946793
+mvt_slope,5,0.05,inf,1.127628962581287
+guarded_mvt,8,0.7,inf,1.216564645475729
+guarded_mvt_dyn,9,1.0,1.6937697993664202,1.2541494847998442
+guarded_mvt_learned,5,0.15,inf,0.9538047116750938

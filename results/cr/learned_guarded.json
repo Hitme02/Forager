@@ -1,0 +1,13 @@
+{
+ "type": "guarded_mvt",
+ "estimator": "adaptive",
+ "estimator_kw": {
+  "base_half_life": 8.0,
+  "max_half_life": 24.0
+ },
+ "min_samples": 2,
+ "hysteresis": 0.21902769465496238,
+ "decline_frac": 0.4492304224227348,
+ "peak_floor_frac": 0.16815938249846193,
+ "budget_cap": 8.0
+}
